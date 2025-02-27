@@ -8,7 +8,47 @@
   ];
 
   options = {
-    hyprland.enable = lib.mkEnableOption "enable hyprland";
+    home-manager.mako.enable = true;
+    home-manager.rofi.enable = true;
+    home-manager.waybar.enable = true;
+
+    home-manager.hyprland.enable = lib.mkEnableOption "enable hyprland";
+
+    home-manager.hyprland.displays = lib.mkOption {
+      type = lib.types.listOf (lib.types.submodule {
+        options = {
+          display = lib.mkOption {
+            type = lib.types.str;
+            example = "DP-6";
+          };
+          primary = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+          };
+          resolution = lib.mkOption {
+            type = lib.types.str;
+            example = "2560x1440";
+          };
+          refreshRate = lib.mkOption {
+            type = lib.types.str;
+            example = "165";
+          };
+          offset = lib.mkOption {
+            type = lib.types.str;
+            default = "0x0";
+          };
+          vrr = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+          };
+          rotate = lib.mkOption {
+            type = lib.types.nullOr lib.types.int;
+            default = null;
+          };
+        };
+      });
+    };
+
   };
 
   config = lib.mkIf config.hyprland.enable {
@@ -84,11 +124,26 @@
     wayland.windowManager.hyprland.enable = true;
     
     wayland.windowManager.hyprland.settings = {
-      monitor = [
-        "DP-6, 2560x1440@165, 0x0, 1, vrr, 1"
-        "HDMI-A-2, 1920x1080@75, -1080x0, 1, transform, 3"
-        "DP-6, addreserved, -6, 0, 0, 0"
-        "HDMI-A-2, addreserved, -6, 0, 0, 0"
+      monitor = lib.mkMerge [
+        # "DP-6, 2560x1440@165, 0x0, 1, vrr, 1"
+        # "HDMI-A-2, 1920x1080@75, -1080x0, 1, transform, 3"
+        # "DP-6, addreserved, -6, 0, 0, 0"
+
+        (lib.forEach config.home-manager.hyprland.displays (display:
+          let
+            vrrStr = if display.vrr then ", vrr, 1" else "";
+            transformStr = if display.transform != null then ", transform, ${toString display.transform}" else "";
+          in
+            "${display.name}, ${display.resolution}@${display.refreshRate}, ${display.offset}, 1${vrrStr}${transformStr}"
+        ))
+
+        (lib.forEach config.home-manager.hyprland.displays (display:
+          if display.primary then
+            "${display.name}, addreserved, -6, 0, 0, 0"
+          else
+            null
+        ))
+
       ];
 
 
@@ -296,6 +351,7 @@
         "workspace 9, class:discord"
       ];
 
+      # TODO: Add support for display config
       workspace = [
         "1, monitor:DP-6"
         "2, monitor:DP-6"

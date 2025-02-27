@@ -3,19 +3,20 @@
 {
   imports = [
     ./alacritty.nix
+    ./neomutt.nix
     ./nerdfonts.nix
     ./tmux.nix
     ./zsh.nix
   ];
 
   options = {
-    terminal.enable = lib.mkEnableOption "terminal environment";
+    home-manager.terminal.enable = lib.mkEnableOption "terminal environment";
   };
 
   config = lib.mkIf config.terminal.enable {
-    terminal.alacritty.enable = true;
-    font.nerd-fonts.enable = true;
-    shell.zsh.enable = true;
-    terminal.tmux.enable = true;
+    home-manager.alacritty.enable = true;
+    home-manager.nerd-fonts.enable = true;
+    home-manager.zsh.enable = true;
+    home-manager.tmux.enable = true;
   };
 }

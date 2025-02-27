@@ -5,7 +5,7 @@
     desktop.hyprland.enable = lib.mkEnableOption "enable hyprland";
   };
 
-  config = lib.mkIf {
+  config = lib.mkIf config.desktop.hyprland.enable {
     environment.systemPackages = [
       pkgs.libnotify
 
@@ -45,7 +45,7 @@
       xwayland.enable = true;
     };
 
-    environment.sessionVariables = lib.optional config.system.nvidia.enable {
+    environment.sessionVariables = lib.mkIf config.system.nvidia.enable {
       # WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
 

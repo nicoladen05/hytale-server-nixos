@@ -1,8 +1,8 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 {
   options = {
-    packages.enable = lib.mkEnableOptions "enable basic packages";
+    packages.enable = lib.mkEnableOption "enable basic packages";
 
     packages.terminal.enable = lib.mkOption {
       type = lib.types.bool;
@@ -59,7 +59,7 @@
         })
     ];
 
-    users.users."${config.desktop.userName}" = {
+    users.users."${config.system.userName}" = {
       packages = with pkgs; [
           git-crypt
           fontconfig
@@ -102,6 +102,6 @@
       "electron-25.9.0"
     ];
 
-
+    programs.zsh.enable = lib.mkIf config.packages.terminal.enable true;
   };
 }

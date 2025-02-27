@@ -2,7 +2,7 @@
 
 {
   options = {
-    apps.mail.neomutt.enable = lib.mkEnableOption "Enable the neomutt mail client";
+    home-manager.neomutt.enable = lib.mkEnableOption "Enable the neomutt mail client";
   };
 
   config = lib.mkIf config.apps.mail.neomutt.enable {

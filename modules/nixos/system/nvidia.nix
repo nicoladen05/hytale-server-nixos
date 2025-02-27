@@ -5,7 +5,7 @@
     system.nvidia.enable = lib.mkEnableOption "enable the nvidia driver module";
   };
 
-  config = lib.mkIf {
+  config = lib.mkIf config.system.nvidia.enable {
     hardware.nvidia = {
       modesetting.enable = true;
       powerManagement.enable = true;

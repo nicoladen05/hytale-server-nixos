@@ -5,21 +5,21 @@
     desktop.stylix.enable = lib.mkEnableOption "enable stylix";
 
     desktop.stylix.colorScheme = lib.mkOption {
-      type = lib.types.string;
+      type = lib.types.str;
       example = "catppuccin-macchiato";
     };
 
     desktop.stylix.wallpaper = lib.mkOption {
-      type = lib.types.string;
+      type = lib.types.str;
     };
 
     desktop.stylix.wallpaperHash = lib.mkOption {
-      type = lib.types.string;
+      type = lib.types.str;
       example = "sha256-NduOrnuMG7HcSLVH6Cj6/TIs/fL2kC1gq+O6IGOiEn8=";
     };
   };
 
-  config = lib.mkIf {
+  config = lib.mkIf config.desktop.stylix.enable {
     stylix.enable = true;
 
     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.desktop.stylix.colorScheme}.yaml";
@@ -44,8 +44,8 @@
     # };
 
     stylix.image = pkgs.fetchurl {
-      url = "${config.desktop.wallpaper}";
-      sha256 = "${config.desktop.wallpaperHash}}";
+      url = "${config.desktop.stylix.wallpaper}";
+      sha256 = "${config.desktop.stylix.wallpaperHash}}";
     };
 
     stylix.cursor.package = pkgs.apple-cursor;

@@ -15,7 +15,7 @@ let
 in
 {
   options = {
-    terminal.tmux.enable = lib.mkEnableOption "enable tmux";
+    home-manager.tmux.enable = lib.mkEnableOption "enable tmux";
   };
 
   config = lib.mkIf config.terminal.tmux.enable {

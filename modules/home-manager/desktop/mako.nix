@@ -2,7 +2,7 @@
 
 {
   options = {
-    mako.enable = lib.mkEnableOption "enable mako";
+    home-manager.mako.enable = lib.mkEnableOption "enable mako";
   };
 
   config = lib.mkIf config.mako.enable {

@@ -2,8 +2,8 @@
 
 {
   imports = [
-    "./nh.nix"
-    "./nvidia.nix"
+    ./nh.nix
+    ./nvidia.nix
   ];
 
   options = {
@@ -34,12 +34,6 @@
       type = lib.types.str;
       default = "de_DE.UTF-8";
       example = "de_DE.UTF-8";
-    };
-
-    system.printing = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      example = true;
     };
 
     system.shell = lib.mkOption {
@@ -87,9 +81,6 @@
       LC_TIME = "${config.system.locale.unitFormat}";
     };
 
-    # Printing
-    service.printing.enable = lib.optionals (config.system.printing == true) true;
-
     # Users
     users.users."${config.system.userName}" = {
       isNormalUser = true;
@@ -106,4 +97,4 @@
 
     system.stateVersion = "24.05";
   };
-
+}

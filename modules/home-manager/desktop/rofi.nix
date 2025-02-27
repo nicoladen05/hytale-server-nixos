@@ -2,7 +2,7 @@
 
 {
   options = {
-    rofi.enable = lib.mkEnableOption "enables rofi";
+    home-manager.rofi.enable = lib.mkEnableOption "enables rofi";
   };
 
   config = lib.mkIf config.rofi.enable {

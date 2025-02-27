@@ -2,7 +2,7 @@
 
 {
   options = {
-    font.nerd-fonts.enable = lib.mkEnableOption "enable nerd-fonts";
+    home-manager.nerd-fonts.enable = lib.mkEnableOption "enable nerd-fonts";
   };
 
   config = lib.mkIf config.font.nerd-fonts.enable {

@@ -4,7 +4,7 @@
   ...
 }: {
   options = {
-    filemanager.yazi.enable = lib.mkEnableOption "enable yazi";
+    home-manager.yazi.enable = lib.mkEnableOption "enable yazi";
   };
 
   config = lib.mkIf config.filemanager.yazi.enable {

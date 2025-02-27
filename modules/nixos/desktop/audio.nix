@@ -5,7 +5,7 @@
     desktop.audio.enable = lib.mkEnableOption "enable audio";
   };
 
-  config = lib.mkIf {
+  config = lib.mkIf config.desktop.audio.enable {
     # Audio
     services.pulseaudio.enable = false;
     security.rtkit.enable = true;

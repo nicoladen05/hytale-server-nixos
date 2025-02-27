@@ -2,7 +2,7 @@
 
 {
   options = {
-    shell.zsh.enable = lib.mkEnableOption "Enable the zsh shell";
+    home-manager.zsh.enable = lib.mkEnableOption "Enable the zsh shell";
   };
 
   config = lib.mkIf config.shell.zsh.enable {

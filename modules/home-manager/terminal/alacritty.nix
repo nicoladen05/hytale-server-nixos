@@ -2,7 +2,7 @@
 
 {
   options = {
-    terminal.alacritty.enable = lib.mkEnableOption "Enable the alacritty terminal";
+    home-manager.alacritty.enable = lib.mkEnableOption "Enable the alacritty terminal";
   };
 
   config = lib.mkIf config.terminal.alacritty.enable {

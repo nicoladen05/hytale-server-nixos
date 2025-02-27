@@ -1,11 +1,11 @@
-{pkgs, lib, ...}:
+{ config, lib, ...}:
 
 {
   options = {
-    desktop.gnome.enable = lib.mkEnableOptions "enable gnome";
+    desktop.gnome.enable = lib.mkEnableOption "enable gnome";
   };
 
-  config = lib.mkIf {
+  config = lib.mkIf config.desktop.gnome.enable {
     services.xserver = {
       enable = true;
 
