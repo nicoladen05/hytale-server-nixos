@@ -5,7 +5,7 @@
     home-manager.zsh.enable = lib.mkEnableOption "Enable the zsh shell";
   };
 
-  config = lib.mkIf config.shell.zsh.enable {
+  config = lib.mkIf config.home-manager.zsh.enable {
     programs.zsh = {
       enable = true;
       enableCompletion = true;

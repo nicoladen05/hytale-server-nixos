@@ -5,7 +5,7 @@
     home-manager.mako.enable = lib.mkEnableOption "enable mako";
   };
 
-  config = lib.mkIf config.mako.enable {
+  config = lib.mkIf config.home-manager.mako.enable {
     services.mako = {
       enable = true;
 

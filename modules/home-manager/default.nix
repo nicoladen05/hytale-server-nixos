@@ -1,11 +1,10 @@
-{ pkgs, lib, secrets, config, ... }:
+{ userName, inputs, lib, secrets, config, ... }:
 
 {
   imports =
     [
       ./desktop
       ./terminal
-      ./apps
       ./firefox.nix
     ];
 
@@ -19,7 +18,7 @@
       };
       git.userEmail = lib.mkOption {
         type = lib.types.str;
-        default = "${secrets.account.gmail.address}";
+        default = "${secrets.accounts.gmail.address}";
         description = "The email to use for git commits";
       };
     };
@@ -41,8 +40,8 @@
         userEmail = "${config.git.userEmail}";
       };
 
-      home.username = "${config.system.userName}";
-      home.homeDirectory = "/home/${config.system.userName}";
+      home.username = "${userName}";
+      home.homeDirectory = "/home/${userName}";
 
       home.stateVersion = "24.05"; # Please read the comment before changing.
   };

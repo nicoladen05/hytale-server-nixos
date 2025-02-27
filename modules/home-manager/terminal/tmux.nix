@@ -18,7 +18,7 @@ in
     home-manager.tmux.enable = lib.mkEnableOption "enable tmux";
   };
 
-  config = lib.mkIf config.terminal.tmux.enable {
+  config = lib.mkIf config.home-manager.tmux.enable {
     programs.tmux = {
       enable = true;
       clock24 = true;

@@ -5,7 +5,7 @@
     home-manager.neomutt.enable = lib.mkEnableOption "Enable the neomutt mail client";
   };
 
-  config = lib.mkIf config.apps.mail.neomutt.enable {
+  config = lib.mkIf config.home-manager.neomutt.enable {
     accounts.email.accounts.gmail = {
       address = secrets.accounts.gmail.address;
       userName = secrets.accounts.gmail.address;

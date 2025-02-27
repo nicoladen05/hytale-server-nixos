@@ -8,7 +8,7 @@
     home-manager.waybar.enable = lib.mkEnableOption "enable waybar";
   };
 
-  config = lib.mkIf config.bar.waybar.enable {
+  config = lib.mkIf config.home-manager.waybar.enable {
     # Scripts
     home.packages = with pkgs; [
       (writeShellScriptBin "weather-script" ''

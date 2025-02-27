@@ -5,7 +5,7 @@
     home-manager.alacritty.enable = lib.mkEnableOption "Enable the alacritty terminal";
   };
 
-  config = lib.mkIf config.terminal.alacritty.enable {
+  config = lib.mkIf config.home-manager.alacritty.enable {
     programs.alacritty = {
       enable = true;
 

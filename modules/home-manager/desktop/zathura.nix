@@ -5,7 +5,7 @@
     home-manager.zathura.enable = lib.mkEnableOption "enable zathura";
   };
 
-  config = lib.mkIf {
+  config = lib.mkIf config.home-manager.zathura.enable {
     programs.zathura = {
       enable = true;
       options = {

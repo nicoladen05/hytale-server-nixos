@@ -13,13 +13,6 @@
       ../../modules/nixos
   ];
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "nico" = import ./home.nix;
-    };
-  };
-
   # CONFIG
   system = {
     enable = true;
@@ -53,6 +46,13 @@
       colorScheme = "catppuccin-macchiato";
       wallpaper = "https://xcu37g90vd.ufs.sh/f/gISQwWsUpMTPCyMXPPTvFiwZ9rz0MeyfSD2VXAElBUHsoJuT";
       wallpaperHash = "sha256-NduOrnuMG7HcSLVH6Cj6/TIs/fL2kC1gq+O6IGOiEn8=";
+    };
+  };
+
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; userName = "${config.system.userName}"; };
+    users = {
+      "nico" = import ./home.nix;
     };
   };
 

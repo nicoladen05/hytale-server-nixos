@@ -7,7 +7,7 @@
     home-manager.yazi.enable = lib.mkEnableOption "enable yazi";
   };
 
-  config = lib.mkIf config.filemanager.yazi.enable {
+  config = lib.mkIf config.home-manager.yazi.enable {
     programs.yazi = {
       enable = true;
       keymap = {

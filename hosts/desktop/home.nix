@@ -8,7 +8,6 @@
   home-manager = {
     enable = true;
 
-    desktop.enable = true;
     firefox.enable = true;
     terminal.enable = true;
     yazi.enable = true;
@@ -21,14 +20,15 @@
           display = "DP-6";
           primary = true;
           resolution = "2560x1440";
-          refreshRate = "165";
+          refreshRate = 165;
         }
         {
           display = "HDMI-A-2";
+          primary = true;
           resolution = "1920x1080";
-          refreshRate = "75";
+          refreshRate = 75;
           offset = "-1080x0";
-          transform = "3"; # Rotate CCW
+          rotate = 3; # Rotate CCW
         }
       ];
     };

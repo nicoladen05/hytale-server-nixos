@@ -8,10 +8,6 @@
   ];
 
   options = {
-    home-manager.mako.enable = true;
-    home-manager.rofi.enable = true;
-    home-manager.waybar.enable = true;
-
     home-manager.hyprland.enable = lib.mkEnableOption "enable hyprland";
 
     home-manager.hyprland.displays = lib.mkOption {
@@ -21,6 +17,7 @@
             type = lib.types.str;
             example = "DP-6";
           };
+          # TODO: Assert that only one monitor can be primary
           primary = lib.mkOption {
             type = lib.types.bool;
             default = false;
@@ -30,8 +27,8 @@
             example = "2560x1440";
           };
           refreshRate = lib.mkOption {
-            type = lib.types.str;
-            example = "165";
+            type = lib.types.int;
+            example = 165;
           };
           offset = lib.mkOption {
             type = lib.types.str;
@@ -48,13 +45,13 @@
         };
       });
     };
-
   };
 
-  config = lib.mkIf config.hyprland.enable {
-    mako.enable = true;
-    rofi.enable = true;
-    bar.waybar.enable = true;
+  config = lib.mkIf config.home-manager.hyprland.enable {
+    home-manager.mako.enable = true;
+    home-manager.rofi.enable = true;
+    home-manager.waybar.enable = true;
+
 
     gtk.enable = true;
     gtk.iconTheme = {
@@ -132,16 +129,13 @@
         (lib.forEach config.home-manager.hyprland.displays (display:
           let
             vrrStr = if display.vrr then ", vrr, 1" else "";
-            transformStr = if display.transform != null then ", transform, ${toString display.transform}" else "";
+            transformStr = if display.rotate != null then ", transform, ${toString display.rotate}" else "";
           in
-            "${display.name}, ${display.resolution}@${display.refreshRate}, ${display.offset}, 1${vrrStr}${transformStr}"
+            "${display.display}, ${display.resolution}@${toString display.refreshRate}, ${display.offset}, 1${vrrStr}${transformStr}"
         ))
 
-        (lib.forEach config.home-manager.hyprland.displays (display:
-          if display.primary then
-            "${display.name}, addreserved, -6, 0, 0, 0"
-          else
-            null
+        (lib.forEach (lib.filter (display: display.primary) config.home-manager.hyprland.displays) (display:
+          "${display.display}, addreserved, -6, 0, 0, 0"
         ))
 
       ];

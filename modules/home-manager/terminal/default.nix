@@ -13,7 +13,7 @@
     home-manager.terminal.enable = lib.mkEnableOption "terminal environment";
   };
 
-  config = lib.mkIf config.terminal.enable {
+  config = lib.mkIf config.home-manager.terminal.enable {
     home-manager.alacritty.enable = true;
     home-manager.nerd-fonts.enable = true;
     home-manager.zsh.enable = true;

@@ -5,7 +5,7 @@
     home-manager.nerd-fonts.enable = lib.mkEnableOption "enable nerd-fonts";
   };
 
-  config = lib.mkIf config.font.nerd-fonts.enable {
+  config = lib.mkIf config.home-manager.nerd-fonts.enable {
     fonts.fontconfig.enable = true;
 
     home.packages =  with pkgs; [
