@@ -10,27 +10,8 @@
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
 
-      # ../../modules/nixos/gnome.nix
-
-      ../../modules/nixos/hyprland.nix
-      ../../modules/nixos/stylix.nix
-
-      ../../modules/nixos/default.nix
+      ../../modules/nixos
   ];
-  desktop = {
-    enable = true;
-    userName = "nico";
-    hostName = "desktop";
-  };
-
-  nvf.enable = true;
-
-  gaming.enable = true;
-
-  vfio.enable = false;
-
-  # Flakes
-  nix.settings.experimental-features = ["nix-command" "flakes" ];
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
@@ -39,16 +20,42 @@
     };
   };
 
-  virtualisation.docker.enable = true;
-  hardware.nvidia-container-toolkit.enable = true;
-  users.users.nico.extraGroups = [ "docker" ];
-
-  services.ollama = {
+  # CONFIG
+  system = {
     enable = true;
-    acceleration = "cuda";
-    environmentVariables = {
-      OLLAMA_MODELS = /home/nico/data/models;
-      OLLAMA_HOST = "0.0.0.0";
+    nvidia.enable = true;
+
+    userName = "nico";
+    hostName = "desktop";
+
+    shell = pkgs.zsh;
+
+    tcpPorts = [];
+    udpPorts = [];
+  };
+
+  packages = {
+    enable = true;
+    terminal.enable = true;
+    coding.enable = true;
+    desktop.enable = true;
+    gaming.enable = true;
+    productivity.enable = true;
+  };
+
+  desktop = {
+    audio.enable = true;
+    hyprland.enable = true;
+
+    stylix = {
+      enable = true;
+
+      colorScheme = "catppuccin-macchiato";
+      wallpaper = "https://xcu37g90vd.ufs.sh/f/gISQwWsUpMTPCyMXPPTvFiwZ9rz0MeyfSD2VXAElBUHsoJuT";
+      wallpaperHash = "sha256-NduOrnuMG7HcSLVH6Cj6/TIs/fL2kC1gq+O6IGOiEn8=";
     };
   };
+
+  nvf.enable = true;
+  gaming.enable = true;
 }
