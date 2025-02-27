@@ -2,17 +2,11 @@
 
 {
   imports = [
-    ./system/nh.nix
-    ./server/homeassistant.nix
-    ./server/tailscale.nix
-    ./server/minecraft-server.nix
-
-    ./virtualisation/default.nix
-
-    ./essentials/nvf.nix
-    ./desktop/default.nix
-
+    ./desktop
     ./gaming
+    ./system
     
+    ./nvf.nix
+    ./packages.nix
   ];
 }
