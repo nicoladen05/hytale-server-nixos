@@ -27,6 +27,12 @@
         rb = "sudo nixos-rebuild switch --flake ~/.config/nixos/#default";
         rt = "sudo nixos-rebuild test --flake ~/.config/nixos/#default";
       };
+
+      profileExtra = ''
+        if uwsm check may-start; then
+            exec uwsm start hyprland.desktop
+        fi
+      '';
     };
 
     programs.zoxide = {

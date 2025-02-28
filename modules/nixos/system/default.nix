@@ -66,6 +66,9 @@
     networking.hostName = "${config.system.hostName}";
     networking.networkmanager.enable = true;
 
+    # Timezone
+    time.timeZone = "${config.system.timeZone}";
+
     # Locale
     i18n.defaultLocale = "${config.system.locale.language}";
 

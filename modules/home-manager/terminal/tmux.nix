@@ -1,18 +1,18 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 
-let
-  tmux-pomodoro = pkgs.tmuxPlugins.mkTmuxPlugin {
-      pluginName = "tmux-pomodoro-plus";
-      version = "v1.0.2";
-      src = pkgs.fetchFromGitHub {
-        owner = "olimorris";
-        repo = "tmux-pomodoro-plus";
-        rev = "bb136e7372b29cbd5e6909f4dd9814fa0ec13a49";
-        sha256 = "1i709pspa2q7mn1pfqkyvvziqi0g4i45rdfgj97d5jzrhra3q9jm";
-      };
-    };
-in
+# let
+#   minimal-tmux-status = pkgs.tmuxPlugins.mkTmuxPlugin {
+#       pluginName = "minimal-tmux-status";
+#       version = "v1.0.0";
+#       src = pkgs.fetchFromGitHub {
+#         owner = "niksingh710";
+#         repo = "minimal-tmux-status";
+#         rev = "d7188c1aeb1c7dd03230982445b7360f5e230131";
+#         sha256 = "JtbuSxWFR94HiUdQL9uIm2V/kwGz0gbVbqvYWmEncbc=";
+#       };
+#     };
+# in
 {
   options = {
     home-manager.tmux.enable = lib.mkEnableOption "enable tmux";
@@ -35,9 +35,6 @@ in
         {
           plugin = tmuxPlugins.fingers;
         }
-        # {
-        #   plugin = tmux-pomodoro;
-        # }
       ];
 
       extraConfig = ''
@@ -46,9 +43,18 @@ in
         set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
         set-environment -g COLORTERM "truecolor"
 
-        set -g status-bg black
+        set -g status-style bg=default,fg=default
+        set -g status-bg default
 
-        set -g status-right ' %H:%M'
+        set -g automatic-rename off
+        set -g window-status-current-format "#I:#W"
+        set -g window-status-format "#I:#W"
+
+        set -g pane-border-status off
+
+        set -g status-right "%d.%m %H:%M"
+
+        set -g status-right "%d.%m. %H:%M"
 
         unbind h
         unbind n

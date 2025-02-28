@@ -44,8 +44,8 @@
       enable = true;
 
       colorScheme = "catppuccin-macchiato";
-      wallpaper = "https://xcu37g90vd.ufs.sh/f/gISQwWsUpMTPCyMXPPTvFiwZ9rz0MeyfSD2VXAElBUHsoJuT";
-      wallpaperHash = "sha256-NduOrnuMG7HcSLVH6Cj6/TIs/fL2kC1gq+O6IGOiEn8=";
+      wallpaper = "https://images.unsplash.com/photo-1739643247007-044e2623ca98?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=marek-piwnicki-HxPkohFqDGY-unsplash.jpg";
+      wallpaperHash = "sha256-njjKS0Wh0jd4hIVAWLFiBcZbS+LEy9Err3dIVcNxCxc=";
     };
   };
 

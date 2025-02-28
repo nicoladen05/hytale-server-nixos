@@ -39,10 +39,12 @@
       '')
     ];
 
+    programs.uwsm.enable = true;
 
     programs.hyprland = {
       enable = true;
       xwayland.enable = true;
+      withUWSM = true;
     };
 
     environment.sessionVariables = lib.mkIf config.system.nvidia.enable {

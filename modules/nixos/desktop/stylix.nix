@@ -21,6 +21,7 @@
 
   config = lib.mkIf config.desktop.stylix.enable {
     stylix.enable = true;
+    stylix.targets.console.enable = false;
 
     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.desktop.stylix.colorScheme}.yaml";
 
