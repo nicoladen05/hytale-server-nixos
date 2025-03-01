@@ -24,7 +24,6 @@
         }
         {
           display = "HDMI-A-2";
-          primary = true;
           resolution = "1920x1080";
           refreshRate = 75;
           offset = "-1080x0";

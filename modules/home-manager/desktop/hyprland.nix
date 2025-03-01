@@ -1,5 +1,8 @@
 { lib, pkgs, config, ... }:
 
+let
+  primaryMonitor = (builtins.head (builtins.filter (d: d.primary) config.home-manager.hyprland.displays)).display;
+in
 {
   imports = [
     ./mako.nix
@@ -17,7 +20,6 @@
             type = lib.types.str;
             example = "DP-6";
           };
-          # TODO: Assert that only one monitor can be primary
           primary = lib.mkOption {
             type = lib.types.bool;
             default = false;
@@ -44,10 +46,19 @@
           };
         };
       });
+      apply = displays:
+        let
+          primaryDisplays = builtins.length (builtins.filter (d: d.primary) displays);
+        in
+        if primaryDisplays == 1 then
+          displays
+        else
+          throw "Exactly one monitor must be configured as primary. Found ${toString primaryDisplays} primary monitors.";
     };
   };
 
   config = lib.mkIf config.home-manager.hyprland.enable {
+
     home-manager.mako.enable = true;
     home-manager.rofi.enable = true;
     home-manager.waybar.enable = true;
@@ -74,7 +85,7 @@
         };
 
         input-field = {
-          monitor = "DP-6";
+          monitor = primaryMonitor;
           halign = "center";
           valign = "bottom";
           position = "0, 200";
@@ -82,7 +93,7 @@
 
         label = [
           {
-            monitor = "DP-6";
+            monitor = primaryMonitor;
             text = "$TIME";
             font_size = 100;
             font_family = "JetBrainsMono Nerd Font";
@@ -91,7 +102,7 @@
             valign = "center";
           }
           {
-            monitor = "DP-6";
+            monitor = primaryMonitor;
             text = "cmd[update:10000] date +'%a, %d. %b'";
             font_size = 24;
             font_family = "JetBrainsMono Nerd Font";
@@ -100,7 +111,7 @@
             valign = "center";
           }
           {
-            monitor = "DP-6";
+            monitor = primaryMonitor;
             text = "cmd[update:10000] weather-script";
             font_size = 24;
             font_family = "JetBrainsMono Nerd Font";
@@ -135,7 +146,7 @@
         ))
 
         (lib.forEach (lib.filter (display: display.primary) config.home-manager.hyprland.displays) (display:
-          "${display.display}, addreserved, -6, 0, 0, 0"
+          "${display.display}, addreserved, -10, 0, 0, 0"
         ))
 
       ];
@@ -345,19 +356,17 @@
         "workspace 9, class:discord"
       ];
 
-      # TODO: Add support for display config
       workspace = [
-        "1, monitor:DP-6"
-        "2, monitor:DP-6"
-        "3, monitor:DP-6"
-        "4, monitor:DP-6"
-        "5, monitor:DP-6"
-        "6, monitor:DP-6"
-        "7, monitor:DP-6"
-        "8, monitor:DP-6"
-        "9, monitor:DP-6"
-        "9, monitor:DP-6"
-        "10, monitor:HDMI-A-2"
+        "1, monitor:${primaryMonitor}"
+        "2, monitor:${primaryMonitor}"
+        "3, monitor:${primaryMonitor}"
+        "4, monitor:${primaryMonitor}"
+        "5, monitor:${primaryMonitor}"
+        "6, monitor:${primaryMonitor}"
+        "7, monitor:${primaryMonitor}"
+        "8, monitor:${primaryMonitor}"
+        "9, monitor:${primaryMonitor}"
+        "9, monitor:${primaryMonitor}"
       ];
     };
   };

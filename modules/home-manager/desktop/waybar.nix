@@ -3,7 +3,12 @@
   config,
   pkgs,
   ...
-}: {
+}: 
+
+let
+  primaryMonitor = (builtins.head (builtins.filter (d: d.primary) config.home-manager.hyprland.displays)).display;
+in
+{
   options = {
     home-manager.waybar.enable = lib.mkEnableOption "enable waybar";
   };
@@ -68,7 +73,7 @@
         height = 30;
         position = "top";
 
-        output = "DP-6";
+        output = primaryMonitor;
 
         modules-left = ["hyprland/workspaces"];
         modules-center = ["clock" "custom/date" "custom/weather"];
@@ -197,7 +202,7 @@
 
       #workspaces {
         background-color: @base00;
-        margin: 6px 16px;
+        margin: 6px 10px 10px 16px;
         padding: 0px 3px;
         border-radius: 11;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
@@ -232,7 +237,7 @@
 
       .modules-center {
         background-color: @base00;
-        margin: 6px 16px;
+        margin: 6px 10px 10px 10px;
         padding: 0px 3px;
         border-radius: 11;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
@@ -240,7 +245,7 @@
 
       .modules-right {
         background-color: @base00;
-        margin: 6px 16px;
+        margin: 6px 16px 10px 10px;
         padding: 0px 3px;
         border-radius: 11;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
