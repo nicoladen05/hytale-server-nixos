@@ -43,6 +43,11 @@
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
     };
+
+    raspberry-pi-nix = {
+      url = "github:nix-community/raspberry-pi-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -63,11 +68,11 @@
         ];
       };
 
-      nixosConfigurations.server = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.rpi5 = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = {inherit inputs; inherit secrets;};
         modules = [
-          ./hosts/server/configuration.nix
+          ./hosts/rpi5/configuration.nix
         ];
       };
     };

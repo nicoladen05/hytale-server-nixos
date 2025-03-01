@@ -21,6 +21,7 @@
           primary = true;
           resolution = "2560x1440";
           refreshRate = 165;
+          vrr = true;
         }
         {
           display = "HDMI-A-2";

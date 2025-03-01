@@ -42,6 +42,12 @@
       example = pkgs.zsh;
     };
 
+    system.systemdBoot = lib.mkOption {
+      type = lib.types.boolean;
+      default = true;
+      example = false;
+    };
+
     system.tcpPorts = lib.mkOption {
       type = lib.types.listOf lib.types.int;
       default = [];
@@ -59,8 +65,8 @@
     nh.enable = true;
 
     # Bootloader.
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.systemd-boot.enable = lib.mkIf config.system.systemdBoot true;
+    boot.loader.efi.canTouchEfiVariables = lib.mkIf config.system.systemdBoot true;
      
     # Networking
     networking.hostName = "${config.system.hostName}";
