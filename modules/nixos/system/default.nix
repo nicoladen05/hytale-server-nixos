@@ -43,7 +43,7 @@
     };
 
     system.systemdBoot = lib.mkOption {
-      type = lib.types.boolean;
+      type = lib.types.bool;
       default = true;
       example = false;
     };

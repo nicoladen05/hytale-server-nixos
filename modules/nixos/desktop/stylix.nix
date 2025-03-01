@@ -6,6 +6,7 @@
 
     desktop.stylix.colorScheme = lib.mkOption {
       type = lib.types.str;
+      default = "catppuccin-macchiato";
       example = "catppuccin-macchiato";
     };
 

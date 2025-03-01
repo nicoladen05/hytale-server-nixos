@@ -73,6 +73,11 @@
         specialArgs = {inherit inputs; inherit secrets;};
         modules = [
           ./hosts/rpi5/configuration.nix
+          inputs.raspberry-pi-nix.nixosModules.raspberry-pi
+          inputs.raspberry-pi-nix.nixosModules.sd-image
+          inputs.stylix.nixosModules.stylix
+          inputs.home-manager.nixosModules.home-manager
+          inputs.nvf.nixosModules.default
         ];
       };
     };

@@ -6,9 +6,9 @@
   };
 
   config = lib.mkIf config.homelab.enable {
-    virtualization.containers.enable = true;
-    virtualization.oci-containers.backend = "podman";
-    virtualization = {
+    virtualisation.containers.enable = true;
+    virtualisation.oci-containers.backend = "podman";
+    virtualisation = {
       podman = {
         enable = true;
         dockerCompat = true;
