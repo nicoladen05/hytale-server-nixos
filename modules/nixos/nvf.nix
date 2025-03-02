@@ -281,19 +281,27 @@
           ui.colorizer.enable = true;
 
 
-          # lazy.plugins = {
-          #   "gruvbox-material" = {
-          #     package = pkgs.vimPlugins.gruvbox-material;
-          #
-          #     after = ''
-          #       vim.g.gruvbox_material_enable_italic = true
-          #       vim.g.gruvbox_material_background = 'medium'
-          #       vim.g.gruvbox_material_foreground = 'material'
-          #       vim.g.gruvbox_material_better_performance = true;
-          #       vim.g.gruvbox_material_transparent_background = true;
-          #       vim.cmd.colorscheme('gruvbox-material')
-          #     '';
-          #   };
+          lazy.plugins = {
+            "avante.nvim" = {
+              package = pkgs.vimPlugins.avante-nvim;
+              setupModule = "avante";
+              setupOpts = {
+                provider="copilot";
+              };
+            };
+
+            # "gruvbox-material" = {
+            #   package = pkgs.vimPlugins.gruvbox-material;
+            #
+            #   after = ''
+            #     vim.g.gruvbox_material_enable_italic = true
+            #     vim.g.gruvbox_material_background = 'medium'
+            #     vim.g.gruvbox_material_foreground = 'material'
+            #     vim.g.gruvbox_material_better_performance = true;
+            #     vim.g.gruvbox_material_transparent_background = true;
+            #     vim.cmd.colorscheme('gruvbox-material')
+            #   '';
+            # };
 
             # "codeium.nvim" = {
             #   package = pkgs.vimPlugins.codeium-nvim;
@@ -302,7 +310,7 @@
             #     virtual_text.enabled = true;
             #   };
             # };
-          # };
+          };
         };
       };
     };
