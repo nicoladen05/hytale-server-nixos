@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../modules/nixos
+    ../../modules/nixos/system
     ../../modules/homelab
   ];
 
