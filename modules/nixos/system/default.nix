@@ -17,7 +17,6 @@
 
     system.passwordFile = lib.mkOption {
       type = lib.types.path;
-      default = "password";
     };
 
     system.hostName = lib.mkOption {
