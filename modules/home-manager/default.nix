@@ -1,4 +1,4 @@
-{ userName, inputs, lib, secrets, config, ... }:
+{ userName, inputs, lib, config, ... }:
 
 {
   imports =
@@ -18,7 +18,7 @@
       };
       git.userEmail = lib.mkOption {
         type = lib.types.str;
-        default = "${secrets.accounts.gmail.address}";
+        default = "nicolashartmanntaba@gmail.com";
         description = "The email to use for git commits";
       };
     };

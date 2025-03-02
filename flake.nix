@@ -63,19 +63,14 @@
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
-    let
-      secrets = builtins.fromJSON (builtins.readFile ./secrets/secrets.json);
-    in {
+    {
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs; inherit secrets;};
+        specialArgs = {inherit inputs;};
         modules = [
           ./hosts/desktop/configuration.nix
           inputs.nur.modules.nixos.default
           inputs.home-manager.nixosModules.home-manager
           inputs.sops-nix.nixosModules.sops
-          {
-            home-manager.extraSpecialArgs = { inherit secrets; };
-          }
           inputs.stylix.nixosModules.stylix
           inputs.nvf.nixosModules.default
         ];
@@ -83,11 +78,12 @@
 
       nixosConfigurations.rpi5 = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = {inherit inputs; inherit secrets;};
+        specialArgs = {inherit inputs;};
         modules = [
           ./hosts/rpi5/configuration.nix
           inputs.raspberry-pi-nix.nixosModules.raspberry-pi
           inputs.raspberry-pi-nix.nixosModules.sd-image
+          inputs.sops-nix.nixosModules.sops
         ];
       };
     };

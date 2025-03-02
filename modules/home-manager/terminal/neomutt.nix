@@ -1,4 +1,4 @@
-{ pkgs, lib, config, secrets, ... }:
+{ pkgs, lib, config, ... }:
 
 {
   options = {
@@ -7,10 +7,10 @@
 
   config = lib.mkIf config.home-manager.neomutt.enable {
     accounts.email.accounts.gmail = {
-      address = secrets.accounts.gmail.address;
-      userName = secrets.accounts.gmail.address;
-      realName = secrets.accounts.real_name;
-      passwordCommand = "echo ${secrets.accounts.gmail.password}";
+      # address = secrets.accounts.gmail.address;
+      # userName = secrets.accounts.gmail.address;
+      # realName = secrets.accounts.real_name;
+      # passwordCommand = "echo ${secrets.accounts.gmail.password}";
       primary = true;
       maildir.path = "Mail";
       flavor = "gmail.com";

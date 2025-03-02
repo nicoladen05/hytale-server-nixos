@@ -15,6 +15,11 @@
       default = "nico";
     };
 
+    system.passwordFile = lib.mkOption {
+      type = lib.types.path;
+      default = "password";
+    };
+
     system.hostName = lib.mkOption {
       type = lib.types.str;
     };
@@ -97,6 +102,7 @@
       description = "${config.system.userName}";
       extraGroups = ["networkmanager" "wheel"];
       shell = config.system.shell;
+      hashedPasswordFile = "${config.system.passwordFile}";
     };
 
     networking.firewall.allowedTCPPorts = config.system.tcpPorts;

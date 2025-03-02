@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, secrets, ... }:
+{ pkgs, lib, inputs, config, ... }:
 
 {
   imports = [
@@ -10,6 +10,7 @@
     enable = true;
 
     hostName = "rpi5";
+    passwordFile = config.sops.secrets.password_strong.file;
     systemdBoot = false;
 
     tcpPorts = [ 22 ];
