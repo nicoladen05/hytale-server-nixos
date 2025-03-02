@@ -254,7 +254,7 @@ in
       "$mainMod" = "SUPER"; 
       bind = [
         "$mainMod, Return, exec, $terminal"
-        "$mainMod, W, exec, firefox"
+        "$mainMod, W, exec, librewolf"
         "$mainMod, Q, killactive,"
         "$mainMod, M, exit,"
         "$mainMod, E, exec, $fileManager"

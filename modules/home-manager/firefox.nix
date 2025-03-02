@@ -6,8 +6,13 @@
   };
 
   config = lib.mkIf config.home-manager.firefox.enable {
-    programs.firefox = {
+    programs.librewolf = {
       enable = true;
+
+      policies = {
+        SanitizeOnShutdown = false;
+        OfferToSaveLogins = false;
+      };
 
       profiles.nico = {
         extensions.packages = with inputs.firefox-addons.packages."x86_64-linux"; [
@@ -17,11 +22,27 @@
         ];
 
         search = {
+          engines = {
+            "Unduck" = {
+              urls = [{
+                template = "https://unduck.link?q={searchTerms}";
+              }];
+            };
+          };
           force = true;
-          default = "DuckDuckGo";
+          default = "Unduck";
         };
 
         settings = {
+          # Librewolf
+          "webgl.disabled" = false;
+          "privacy.clearOnShutdown.history" = false;
+          "privacy.clearOnShutdown.downloads" = false;
+          "middlemouse.paste" = false;
+          "general.autoScroll" = true;
+          "privacy.resistFingerprinting" = false;
+
+          # Firefox
           "content.notify.interval" = 100000;
           "layers.acceleration.force-enabled" = true;
           "gfx.webrender.all" = true;
