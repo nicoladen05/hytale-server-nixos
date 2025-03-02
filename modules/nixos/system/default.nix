@@ -4,6 +4,7 @@
   imports = [
     ./nh.nix
     ./nvidia.nix
+    ./sops.nix
   ];
 
   options = {

@@ -8,15 +8,26 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
 
       ../../modules/nixos
   ];
+
+  nix.buildMachines = [
+    {
+      hostName = "eclipse";
+      system = "aarch64-linux";
+      protocol = "ssh-ng";
+      supportedFeatures = ["big-parallel"];
+    }
+  ];
+  nix.distributedBuilds = true;
+  nix.settings.trusted-users = [ "root" "nico" ];
 
   # CONFIG
   system = {
     enable = true;
     nvidia.enable = true;
+    sops.enable = true;
 
     userName = "nico";
     hostName = "desktop";

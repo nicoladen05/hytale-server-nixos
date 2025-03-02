@@ -21,7 +21,7 @@
     sops.defaultSopsFile = config.system.sops.secretsFile;
     sops.defaultSopsFormat = "yaml";
 
-    sops.age.keyFile = config.system.sops.keyFile;
+    sops.age.keyFile = config.system.sops.ageKeyFile;
 
     sops.secrets.password = { };
     sops.secrets.password_strong = { };
