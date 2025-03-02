@@ -1,26 +1,36 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 
+let
+  cfg = config.homelab.services.homeassistant;
+in
 {
   options = {
-    homeassistant.enable = lib.mkEnableOption "enables homeassistant";
+    options.homelab.services.homeassistant = {
+      enable = lib.mkEnableOption "enables homeassistant";
+
+      url = lib.mkOption {
+        type = lib.types.str;
+        default = "home.${config.homelab.baseDomain}";
+      };
+
+      configDir = lib.mkOption {
+        type = lib.types.str;
+        default = "${config.homelab.configDir}/homeassistant";
+      };
+    };
   };
 
   config = lib.mkIf config.homeassistant.enable {
-    networking.firewall.allowedTCPPorts = [ 8123 ];
-
-    services.home-assistant = {
-      enable = true;
-
-      extraComponents = [
-        "esphome"
-        "met"
-        "radio_browser"
+    virtualisation.oci-containers.containers.homeassistant = {
+      image = "homeassistant/home-assistant:stable";
+      autoStart = true;
+      volumes = [
+        "${cfg.configDir}:/config"
       ];
-
-      config = {
-        default_config = {};
+      priveleged = true;
+      environment = {
+        TZ = config.system.timeZone;
       };
     };
-
   };
 }
