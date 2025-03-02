@@ -10,7 +10,7 @@
     enable = true;
 
     hostName = "rpi5";
-    passwordFile = config.sops.secrets.password_strong.file;
+    passwordFile = config.sops.secrets.password_strong.path;
     systemdBoot = false;
 
     tcpPorts = [ 22 ];
