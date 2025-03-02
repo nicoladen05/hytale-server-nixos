@@ -101,7 +101,7 @@
       description = "${config.system.userName}";
       extraGroups = ["networkmanager" "wheel"];
       shell = config.system.shell;
-      hashedPasswordFile = "${config.system.passwordFile}";
+      # hashedPasswordFile = "${config.system.passwordFile}";
     };
 
     networking.firewall.allowedTCPPorts = config.system.tcpPorts;

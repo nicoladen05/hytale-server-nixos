@@ -10,7 +10,6 @@
     enable = true;
 
     hostName = "rpi5";
-    passwordFile = null;
     systemdBoot = false;
 
     tcpPorts = [ 22 ];
