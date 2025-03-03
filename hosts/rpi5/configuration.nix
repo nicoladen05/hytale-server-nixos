@@ -15,6 +15,14 @@
     tcpPorts = [ 22 ];
   };
 
+  homelab = {
+    enable = true;
+    configDir = "/home/nico/";
+    baseUrl = "nerduniverse.duckdns.org";
+
+    services.homeassistant.enable = true;
+  };
+
   users.users.nico.initialPassword = "password"; # For ssh login on first boot
 
   raspberry-pi-nix = {
