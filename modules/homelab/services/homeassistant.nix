@@ -27,7 +27,7 @@ in
       volumes = [
         "${cfg.configDir}:/config"
       ];
-      priveleged = true;
+      privileged = true;
       environment = {
         TZ = config.system.timeZone;
       };
