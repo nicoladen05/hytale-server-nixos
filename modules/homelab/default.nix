@@ -1,6 +1,10 @@
 { lib, config, ... }:
 
 {
+  imports = [
+    ./services
+  ];
+
   options.homelab = {
     enable = lib.mkEnableOption "enable homelab configuration";
 
