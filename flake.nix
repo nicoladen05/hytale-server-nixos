@@ -26,6 +26,8 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
 
+    deploy-rs.url = "github:serokell/deploy-rs";
+
     stylix.url = "github:danth/stylix";
 
     firefox-addons = {
@@ -85,6 +87,14 @@
           inputs.raspberry-pi-nix.nixosModules.sd-image
           inputs.sops-nix.nixosModules.sops
         ];
+      };
+
+      deploy.nodes.rpi5 = {
+        hostname = "rpi5";
+        profiles.system = {
+          user = "nico";
+          path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.rpi5;
+        };
       };
     };
 }
