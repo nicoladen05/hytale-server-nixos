@@ -43,8 +43,9 @@
         set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
         set-environment -g COLORTERM "truecolor"
 
+        set -g status-position top
+
         set -g status-style bg=default,fg=default
-        set -g status-bg default
 
         set -g automatic-rename off
         set -g window-status-current-format "#I:#W"
@@ -52,9 +53,15 @@
 
         set -g pane-border-status off
 
-        set -g status-right "%d.%m %H:%M"
-
         set -g status-right "%d.%m. %H:%M"
+        set -g status-left ""
+
+        set -g window-status-format "#I: #{=10:window_name} "
+        set -g window-status-current-format "#I: #{=10:window_name} "
+
+        set -g window-status-current-style fg=white,bg="#${config.lib.stylix.colors.base02}"
+
+        set -g window-status-style fg=white,dim
 
         unbind h
         unbind n
