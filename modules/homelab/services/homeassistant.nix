@@ -5,7 +5,7 @@ let
 in
 {
   options = {
-    options.homelab.services.homeassistant = {
+    homelab.services.homeassistant = {
       enable = lib.mkEnableOption "enables homeassistant";
 
       url = lib.mkOption {
