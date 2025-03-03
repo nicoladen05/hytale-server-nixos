@@ -18,7 +18,7 @@
   homelab = {
     enable = true;
     configDir = "/home/nico/";
-    baseUrl = "nerduniverse.duckdns.org";
+    baseDomain = "nerduniverse.duckdns.org";
 
     services.homeassistant.enable = true;
   };
