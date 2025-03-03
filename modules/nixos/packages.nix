@@ -43,6 +43,7 @@
       wget
       gcc
       htop
+      deploy-rs
     ]
     ++ lib.optionals config.packages.terminal.enable [
       lazygit

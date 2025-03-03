@@ -19,8 +19,17 @@
       protocol = "ssh-ng";
       supportedFeatures = ["big-parallel"];
     }
+    {
+      hostName = "rpi5";
+      system = "aarch64-linux";
+      protocol = "ssh-ng";
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+    }
   ];
   nix.distributedBuilds = true;
+  nix.extraOptions = ''
+    builders-use-substitutes = true
+  '';
   nix.settings.trusted-users = [ "root" "nico" ];
 
   # CONFIG
