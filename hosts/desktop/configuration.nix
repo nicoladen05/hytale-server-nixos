@@ -21,6 +21,7 @@
     }
     {
       hostName = "rpi5";
+      sshUser = "nico";
       system = "aarch64-linux";
       protocol = "ssh-ng";
       supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
