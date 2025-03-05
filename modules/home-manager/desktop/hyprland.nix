@@ -324,6 +324,9 @@ in
         "$mainMod, F, fullscreen, 1"
         "$mainMod SHIFT, F, fullscreen"
 
+        # Float
+        "$mainMod, g, workspaceopt, allfloat"
+
         # Example special workspace (scratchpad)
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"

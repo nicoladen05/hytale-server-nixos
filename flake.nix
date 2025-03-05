@@ -91,8 +91,10 @@
 
       deploy.nodes.rpi5 = {
         hostname = "rpi5";
+        interactiveSudo = true;
         profiles.system = {
-          user = "nico";
+          user = "root";
+          sshUser = "nico";
           path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.rpi5;
         };
       };

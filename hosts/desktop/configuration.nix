@@ -65,9 +65,9 @@
     stylix = {
       enable = true;
 
-      colorScheme = "catppuccin-macchiato";
-      wallpaper = "https://raw.githubusercontent.com/zhichaoh/catppuccin-wallpapers/refs/heads/main/waves/Waves%20Dark%20Alt%206016x6016.jpg";
-      wallpaperHash = "sha256-5hjv4M7LIYCS4AqEf1k2417taqN7hqi4ffCSc+7QzAY=";
+      colorScheme = "ayu-dark";
+      wallpaper = "https://i.redd.it/7vzss3iwq0me1.png";
+      wallpaperHash = "sha256-w/2YwyJhR9Kb3Pccs6lcy/NH+iGT5nSsU8XqBurBvvg=";
     };
   };
 

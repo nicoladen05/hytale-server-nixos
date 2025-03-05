@@ -59,7 +59,7 @@
         set -g window-status-format "#I: #{=10:window_name} "
         set -g window-status-current-format "#I: #{=10:window_name} "
 
-        set -g window-status-current-style fg=white,bg="#${config.lib.stylix.colors.base02}"
+        set -g window-status-current-style fg=white,bg="white"
 
         set -g window-status-style fg=white,dim
 

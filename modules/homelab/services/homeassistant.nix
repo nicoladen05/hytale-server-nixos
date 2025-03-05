@@ -21,7 +21,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    virtualisation.oci-containers.containers.homeassistant = {
+    virtualisation.oci-containers.containers."homeassistant" = {
       image = "homeassistant/home-assistant:stable";
       autoStart = true;
       volumes = [
