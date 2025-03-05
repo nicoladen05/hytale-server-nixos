@@ -65,7 +65,7 @@
     stylix = {
       enable = true;
 
-      colorScheme = "ayu-dark";
+      colorScheme = "vesper";
       wallpaper = "https://i.redd.it/7vzss3iwq0me1.png";
       wallpaperHash = "sha256-w/2YwyJhR9Kb3Pccs6lcy/NH+iGT5nSsU8XqBurBvvg=";
     };
