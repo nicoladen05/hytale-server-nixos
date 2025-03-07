@@ -18,9 +18,9 @@
 
   config = lib.mkIf config.nvf.enable {
     # Set $EDITOR as nvim
-    environment.sessionVariables = {
-      EDITOR = "nvim";
-    };
+#    environment.sessionVariables = {
+#      EDITOR = "nvim";
+#    };
 
     programs.nvf = {
       enable = true;

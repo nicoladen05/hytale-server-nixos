@@ -78,6 +78,12 @@
         ];
       };
 
+      homeConfigurations."nico" = inputs.home-manager.lib.homeManagerConfiguration {
+	pkgs = nixpkgs.legacyPackages.x86_64-linux;
+	modules = [ ./hosts/wsl/home.nix inputs.nvf.homeManagerModules.default ];
+	extraSpecialArgs = { userName = "nico"; };
+      };
+
       nixosConfigurations.rpi5 = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = {inherit inputs;};
