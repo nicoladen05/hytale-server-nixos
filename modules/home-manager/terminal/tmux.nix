@@ -19,6 +19,8 @@
   };
 
   config = lib.mkIf config.home-manager.tmux.enable {
+    stylix.targets.tmux.enable = false;
+
     programs.tmux = {
       enable = true;
       clock24 = true;
@@ -47,19 +49,17 @@
 
         set -g status-style bg=default,fg=default
 
-        set -g automatic-rename off
-        set -g window-status-current-format "#I:#W"
-        set -g window-status-format "#I:#W"
+        set -g automatic-rename on
 
         set -g pane-border-status off
 
-        set -g status-right "%d.%m. %H:%M"
+        set -g status-right " 󰥔 %H:%M "
         set -g status-left ""
 
-        set -g window-status-format "#I: #{=10:window_name} "
-        set -g window-status-current-format "#I: #{=10:window_name} "
+        set -g window-status-format " #I: #{=10:window_name} "
+        set -g window-status-current-format " #I: #{=10:window_name} "
 
-        set -g window-status-current-style fg=white,bg="white"
+        set -g window-status-current-style fg=black,bg="white"
 
         set -g window-status-style fg=white,dim
 
