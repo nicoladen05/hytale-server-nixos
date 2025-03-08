@@ -167,7 +167,7 @@ in
         gaps_in = 6;
         gaps_out = 16;
 
-        border_size = 2;
+        border_size = 1;
 
         resize_on_border = false;
 
@@ -177,7 +177,7 @@ in
       };
 
       decoration = {
-        rounding = 15;
+        rounding = 10;
         rounding_power = 4;
 
         blur = {
@@ -190,9 +190,11 @@ in
 
         shadow = {
           enabled = true;
-          range = 16;
-          render_power = 3;
-          color = lib.mkForce "rgba(0, 0, 0, 0.25)";
+          range = 300;
+          render_power = 4;
+          offset = "0 40";
+          scale = 0.9;
+          color = lib.mkForce "rgba(1a1a1aaf)";
         };
       };
 

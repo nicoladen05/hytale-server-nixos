@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
 
       ../../modules/nixos
+      ../../modules/homelab/services/ollama.nix
   ];
 
   nix.buildMachines = [
@@ -49,6 +50,12 @@
     udpPorts = [];
   };
 
+  homelab.services.ollama = {
+    enable = true;
+    useCuda = true;
+    modelDirectory = /home/nico/data/models;
+  };
+
   packages = {
     enable = true;
     terminal.enable = true;
@@ -65,9 +72,9 @@
     stylix = {
       enable = true;
 
-      colorScheme = "vesper";
-      wallpaper = "https://i.redd.it/7vzss3iwq0me1.png";
-      wallpaperHash = "sha256-w/2YwyJhR9Kb3Pccs6lcy/NH+iGT5nSsU8XqBurBvvg=";
+      colorScheme = "everforest-dark-hard";
+      wallpaper = "https://images.unsplash.com/photo-1477322524744-0eece9e79640?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=juan-davila-P8PlK2nGwqA-unsplash.jpg";
+      wallpaperHash = "sha256-eISEchJr1/wl+557PdWeG/58uS5sz0SOMqbQAskdess=";
     };
   };
 
