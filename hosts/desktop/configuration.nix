@@ -45,7 +45,7 @@
 
     shell = pkgs.zsh;
 
-    tcpPorts = [];
+    tcpPorts = [ 22 ];
     udpPorts = [];
   };
 
