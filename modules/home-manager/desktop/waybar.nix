@@ -77,7 +77,7 @@ in
 
         modules-left = ["hyprland/workspaces"];
         modules-center = ["clock" "custom/date" "custom/weather"];
-        modules-right = ["gamemode" "network" "wireplumber"];
+        modules-right = ["tray" "gamemode" "network" "wireplumber"];
 
         "hyprland/workspaces" = {
           on-click = "activate";
@@ -105,6 +105,10 @@ in
 
         clock = {
           format = "󰥔 {:%H:%M}";
+        };
+        
+        tray = {
+          icon-size = 18;
         };
 
         "custom/date" = {
