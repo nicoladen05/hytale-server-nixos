@@ -1,6 +1,8 @@
-{ lib, config, ... }:
-
 {
+  lib,
+  config,
+  ...
+}: {
   options = {
     home-manager.zsh.enable = lib.mkEnableOption "Enable the zsh shell";
   };
@@ -27,12 +29,6 @@
         rb = "sudo nixos-rebuild switch --flake ~/.config/nixos/#default";
         rt = "sudo nixos-rebuild test --flake ~/.config/nixos/#default";
       };
-
-      profileExtra = ''
-        if uwsm check may-start; then
-            exec uwsm start hyprland.desktop
-        fi
-      '';
     };
 
     programs.zoxide = {

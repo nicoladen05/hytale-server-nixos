@@ -1,16 +1,18 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, inputs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
 
-      ../../modules/nixos
-      ../../modules/homelab/services/ollama.nix
+    ../../modules/nixos
+    ../../modules/homelab/services/ollama.nix
   ];
 
   nix.buildMachines = [
@@ -25,14 +27,14 @@
       sshUser = "nico";
       system = "aarch64-linux";
       protocol = "ssh-ng";
-      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
     }
   ];
   nix.distributedBuilds = true;
   nix.extraOptions = ''
     builders-use-substitutes = true
   '';
-  nix.settings.trusted-users = [ "root" "nico" ];
+  nix.settings.trusted-users = ["root" "nico"];
 
   # CONFIG
   system = {
@@ -44,9 +46,11 @@
     hostName = "desktop";
     passwordFile = config.sops.secrets.password.path;
 
+    bluetooth.enable = true;
+
     shell = pkgs.zsh;
 
-    tcpPorts = [ 22 ];
+    tcpPorts = [22];
     udpPorts = [];
   };
 
@@ -73,18 +77,26 @@
       enable = true;
 
       colorScheme = "everforest-dark-hard";
-      wallpaper = "https://images.unsplash.com/photo-1477322524744-0eece9e79640?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=juan-davila-P8PlK2nGwqA-unsplash.jpg";
-      wallpaperHash = "sha256-eISEchJr1/wl+557PdWeG/58uS5sz0SOMqbQAskdess=";
+      wallpaper = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=bailey-zindel-NRQV-hBF10M-unsplash.jpg";
+      wallpaperHash = "sha256-RgB+eG5XbRUBc6xB2LHh/YpcSDvp6UF3tDKVeR3suY4=";
     };
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; userName = "${config.system.userName}"; };
+    extraSpecialArgs = {
+      inherit inputs;
+      userName = "${config.system.userName}";
+    };
     users = {
       "nico" = import ./home.nix;
     };
   };
 
+  gaming = {
+    enable = true;
+    jovian.enable = true;
+    controller.xbox.enable = true;
+  };
+
   nvf.enable = true;
-  gaming.enable = true;
 }

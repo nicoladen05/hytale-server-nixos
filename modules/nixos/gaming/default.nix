@@ -1,8 +1,12 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   imports = [
     ./steam.nix
+    ./controller.nix
+    ./jovian.nix
   ];
 
   options = {
@@ -12,5 +16,4 @@
   config = lib.mkIf config.gaming.enable {
     gaming.steam.enable = true;
   };
-
 }

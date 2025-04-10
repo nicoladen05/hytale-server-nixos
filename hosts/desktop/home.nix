@@ -21,14 +21,14 @@
           primary = true;
           resolution = "2560x1440";
           refreshRate = 165;
-          vrr = true;
+          vrr = false;
         }
         {
           display = "HDMI-A-2";
           resolution = "1920x1080";
-          refreshRate = 75;
           offset = "-1080x0";
-          rotate = 3; # Rotate CCW
+          refreshRate = 75;
+          rotate = 3;
         }
       ];
     };

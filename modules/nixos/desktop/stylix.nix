@@ -24,6 +24,9 @@
     stylix.enable = true;
     stylix.targets.console.enable = false;
 
+
+    stylix.targets.nvf.transparentBackground = true;
+
     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.desktop.stylix.colorScheme}.yaml";
 
     # stylix.base16Scheme = {
@@ -53,7 +56,6 @@
     stylix.cursor.package = pkgs.apple-cursor;
     stylix.cursor.name = "macOS";
     stylix.cursor.size = 28;
-
 
     stylix.opacity = {
       terminal = 0.95;

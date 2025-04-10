@@ -6,6 +6,8 @@
   };
 
   config = lib.mkIf config.home-manager.firefox.enable {
+    stylix.targets.librewolf.profileNames = [ "nico" ];
+
     programs.librewolf = {
       enable = true;
 

@@ -88,12 +88,13 @@
           runc
       ]
       ++ lib.optionals config.packages.productivity.enable [
-        (obsidian.override {
-          electron = electron_32.overrideAttrs (_: {
-            preFixup = "patchelf --add-needed ${libglvnd}/lib/libEGL.so.1 $out/bin/electron";
-            meta.knownVulnerabilities = [ ];
-          });
-        })
+        # (obsidian.override {
+        #   electron = electron_32.overrideAttrs (_: {
+        #     preFixup = "patchelf --add-needed ${libglvnd}/lib/libEGL.so.1 $out/bin/electron";
+        #     meta.knownVulnerabilities = [ ];
+        #   });
+        # })
+        obsidian
         nextcloud-client
         anki
       ];

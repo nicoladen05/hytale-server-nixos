@@ -1,6 +1,9 @@
-{ lib, pkgs, config, ... }:
-
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: {
   options = {
     desktop.hyprland.enable = lib.mkEnableOption "enable hyprland";
   };
@@ -16,26 +19,26 @@
 
       pkgs.slurp
       pkgs.hyprsunset
-      
+
       (pkgs.writeScriptBin "rofi-power-menu" ''
-      options="󰌾 Lock\n󰤄 Sleep\n󰜉 Reboot\n󰐥 Shutdown"
+        options="󰌾 Lock\n󰤄 Sleep\n󰜉 Reboot\n󰐥 Shutdown"
 
-      selected=$(echo -e "$options" | rofi -dmenu -i -p "Power Menu")
+        selected=$(echo -e "$options" | rofi -dmenu -i -p "Power Menu")
 
-      case "''${selected}" in
-         "󰐥 Shutdown")
-            systemctl poweroff
-            ;;
-         "󰜉 Reboot")
-            systemctl reboot
-            ;;
-         "󰤄 Sleep")
-            hyprshot -m output -m DP-6 -o /tmp -f screenshot.png -s ; hyprlock ; systemctl suspend
-            ;;
-         "󰌾 Lock")
-            hyprshot -m output -m DP-6 -o /tmp -f screenshot.png -s ; hyprlock
-            ;;
-      esac
+        case "''${selected}" in
+           "󰐥 Shutdown")
+              systemctl poweroff
+              ;;
+           "󰜉 Reboot")
+              systemctl reboot
+              ;;
+           "󰤄 Sleep")
+              hyprshot -m output -m DP-6 -o /tmp -f screenshot.png -s ; hyprlock ; systemctl suspend
+              ;;
+           "󰌾 Lock")
+              hyprshot -m output -m DP-6 -o /tmp -f screenshot.png -s ; hyprlock
+              ;;
+        esac
       '')
     ];
 
@@ -57,5 +60,15 @@
 
     xdg.portal.enable = true;
     # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
+    services.greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "Hyprland";
+          user = config.system.userName;
+        };
+      };
+    };
   };
 }

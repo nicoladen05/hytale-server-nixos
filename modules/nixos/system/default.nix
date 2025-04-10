@@ -1,6 +1,9 @@
-{ pkgs, lib, config, ... }: 
-
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   imports = [
     ./nh.nix
     ./nvidia.nix
@@ -53,6 +56,12 @@
       example = false;
     };
 
+    system.bluetooth.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      example = true;
+    };
+
     system.tcpPorts = lib.mkOption {
       type = lib.types.listOf lib.types.int;
       default = [];
@@ -72,7 +81,7 @@
     # Bootloader.
     boot.loader.systemd-boot.enable = lib.mkIf config.system.systemdBoot true;
     boot.loader.efi.canTouchEfiVariables = lib.mkIf config.system.systemdBoot true;
-     
+
     # Networking
     networking.hostName = "${config.system.hostName}";
     networking.networkmanager.enable = true;
@@ -104,11 +113,25 @@
       # hashedPasswordFile = "${config.system.passwordFile}";
     };
 
+    # Bluetooth
+    hardware.bluetooth = lib.mkIf config.system.bluetooth.enable {
+      enable = true;
+      powerOnBoot = true;
+      settings.General = {
+        experimental = true;
+        Privacy = "device";
+        JustWorksRepairing = "always";
+        Class = "0x000100";
+        FastConnectable = true;
+      };
+    };
+    services.blueman.enable = lib.mkIf config.system.bluetooth.enable true;
+
     networking.firewall.allowedTCPPorts = config.system.tcpPorts;
     networking.firewall.allowedUDPPorts = config.system.udpPorts;
 
     nixpkgs.config.allowUnfree = true;
-    nix.settings.experimental-features = ["nix-command" "flakes" ];
+    nix.settings.experimental-features = ["nix-command" "flakes"];
 
     system.stateVersion = "24.05";
   };
