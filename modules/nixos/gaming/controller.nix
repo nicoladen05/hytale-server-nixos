@@ -10,6 +10,7 @@
 
   config = lib.mkIf config.gaming.controller.xbox.enable {
     hardware.xpadneo.enable = true;
+    hardware.xone.enable = true;
 
     boot = {
       extraModulePackages = with config.boot.kernelPackages; [xpadneo];

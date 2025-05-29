@@ -50,7 +50,7 @@
       example = pkgs.zsh;
     };
 
-    system.systemdBoot = lib.mkOption {
+    system.boot.systemdBoot = lib.mkOption {
       type = lib.types.bool;
       default = true;
       example = false;
@@ -79,12 +79,13 @@
     nh.enable = true;
 
     # Bootloader.
-    boot.loader.systemd-boot.enable = lib.mkIf config.system.systemdBoot true;
-    boot.loader.efi.canTouchEfiVariables = lib.mkIf config.system.systemdBoot true;
+    boot.loader.systemd-boot.enable = lib.mkIf config.system.boot.systemdBoot true;
+    boot.loader.efi.canTouchEfiVariables = lib.mkIf config.system.boot.systemdBoot true;
 
     # Networking
     networking.hostName = "${config.system.hostName}";
     networking.networkmanager.enable = true;
+    networking.nameservers = ["192.168.2.103"];
 
     # Timezone
     time.timeZone = "${config.system.timeZone}";

@@ -1,6 +1,10 @@
-{ lib, pkgs, inputs, config, ...}:
-
 {
+  lib,
+  pkgs,
+  inputs,
+  config,
+  ...
+}: {
   options = {
     desktop.stylix.enable = lib.mkEnableOption "enable stylix";
 
@@ -23,7 +27,6 @@
   config = lib.mkIf config.desktop.stylix.enable {
     stylix.enable = true;
     stylix.targets.console.enable = false;
-
 
     stylix.targets.nvf.transparentBackground = true;
 
@@ -58,8 +61,8 @@
     stylix.cursor.size = 28;
 
     stylix.opacity = {
-      terminal = 0.95;
-      applications = 0.95;
+      terminal = 0.9;
+      applications = 0.9;
     };
 
     stylix.fonts = {
@@ -67,14 +70,14 @@
         package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono Nerd Font";
       };
-     sansSerif = {
-       package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro-nerd;
-       name = "SFProDisplay Nerd Font";
-     };
-     serif = {
-       package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro-nerd;
-       name = "SFProDisplay Nerd Font";
-     };
+      sansSerif = {
+        package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro-nerd;
+        name = "SFProDisplay Nerd Font";
+      };
+      serif = {
+        package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro-nerd;
+        name = "SFProDisplay Nerd Font";
+      };
     };
 
     stylix.fonts.sizes = {

@@ -1,9 +1,11 @@
-{ lib, pkgs, config, ... }:
-
-let
-  primaryMonitor = (builtins.head (builtins.filter (d: d.primary) config.home-manager.hyprland.displays)).display;
-in
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
+  primaryMonitor = (builtins.head (builtins.filter (d: d.primary) config.home-manager.hyprland.displays)).display;
+in {
   imports = [
     ./mako.nix
     ./rofi.nix
@@ -46,23 +48,19 @@ in
           };
         };
       });
-      apply = displays:
-        let
-          primaryDisplays = builtins.length (builtins.filter (d: d.primary) displays);
-        in
-        if primaryDisplays == 1 then
-          displays
-        else
-          throw "Exactly one monitor must be configured as primary. Found ${toString primaryDisplays} primary monitors.";
+      apply = displays: let
+        primaryDisplays = builtins.length (builtins.filter (d: d.primary) displays);
+      in
+        if primaryDisplays == 1
+        then displays
+        else throw "Exactly one monitor must be configured as primary. Found ${toString primaryDisplays} primary monitors.";
     };
   };
 
   config = lib.mkIf config.home-manager.hyprland.enable {
-
     home-manager.mako.enable = true;
     home-manager.rofi.enable = true;
     home-manager.waybar.enable = true;
-
 
     gtk.enable = true;
     gtk.iconTheme = {
@@ -128,46 +126,47 @@ in
     };
 
     wayland.windowManager.hyprland.xwayland.enable = true;
-    
+
     wayland.windowManager.hyprland.enable = true;
-    
+
     wayland.windowManager.hyprland.settings = {
       monitor = lib.mkMerge [
         # "DP-6, 2560x1440@165, 0x0, 1, vrr, 1"
         # "HDMI-A-2, 1920x1080@75, -1080x0, 1, transform, 3"
         # "DP-6, addreserved, -6, 0, 0, 0"
 
-        (lib.forEach config.home-manager.hyprland.displays (display:
-          let
-            vrrStr = if display.vrr then ", vrr, 1" else "";
-            transformStr = if display.rotate != null then ", transform, ${toString display.rotate}" else "";
-          in
-            "${display.display}, ${display.resolution}@${toString display.refreshRate}, ${display.offset}, 1${vrrStr}${transformStr}"
+        (lib.forEach config.home-manager.hyprland.displays (
+          display: let
+            vrrStr =
+              if display.vrr
+              then ", vrr, 1"
+              else "";
+            transformStr =
+              if display.rotate != null
+              then ", transform, ${toString display.rotate}"
+              else "";
+          in "${display.display}, ${display.resolution}@${toString display.refreshRate}, ${display.offset}, 1${vrrStr}${transformStr}"
         ))
 
-        (lib.forEach (lib.filter (display: display.primary) config.home-manager.hyprland.displays) (display:
-          "${display.display}, addreserved, -10, 0, 0, 0"
+        (lib.forEach (lib.filter (display: display.primary) config.home-manager.hyprland.displays) (
+          display: "${display.display}, addreserved, -10, 0, 0, 0"
         ))
-
       ];
-
 
       "$terminal" = "alacritty";
       "$fileManager" = "dolphin";
       "$menu" = "rofi -show drun -show-icons";
-
 
       exec-once = [
         "waybar &"
         "mako &"
       ];
 
-
       general = {
         gaps_in = 6;
         gaps_out = 16;
 
-        border_size = 1;
+        border_size = 2;
 
         resize_on_border = false;
 
@@ -184,7 +183,7 @@ in
           enabled = true;
           size = 8;
           passes = 1;
-          
+
           vibrancy = 0.1696;
         };
 
@@ -214,46 +213,43 @@ in
       cursor = {
         inactive_timeout = 3;
       };
-      
+
       dwindle = {
-          pseudotile = true;
-          preserve_split = true;
+        pseudotile = true;
+        preserve_split = true;
       };
 
       master = {
-          new_status = "master";
+        new_status = "master";
       };
 
-      misc =  { 
-          force_default_wallpaper = -1;
-          disable_hyprland_logo = false;
+      misc = {
+        force_default_wallpaper = -1;
       };
-
 
       input = {
-          kb_layout = "us";
-          kb_variant = "colemak";
-          kb_options = "caps:escape";
+        kb_layout = "us";
+        kb_variant = "colemak";
+        kb_options = "caps:escape";
 
-          repeat_delay = 300;
-          repeat_rate = 50;
+        repeat_delay = 300;
+        repeat_rate = 50;
 
-          follow_mouse = 1;
+        follow_mouse = 1;
 
-          sensitivity = -0.2;
-          accel_profile = "flat";
+        sensitivity = -0.2;
+        accel_profile = "flat";
 
-          touchpad = {
-              natural_scroll = false;
-          };
+        touchpad = {
+          natural_scroll = false;
+        };
       };
 
       gestures = {
-          workspace_swipe = false;
+        workspace_swipe = false;
       };
 
-
-      "$mainMod" = "SUPER"; 
+      "$mainMod" = "SUPER";
       bind = [
         "$mainMod, Return, exec, $terminal"
         "$mainMod, W, exec, librewolf"
@@ -347,7 +343,7 @@ in
         ", code:172, exec, playerctl play-pause"
         ", code:171, exec, playerctl next"
       ];
-      
+
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"

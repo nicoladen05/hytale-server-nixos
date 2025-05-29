@@ -1,12 +1,15 @@
-{ config, pkgs, inputs, ... }:
-
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ../../modules/home-manager
   ];
 
   home-manager = {
-    enable = true;
+    enable = false;
 
     firefox.enable = true;
     terminal.enable = true;
@@ -33,7 +36,4 @@
       ];
     };
   };
-
-  
-
 }
