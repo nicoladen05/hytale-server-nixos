@@ -9,7 +9,7 @@
   ];
 
   home-manager = {
-    enable = false;
+    enable = true;
 
     firefox.enable = true;
     terminal.enable = true;

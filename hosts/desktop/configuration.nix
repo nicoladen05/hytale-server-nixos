@@ -71,15 +71,15 @@
 
   desktop = {
     audio.enable = true;
-    # hyprland.enable = true;
-    kde.enable = true;
+    hyprland.enable = true;
+    gnome.enable = false;
 
     stylix = {
       enable = true;
 
       colorScheme = "gruvbox-material-dark-medium";
-      wallpaper = "https://w.wallhaven.cc/full/gp/wallhaven-gpe92e.png";
-      wallpaperHash = "sha256-pPYmr9fk0jzrN9sW/WDrsEEwtvDc4fRUoCQ3wClzXPg=";
+      wallpaper = "https://images.unsplash.com/photo-1745669754254-c30c98e5f8b1?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=andrei-r-popescu-HBsmzKuGyuI-unsplash.jpg";
+      wallpaperHash = "sha256-C0lvJ0ff0mCC3i9mmeHZsj/n6Ehkp3jaslVr7VDUB3k=";
     };
   };
 
@@ -95,14 +95,14 @@
 
   gaming.enable = true;
 
-  specialisation = {
-    jovian.configuration = {
-      gaming = {
-        jovian.enable = true;
-        controller.xbox.enable = true;
-      };
-    };
-  };
+  # specialisation = {
+  #   jovian.configuration = {
+  #     gaming = {
+  #       jovian.enable = true;
+  #       controller.xbox.enable = true;
+  #     };
+  #   };
+  # };
 
   nvf.enable = true;
 }
