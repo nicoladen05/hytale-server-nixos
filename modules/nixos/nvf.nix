@@ -169,8 +169,8 @@
               right = "";
             };
             sectionSeparator = {
-              left = "";
-              right = "";
+              left = "";
+              right = "";
             };
             disabledFiletypes = [
               "statusline"

@@ -77,9 +77,9 @@
     stylix = {
       enable = true;
 
-      colorScheme = "gruvbox-material-dark-medium";
-      wallpaper = "https://images.unsplash.com/photo-1745669754254-c30c98e5f8b1?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=andrei-r-popescu-HBsmzKuGyuI-unsplash.jpg";
-      wallpaperHash = "sha256-C0lvJ0ff0mCC3i9mmeHZsj/n6Ehkp3jaslVr7VDUB3k=";
+      colorScheme = "catppuccin-macchiato";
+      wallpaper = "https://xcu37g90vd.ufs.sh/f/gISQwWsUpMTP8i7HGfAkvTZz3GsPRhLOBuSmYXAdHjVe2CoU";
+      wallpaperHash = "sha256-4xVUtw+hiBaQPlJ9hNBhqN37HUShvrvvQse0v27rETs=";
     };
   };
 
@@ -94,6 +94,7 @@
   };
 
   gaming.enable = true;
+  gaming.controller.xbox.enable = true;
 
   # specialisation = {
   #   jovian.configuration = {

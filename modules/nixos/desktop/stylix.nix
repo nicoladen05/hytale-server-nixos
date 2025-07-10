@@ -61,14 +61,14 @@
     stylix.cursor.size = 28;
 
     stylix.opacity = {
-      terminal = 0.9;
-      applications = 0.9;
+      terminal = 1.0;
+      applications = 1.0;
     };
 
     stylix.fonts = {
       monospace = {
-        package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font";
+        package = pkgs.nerd-fonts.zed-mono;
+        name = "ZedMono Nerd Font";
       };
       sansSerif = {
         package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro-nerd;
