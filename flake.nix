@@ -87,8 +87,12 @@
     };
 
     homeConfigurations."nico" = inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      modules = [./hosts/wsl/home.nix inputs.nvf.homeManagerModules.default];
+      pkgs = nixpkgs.legacyPackages.aarch64-linux;
+      modules = [
+      	./hosts/dev-server/home.nix
+      	inputs.nvf.homeManagerModules.default
+		inputs.stylix.homeManagerModules.stylix
+      ];
       extraSpecialArgs = {userName = "nico";};
     };
 
