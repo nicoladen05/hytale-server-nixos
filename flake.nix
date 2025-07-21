@@ -23,6 +23,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    disko.url = "github:nix-community/disko";
+
     sops-nix.url = "github:Mic92/sops-nix";
 
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -83,6 +85,15 @@
         inputs.stylix.nixosModules.stylix
         inputs.nvf.nixosModules.default
         inputs.jovian.nixosModules.default
+      ];
+    };
+
+    nixosConfigurations.vps = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        ./hosts/vps/configuration.nix
+        ./hosts/vps/hardware-configuration.nix
+        inputs.disko.nixosModules.disko
       ];
     };
 
