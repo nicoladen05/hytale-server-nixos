@@ -365,6 +365,7 @@
           autocomplete.nvim-cmp = {
             enable = true;
             sourcePlugins = [
+              "supermaven-nvim"
               "cmp-buffer"
               "cmp-path"
               "cmp-luasnip"
@@ -404,9 +405,11 @@
           #   setupOpts.completion.nvim_cmp = true;
           # };
 
-          assistant.copilot = {
+          assistant.supermaven-nvim = {
             enable = true;
-            cmp.enable = true;
+            setupOpts = {
+              disable_inline_completion = true;
+            };
           };
 
           telescope.enable = true;
@@ -423,22 +426,6 @@
           ui.colorizer.enable = true;
 
           lazy.plugins = {
-            "avante.nvim" = {
-              package = pkgs.vimPlugins.avante-nvim;
-              setupModule = "avante";
-              setupOpts = {
-                provider = "ollama";
-                vendors = {
-                  ollama = {
-                    __inherited_from = "openai";
-                    api_key_name = "";
-                    endpoint = "http://127.0.0.1:11434/v1";
-                    model = "deepseek-r1:14b";
-                  };
-                };
-              };
-            };
-
             # theme = {
             #   package = theme;
             # };
