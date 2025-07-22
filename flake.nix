@@ -94,6 +94,7 @@
         ./hosts/vps/configuration.nix
         ./hosts/vps/hardware-configuration.nix
         inputs.disko.nixosModules.disko
+        inputs.sops-nix.nixosModules.sops
       ];
     };
 
@@ -117,6 +118,16 @@
         inputs.sops-nix.nixosModules.sops
       ];
     };
+
+	deploy.nodes.vps = {
+	  hostname = "130.61.231.173";
+	  profiles.system = {
+	  	user = "root";
+	  	sshUser = "root";
+	  	fastConnection = true;
+	  	path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.vps;
+	  };  	
+	};
 
     deploy.nodes.rpi5 = {
       hostname = "rpi5";

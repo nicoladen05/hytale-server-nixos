@@ -10,7 +10,7 @@
     enable = true;
 
     hostName = "rpi5";
-    systemdBoot = false;
+    boot.systemdBoot = false;
 
     tcpPorts = [ 22 ];
   };

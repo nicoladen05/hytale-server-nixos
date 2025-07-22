@@ -5,10 +5,16 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disko.nix
+	../../modules/nixos/system
   ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  system = {
+	enable = true;
+  
+  	userName = "nico";
+  	hostName = "vps";
+  };
+
   boot.kernelParams = [ "net.ifnames=0" ];
 
   services.openssh.enable = true;
@@ -23,22 +29,23 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC48NdWVvqBb7eEfDWSrTyc8aGA496kJTjCYImIIpcbv"
   ];
 
+  users.users.nico.openssh.authorizedKeys.keys =
+  [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC48NdWVvqBb7eEfDWSrTyc8aGA496kJTjCYImIIpcbv"
+  ];
+
   system.stateVersion = "25.05";
 
   networking = {
-    hostName = "vps";
     defaultGateway = "10.0.0.1";
     nameservers = [
-        "9.9.9.9"
-        "149.112.112.112"
-        "2620:fe::fe"
-        "2620:fe::9"
+        "8.8.8.8"
     ];
     interfaces.eth0 = {
         ipv4.addresses = [
         {
             # Use IP address configured in the Oracle Cloud web interface
-            address = "10.0.0.34";
+            address = "10.0.0.68";
             prefixLength = 24;
         }
         ];
@@ -53,5 +60,5 @@
         logRefusedConnections = false;
         rejectPackets = true;
     };
-    };
+  };
 }

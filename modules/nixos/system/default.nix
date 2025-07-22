@@ -85,7 +85,6 @@
     # Networking
     networking.hostName = "${config.system.hostName}";
     networking.networkmanager.enable = true;
-    networking.nameservers = ["192.168.2.103"];
 
     # Timezone
     time.timeZone = "${config.system.timeZone}";
@@ -133,7 +132,5 @@
 
     nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = ["nix-command" "flakes"];
-
-    system.stateVersion = "24.05";
   };
 }
