@@ -1,4 +1,4 @@
-{ modulesPath, config, lib, input, ... }:
+{ modulesPath, config, lib, input, pkgs, ... }:
 
 {
   imports = [
@@ -49,7 +49,7 @@
     # (Virtual Cloud Network -> Security Lists -> Ingress Rules)
     firewall = {
         # (both optional)
-        allowedTCPPorts = [ "22" ];
+        allowedTCPPorts = [ 22 ];
         logRefusedConnections = false;
         rejectPackets = true;
     };
