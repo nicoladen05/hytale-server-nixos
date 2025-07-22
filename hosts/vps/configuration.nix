@@ -2,7 +2,7 @@
   modulesPath,
   config,
   lib,
-  input,
+  inputs,
   pkgs,
   ...
 }:
@@ -12,7 +12,6 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disko.nix
     ./hardware-configuration.nix
-    ./home.nix
     ../../modules/nixos
   ];
 
@@ -21,6 +20,18 @@
 
     userName = "nico";
     hostName = "vps";
+
+    shell = pkgs.zsh;
+  };
+
+  home-manager = {
+    extraSpecialArgs = {
+      inherit inputs;
+      userName = "${config.system.userName}";
+    };
+    users = {
+      "nico" = import ./home.nix;
+    };
   };
 
   nvf.enable = true;
@@ -30,14 +41,14 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/ayu-dark.yaml";
   };
 
+  packages = {
+    enable = true;
+    terminal.enable = true;
+  };
+
   boot.kernelParams = [ "net.ifnames=0" ];
 
   services.openssh.enable = true;
-
-  environment.systemPackages = map lib.lowPrio [
-    pkgs.curl
-    pkgs.gitMinimal
-  ];
 
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC48NdWVvqBb7eEfDWSrTyc8aGA496kJTjCYImIIpcbv"

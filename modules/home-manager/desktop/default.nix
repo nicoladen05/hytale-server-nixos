@@ -3,7 +3,7 @@
 {
   imports = [
     ./hyprland.nix
-    ./gnome.nix
+    # ./gnome.nix
     ./mako.nix
     ./rofi.nix
     ./waybar.nix

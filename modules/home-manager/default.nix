@@ -3,8 +3,8 @@
 {
   imports =
     [
-      ./desktop
       ./terminal
+      ./desktop
       ./firefox.nix
     ];
 
