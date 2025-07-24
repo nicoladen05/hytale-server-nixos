@@ -405,10 +405,15 @@
           #   setupOpts.completion.nvim_cmp = true;
           # };
 
-          assistant.supermaven-nvim = {
-            enable = true;
-            setupOpts = {
-              disable_inline_completion = true;
+          assistant = {
+            supermaven-nvim = {
+              enable = true;
+              setupOpts = {
+                disable_inline_completion = true;
+              };
+            };
+            chatgpt = {
+              enable = true;
             };
           };
 
