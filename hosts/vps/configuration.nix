@@ -13,6 +13,7 @@
     ./disko.nix
     ./hardware-configuration.nix
     ../../modules/nixos
+    ../../modules/homelab
   ];
 
   system = {
@@ -22,6 +23,25 @@
     hostName = "vps";
 
     shell = pkgs.zsh;
+  };
+
+  homelab = {
+    enable = true;
+
+    configDir = "/home/nico/services";
+    baseDomain = "nicoladen.dev";
+
+    services = {
+      minecraft-server = {
+        enable = true;
+        servers = {
+          main_server = {
+            type = "fabric";
+            version = "1.21.7";
+          };
+        };
+      };
+    };
   };
 
   home-manager = {

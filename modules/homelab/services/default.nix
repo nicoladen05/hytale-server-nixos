@@ -2,6 +2,8 @@
 
 {
   imports = [
-    ./homeassistant.nix
+    ./homeassistant
+    ./tailscale
+    ./minecraft
   ];
 }

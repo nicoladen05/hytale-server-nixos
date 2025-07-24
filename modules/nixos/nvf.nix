@@ -365,7 +365,6 @@
           autocomplete.nvim-cmp = {
             enable = true;
             sourcePlugins = [
-              "supermaven-nvim"
               "cmp-buffer"
               "cmp-path"
               "cmp-luasnip"
@@ -406,16 +405,7 @@
           # };
 
           assistant = {
-            supermaven-nvim = {
-              enable = true;
-              setupOpts = {
-                disable_inline_completion = true;
-              };
-            };
             copilot = {
-              enable = true;
-            };
-            codecompanion-nvim = {
               enable = true;
               cmp.enable = true;
             };
