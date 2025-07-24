@@ -412,8 +412,12 @@
                 disable_inline_completion = true;
               };
             };
-            chatgpt = {
+            copilot = {
               enable = true;
+            };
+            codecompanion-nvim = {
+              enable = true;
+              cmp.enable = true;
             };
           };
 
