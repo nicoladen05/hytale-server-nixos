@@ -1,6 +1,15 @@
 {
   description = "Nixos config flake";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://nixos-raspberrypi.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -45,9 +54,8 @@
       url = "github:Infinidoge/nix-minecraft";
     };
 
-    raspberry-pi-nix = {
-      url = "github:nix-community/raspberry-pi-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+    nixos-raspberrypi = {
+      url = "github:nvmd/nixos-raspberrypi/main";
     };
 
     jovian = {
@@ -103,13 +111,13 @@
       #   };
       # };
 
-      # nixosConfigurations.rpi5 = nixpkgs.lib.nixosSystem {
+      # nixosConfigurations.rpi5 = nixos-raspberrypi.lib.nixosSystemFull {
       #   system = "aarch64-linux";
       #   specialArgs = { inherit inputs; };
       #   modules = [
       #     ./hosts/rpi5/configuration.nix
-      #     inputs.raspberry-pi-nix.nixosModules.raspberry-pi
-      #     inputs.raspberry-pi-nix.nixosModules.sd-image
+            # inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.base
+            # inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.bluetooth
       #     inputs.sops-nix.nixosModules.sops
       #   ];
       # };

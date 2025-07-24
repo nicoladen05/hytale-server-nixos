@@ -36,6 +36,15 @@
 
   nvf.enable = true;
 
+  nix.optimise.automatic = true;
+  nix.optimise.dates = [ "03:45" ];
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
+
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/ayu-dark.yaml";

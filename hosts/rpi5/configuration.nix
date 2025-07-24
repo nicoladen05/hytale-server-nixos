@@ -15,13 +15,13 @@
     tcpPorts = [ 22 ];
   };
 
-  homelab = {
-    enable = true;
-    configDir = "/home/nico/";
-    baseDomain = "nerduniverse.duckdns.org";
-
-    services.homeassistant.enable = true;
-  };
+  # homelab = {
+  #   enable = true;
+  #   configDir = "/home/nico/";
+  #   baseDomain = "nerduniverse.duckdns.org";
+  #
+  #   services.homeassistant.enable = true;
+  # };
 
   users.users.nico = {
     initialPassword = "password"; # For ssh login on first boot
