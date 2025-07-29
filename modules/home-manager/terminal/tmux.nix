@@ -1,5 +1,9 @@
-{ lib, config, pkgs, inputs, ... }:
-
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 # let
 #   minimal-tmux-status = pkgs.tmuxPlugins.mkTmuxPlugin {
@@ -53,13 +57,13 @@
 
         set -g pane-border-status off
 
-        set -g status-right " 󰥔 %H:%M "
-        set -g status-left ""
+        set -g status-right " #[bg=blue,fg=black] 󰥔 %H:%M #[default]"
+        set -g status-left "#[bg=blue,fg=black] #S#{?window_zoomed_flag, 󰊓,} #[default]"
 
         set -g window-status-format " #I: #{=10:window_name} "
         set -g window-status-current-format " #I: #{=10:window_name} "
 
-        set -g window-status-current-style fg=black,bg="white"
+        set -g window-status-current-style fg=black,bg=green
 
         set -g window-status-style fg=white,dim
 
