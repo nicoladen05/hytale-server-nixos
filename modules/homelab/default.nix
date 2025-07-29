@@ -11,11 +11,13 @@
     configDir = lib.mkOption {
       type = lib.types.str;
       example = "/mnt/homelab";
+      description = "Directory where homelab configuration files are stored.";
     };
 
     baseDomain = lib.mkOption {
       type = lib.types.str;
       example = "example.com";
+      description = "Base domain for homelab services. Should not include https:// or http://.";
     };
   };
 

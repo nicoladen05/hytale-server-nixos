@@ -82,6 +82,7 @@
       enable = true;
       eula = true;
       openFirewall = true;
+      dataDir = config.homelab.configDir + "/minecraft-servers";
 
       servers = lib.mapAttrs (serverName: serverConfig: {
         jvmOpts = "-Xmx${serverConfig.ram} -Xms${serverConfig.ram}";

@@ -23,6 +23,8 @@
     hostName = "vps";
 
     shell = pkgs.zsh;
+
+    tcpPorts = [ 3000 ];
   };
 
   homelab = {
