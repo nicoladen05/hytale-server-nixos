@@ -57,7 +57,7 @@
 
         set -g pane-border-status off
 
-        set -g status-right " #[bg=blue,fg=black] 󰥔 %H:%M #[default]"
+        set -g status-right " #[bg=blue,fg=black] 󰃭 %a, %d.%m. 󰥔 %H:%M #[default]"
         set -g status-left "#[bg=blue,fg=black] #S#{?window_zoomed_flag, 󰊓,} #[default]"
 
         set -g window-status-format " #I: #{=10:window_name} "
