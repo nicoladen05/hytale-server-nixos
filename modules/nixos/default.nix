@@ -5,8 +5,8 @@
     ./desktop
     ./gaming
     ./system
-    
-    ./nvf.nix
+    ./nvf
+
     ./packages.nix
   ];
 }

@@ -5,17 +5,6 @@
   ...
 }:
 
-# let theme = pkgs.buildVimPlugin {
-#     pname = "oxocarbon";
-#     version = "2025-03-05";
-#     src = pkgs.fetchFromGitHub {
-#       owner = "nyoom-engineering";
-#       repo = "oxocarbon.nvim";
-#       rev = "004777819ba294423b638a35a75c9f0c7be758ed";
-#       sha256 = "Hi/nATEvZ4a6Yxc66KtuJqss6kQV19cmtIlhCw6alOI=";
-#     };
-#   };
-# in
 {
   options = {
     nvf.enable = lib.mkEnableOption "enable nvf";
@@ -23,9 +12,9 @@
 
   config = lib.mkIf config.nvf.enable {
     # Set $EDITOR as nvim
-    #    environment.sessionVariables = {
-    #      EDITOR = "nvim";
-    #    };
+    environment.sessionVariables = {
+      EDITOR = "nvim";
+    };
 
     programs.nvf = {
       enable = true;
@@ -153,16 +142,30 @@
               action = "i";
             }
             {
+              key = "K";
+              mode = "v";
+              action = "I";
+            }
+            {
               key = "j";
               mode = "v";
               action = "n";
+            }
+            {
+              key = "J";
+              mode = "v";
+              action = "N";
             }
             {
               key = "l";
               mode = "v";
               action = "e";
             }
-
+            {
+              key = "L";
+              mode = "v";
+              action = "E";
+            }
             # Better window navigation
             {
               key = "<C-h>";
@@ -214,7 +217,7 @@
               action = ":bprevious<CR>";
             }
             {
-              key = "<S-l>";
+              key = "<S-i>";
               mode = "n";
               action = ":bnext<CR>";
             }
@@ -243,7 +246,28 @@
             enable = true;
           };
 
-          lsp.enable = true;
+          lsp = {
+            enable = true;
+            formatOnSave = true;
+          };
+
+          treesitter.autotagHtml = true;
+
+          formatter.conform-nvim = {
+            enable = true;
+            setupOpts = {
+              formatters_by_ft = {
+                nix = [ "nixfmt" ];
+                python = [
+                  "black"
+                  "isort"
+                ];
+                javascript = [ "prettierd" ];
+                typescript = [ "prettierd" ];
+                html = [ "prettierd" ];
+              };
+            };
+          };
 
           languages = {
             enableTreesitter = true;
@@ -265,10 +289,27 @@
               format.enable = true;
               format.type = "black-and-isort";
             };
+            ts = {
+              enable = true;
+              extraDiagnostics.enable = true;
+              format.enable = true;
+              format.type = "prettierd";
+              lsp.enable = true;
+              lsp.server = "ts_ls";
+              treesitter.enable = true;
+            };
+            html = {
+              enable = true;
+              treesitter.enable = true;
+              treesitter.autotagHtml = true;
+            };
+            tailwind = {
+              enable = true;
+              lsp.enable = true;
+            };
 
             markdown.enable = true;
             rust.enable = true;
-            ts.enable = true;
             # markdown.extensions.render-markdown-nvim.enable = true;
           };
 
@@ -421,8 +462,9 @@
           terminal.toggleterm.lazygit.enable = true;
           comments.comment-nvim.enable = true;
           notes.todo-comments.enable = true;
-          ui.noice.enable = true;
+          # ui.noice.enable = true;
           ui.colorizer.enable = true;
+          ui.colorizer.setupOpts.user_default_options.tailwind = true;
 
           lazy.plugins = {
             # theme = {
