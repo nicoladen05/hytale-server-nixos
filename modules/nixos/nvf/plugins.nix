@@ -1,16 +1,19 @@
 { lib, config, ... }:
 {
-  options = {
-    nvf.enable = lib.mkEnableOption "enable nvf";
-  };
-
   config = lib.mkIf config.nvf.enable {
-    binds.whichKey = {
-      enable = true;
-      setupOpts = {
-        preset = "classic";
+    programs.nvf.settings.vim = {
+      binds.whichKey = {
+        enable = true;
+        setupOpts = {
+          preset = "classic";
+          delay = 500;
+          win.border = "single";
+          padding = [
+            2
+            2
+          ];
+        };
       };
     };
-
   };
 }

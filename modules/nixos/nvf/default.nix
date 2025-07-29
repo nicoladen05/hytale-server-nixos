@@ -6,8 +6,9 @@
 }:
 
 {
-  import = [
+  imports = [
     ./plugins.nix
+    ./lualine.nix
   ];
 
   options = {
@@ -289,91 +290,6 @@
           };
 
           # Plugins
-          statusline.lualine = {
-            enable = true;
-            # theme = "auto";
-
-            componentSeparator = {
-              left = "";
-              right = "";
-            };
-            sectionSeparator = {
-              left = "";
-              right = "";
-            };
-            disabledFiletypes = [
-              "statusline"
-              "winbar"
-            ];
-            globalStatus = false;
-
-            activeSection = {
-              a = [
-                ''
-                  {
-                    "mode",
-                    icons_enabled = true
-                  }
-                ''
-              ];
-              b = [
-                ''
-                  {
-                    "",
-                    draw_empty = true,
-                  }
-                ''
-              ];
-              c = [
-                ''
-                  {
-                    "filetype",
-                    colored = true,
-                    icon_only = true,
-                    icon = { align = 'right' },
-                  }
-                ''
-                ''
-                  {
-                    "filename",
-                    symbols = { modified = '', readonly = ''},
-                  }
-                ''
-              ];
-
-              x = [
-                ''
-                  {
-                    "searchcount"
-                  }
-                ''
-                ''
-                  {
-                    "diagnostics",
-                    symbols = {error = '󰅙  ', warn = '  ', info = '  ', hint = '󰌵 '},
-                    colored = true,
-                  }
-                ''
-              ];
-              y = [
-                ''
-                  {
-                    "",
-                    draw_empty = true,
-                  }
-                ''
-              ];
-              z = [
-                ''
-                  {
-                    "branch",
-                    icon = ' •',
-                  }
-                ''
-              ];
-            };
-          };
-
           visuals = {
             nvim-web-devicons.enable = true;
           };
