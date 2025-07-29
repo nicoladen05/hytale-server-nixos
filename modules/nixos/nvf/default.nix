@@ -6,8 +6,9 @@
 
 {
   imports = [
-    ./plugins.nix
+    ./lsp.nix
     ./lualine.nix
+    ./plugins.nix
   ];
 
   options = {
