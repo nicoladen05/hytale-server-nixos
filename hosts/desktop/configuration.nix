@@ -12,7 +12,7 @@
     ./hardware-configuration.nix
 
     ../../modules/nixos
-    ../../modules/homelab/services/ollama.nix
+    # ../../modules/homelab/services/ollama.nix
   ];
 
   nix.buildMachines = [
@@ -54,11 +54,11 @@
     udpPorts = [];
   };
 
-  homelab.services.ollama = {
-    enable = true;
-    useCuda = true;
-    modelDirectory = /home/nico/data/models;
-  };
+  # homelab.services.ollama = {
+  #   enable = true;
+  #   useCuda = true;
+  #   modelDirectory = /home/nico/data/models;
+  # };
 
   packages = {
     enable = true;
