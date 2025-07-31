@@ -154,7 +154,8 @@ in {
       ];
 
       "$terminal" = "alacritty";
-      "$fileManager" = "dolphin";
+      "$browser" = "zen";
+      "$fileManager" = "yazi";
       "$menu" = "rofi -show drun -show-icons";
 
       exec-once = [
@@ -189,11 +190,8 @@ in {
 
         shadow = {
           enabled = true;
-          range = 300;
-          render_power = 4;
-          offset = "0 40";
-          scale = 0.9;
-          color = lib.mkForce "rgba(1a1a1aaf)";
+          range = 4;
+          render_power = 3;
         };
       };
 
@@ -252,7 +250,7 @@ in {
       "$mainMod" = "SUPER";
       bind = [
         "$mainMod, Return, exec, $terminal"
-        "$mainMod, W, exec, librewolf"
+        "$mainMod, W, exec, $browser"
         "$mainMod, Q, killactive,"
         "$mainMod, M, exit,"
         "$mainMod, E, exec, $fileManager"
