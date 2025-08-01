@@ -157,7 +157,7 @@ in
         ))
       ];
 
-      "$terminal" = "ghostty";
+      "$terminal" = "alacritty";
       "$browser" = "zen";
       "$fileManager" = "yazi";
       "$menu" = "rofi -show drun -show-icons";

@@ -23,7 +23,7 @@
         window-padding-y = 10;
         window-padding-balance = true;
         adjust-cell-height = "50%";
-        confim-close-surface = false;
+        confirm-close-surface = false;
       };
     };
   };
