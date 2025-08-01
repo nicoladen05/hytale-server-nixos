@@ -21,7 +21,7 @@
       hostName = "server.nicoladen.dev";
       sshUser = "nico";
       system = "aarch64-linux";
-      protocol = "ssh-ng";
+      protocol = "ssh";
       supportedFeatures = [
         "nixos-test"
         "benchmark"
