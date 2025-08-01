@@ -46,6 +46,7 @@
       extraConfig = ''
         set -g default-terminal "xterm-256color"
         set -ga terminal-overrides ",*256col*:Tc"
+        set -ga terminal-overrides ",xterm-256color:Tc"
         set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
         set-environment -g COLORTERM "truecolor"
 
