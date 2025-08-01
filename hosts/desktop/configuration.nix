@@ -6,7 +6,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -17,24 +18,26 @@
 
   nix.buildMachines = [
     {
-      hostName = "eclipse";
-      system = "aarch64-linux";
-      protocol = "ssh-ng";
-      supportedFeatures = ["big-parallel"];
-    }
-    {
-      hostName = "rpi5";
+      hostName = "server.nicoladen.dev";
       sshUser = "nico";
       system = "aarch64-linux";
       protocol = "ssh-ng";
-      supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+      ];
     }
   ];
   nix.distributedBuilds = true;
   nix.extraOptions = ''
     builders-use-substitutes = true
   '';
-  nix.settings.trusted-users = ["root" "nico"];
+  nix.settings.trusted-users = [
+    "root"
+    "nico"
+  ];
 
   # CONFIG
   system = {
@@ -50,8 +53,8 @@
 
     shell = pkgs.zsh;
 
-    tcpPorts = [22];
-    udpPorts = [];
+    tcpPorts = [ 22 ];
+    udpPorts = [ ];
   };
 
   # homelab.services.ollama = {
