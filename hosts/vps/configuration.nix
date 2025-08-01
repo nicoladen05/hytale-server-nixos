@@ -78,14 +78,17 @@
 
   boot.kernelParams = [ "net.ifnames=0" ];
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    passwordAuthentication = false;
+    permitRootLogin = "no";
+  };
 
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC48NdWVvqBb7eEfDWSrTyc8aGA496kJTjCYImIIpcbv"
-  ];
+  services.fail2ban.enable = true;
 
   users.users.nico.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC48NdWVvqBb7eEfDWSrTyc8aGA496kJTjCYImIIpcbv"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEztxKjajt/4t2hhu80eEiLps75mewRnILzlBs01RFYk"
   ];
 
   system.stateVersion = "25.05";
