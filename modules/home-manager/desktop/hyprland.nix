@@ -3,9 +3,12 @@
   pkgs,
   config,
   ...
-}: let
-  primaryMonitor = (builtins.head (builtins.filter (d: d.primary) config.home-manager.hyprland.displays)).display;
-in {
+}:
+let
+  primaryMonitor =
+    (builtins.head (builtins.filter (d: d.primary) config.home-manager.hyprland.displays)).display;
+in
+{
   imports = [
     ./mako.nix
     ./rofi.nix
@@ -16,44 +19,49 @@ in {
     home-manager.hyprland.enable = lib.mkEnableOption "enable hyprland";
 
     home-manager.hyprland.displays = lib.mkOption {
-      type = lib.types.listOf (lib.types.submodule {
-        options = {
-          display = lib.mkOption {
-            type = lib.types.str;
-            example = "DP-6";
+      type = lib.types.listOf (
+        lib.types.submodule {
+          options = {
+            display = lib.mkOption {
+              type = lib.types.str;
+              example = "DP-6";
+            };
+            primary = lib.mkOption {
+              type = lib.types.bool;
+              default = false;
+            };
+            resolution = lib.mkOption {
+              type = lib.types.str;
+              example = "2560x1440";
+            };
+            refreshRate = lib.mkOption {
+              type = lib.types.int;
+              example = 165;
+            };
+            offset = lib.mkOption {
+              type = lib.types.str;
+              default = "0x0";
+            };
+            vrr = lib.mkOption {
+              type = lib.types.bool;
+              default = false;
+            };
+            rotate = lib.mkOption {
+              type = lib.types.nullOr lib.types.int;
+              default = null;
+            };
           };
-          primary = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-          };
-          resolution = lib.mkOption {
-            type = lib.types.str;
-            example = "2560x1440";
-          };
-          refreshRate = lib.mkOption {
-            type = lib.types.int;
-            example = 165;
-          };
-          offset = lib.mkOption {
-            type = lib.types.str;
-            default = "0x0";
-          };
-          vrr = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-          };
-          rotate = lib.mkOption {
-            type = lib.types.nullOr lib.types.int;
-            default = null;
-          };
-        };
-      });
-      apply = displays: let
-        primaryDisplays = builtins.length (builtins.filter (d: d.primary) displays);
-      in
-        if primaryDisplays == 1
-        then displays
-        else throw "Exactly one monitor must be configured as primary. Found ${toString primaryDisplays} primary monitors.";
+        }
+      );
+      apply =
+        displays:
+        let
+          primaryDisplays = builtins.length (builtins.filter (d: d.primary) displays);
+        in
+        if primaryDisplays == 1 then
+          displays
+        else
+          throw "Exactly one monitor must be configured as primary. Found ${toString primaryDisplays} primary monitors.";
     };
   };
 
@@ -136,16 +144,12 @@ in {
         # "DP-6, addreserved, -6, 0, 0, 0"
 
         (lib.forEach config.home-manager.hyprland.displays (
-          display: let
-            vrrStr =
-              if display.vrr
-              then ", vrr, 1"
-              else "";
-            transformStr =
-              if display.rotate != null
-              then ", transform, ${toString display.rotate}"
-              else "";
-          in "${display.display}, ${display.resolution}@${toString display.refreshRate}, ${display.offset}, 1${vrrStr}${transformStr}"
+          display:
+          let
+            vrrStr = if display.vrr then ", vrr, 1" else "";
+            transformStr = if display.rotate != null then ", transform, ${toString display.rotate}" else "";
+          in
+          "${display.display}, ${display.resolution}@${toString display.refreshRate}, ${display.offset}, 1${vrrStr}${transformStr}"
         ))
 
         (lib.forEach (lib.filter (display: display.primary) config.home-manager.hyprland.displays) (
@@ -153,7 +157,7 @@ in {
         ))
       ];
 
-      "$terminal" = "alacritty";
+      "$terminal" = "ghostty";
       "$browser" = "zen";
       "$fileManager" = "yazi";
       "$menu" = "rofi -show drun -show-icons";
