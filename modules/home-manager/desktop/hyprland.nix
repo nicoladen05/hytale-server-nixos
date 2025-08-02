@@ -149,7 +149,7 @@ in
             vrrStr = if display.vrr then ", vrr, 1" else "";
             transformStr = if display.rotate != null then ", transform, ${toString display.rotate}" else "";
           in
-          "${display.display}, ${display.resolution}@${toString display.refreshRate}, ${display.offset}, 1${vrrStr}${transformStr}"
+          "${display.display}, ${display.resolution}@${toString display.refreshRate}, ${display.offset}, auto${vrrStr}${transformStr}"
         ))
 
         (lib.forEach (lib.filter (display: display.primary) config.home-manager.hyprland.displays) (
