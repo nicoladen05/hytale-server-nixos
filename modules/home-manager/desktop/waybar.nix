@@ -3,10 +3,11 @@
   config,
   pkgs,
   ...
-}: 
+}:
 
 let
-  primaryMonitor = (builtins.head (builtins.filter (d: d.primary) config.home-manager.hyprland.displays)).display;
+  primaryMonitor =
+    (builtins.head (builtins.filter (d: d.primary) config.home-manager.hyprland.displays)).display;
 in
 {
   options = {
@@ -75,9 +76,18 @@ in
 
         output = primaryMonitor;
 
-        modules-left = ["hyprland/workspaces"];
-        modules-center = ["clock" "custom/date" "custom/weather"];
-        modules-right = ["tray" "gamemode" "network" "wireplumber"];
+        modules-left = [ "hyprland/workspaces" ];
+        modules-center = [
+          "clock"
+          "custom/date"
+          "custom/weather"
+        ];
+        modules-right = [
+          "tray"
+          "gamemode"
+          "network"
+          "wireplumber"
+        ];
 
         "hyprland/workspaces" = {
           on-click = "activate";
@@ -95,18 +105,18 @@ in
             "9" = "9";
           };
           persistent_workspaces = {
-            "1" = [];
-            "2" = [];
-            "3" = [];
-            "4" = [];
-            "5" = [];
+            "1" = [ ];
+            "2" = [ ];
+            "3" = [ ];
+            "4" = [ ];
+            "5" = [ ];
           };
         };
 
         clock = {
           format = "󰥔 {:%H:%M}";
         };
-        
+
         tray = {
           icon-size = 18;
         };
@@ -166,7 +176,11 @@ in
         wireplumber = {
           format-icons = {
             headphone = "";
-            default = ["󰖀" "󰕾" ""];
+            default = [
+              "󰖀"
+              "󰕾"
+              ""
+            ];
           };
           format = "{icon} {volume}%";
           format-muted = "󰝟 {volume}%";
@@ -181,8 +195,8 @@ in
         border: none;
         border-radius: 0;
         min-height: 0;
-        font-size: 15px;
-        font-family: JetBrainsMono Nerd Font;
+        font-size: 16px;
+        font-family: Iosevka NF;
         font-weight: 600;
       }
 
