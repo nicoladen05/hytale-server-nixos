@@ -10,6 +10,13 @@
   imports = [
     ../../modules/nixos/system
     ../../modules/homelab
+    inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.base
+    inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.bluetooth
+  ];
+
+  nix.settings.trusted-users = [
+    "root"
+    "nico"
   ];
 
   system = {
