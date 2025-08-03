@@ -29,6 +29,7 @@
     stylix.enable = true;
     stylix.targets.console.enable = false;
 
+    stylix.targets.nvf.enable = false;
     stylix.targets.nvf.transparentBackground = true;
 
     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.desktop.stylix.colorScheme}.yaml";

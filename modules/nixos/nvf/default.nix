@@ -25,6 +25,12 @@
       enable = true;
       settings = {
         vim = {
+          theme = {
+            enable = true;
+            name = "everforest";
+            style = "hard";
+          };
+
           options = {
             undofile = true;
             undodir = "/home/${config.system.userName}/.cache";
