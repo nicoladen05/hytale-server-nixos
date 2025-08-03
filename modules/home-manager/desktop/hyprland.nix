@@ -152,9 +152,9 @@ in
           "${display.display}, ${display.resolution}@${toString display.refreshRate}, ${display.offset}, auto${vrrStr}${transformStr}"
         ))
 
-        # (lib.forEach (lib.filter (display: display.primary) config.home-manager.hyprland.displays) (
-        #   display: "${display.display}, addreserved, -10, 0, 0, 0"
-        # ))
+        (lib.forEach (lib.filter (display: display.primary) config.home-manager.hyprland.displays) (
+          display: "${display.display}, addreserved, -10, 0, 0, 0"
+        ))
       ];
 
       "$terminal" = "alacritty";
@@ -168,8 +168,8 @@ in
       ];
 
       general = {
-        gaps_in = 5;
-        gaps_out = 10;
+        gaps_in = 6;
+        gaps_out = 16;
 
         border_size = 2;
 
@@ -181,12 +181,12 @@ in
       };
 
       decoration = {
-        rounding = 5;
+        rounding = 8;
         rounding_power = 4;
 
         blur = {
           enabled = true;
-          size = 3;
+          size = 8;
           passes = 1;
 
           vibrancy = 0.1696;

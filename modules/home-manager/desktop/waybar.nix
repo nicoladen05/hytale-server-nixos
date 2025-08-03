@@ -71,26 +71,22 @@ in
 
     programs.waybar.settings = {
       mainBar = {
-        height = 26;
-        spacing = 0;
+        height = 30;
         position = "top";
-        layer = "top";
 
         output = primaryMonitor;
 
-        modules-left = [
-          "hyprland/workspaces"
-          "custom/spotify"
-        ];
+        modules-left = [ "hyprland/workspaces" ];
         modules-center = [
           "clock"
+          "custom/date"
+          "custom/weather"
         ];
         modules-right = [
-          "group/tray-expander"
+          "tray"
           "gamemode"
-          "bluetooth"
           "network"
-          "pulseaudio"
+          "wireplumber"
         ];
 
         "hyprland/workspaces" = {
@@ -107,7 +103,6 @@ in
             "7" = "7";
             "8" = "8";
             "9" = "9";
-            # "active" = "󱓻";
           };
           persistent_workspaces = {
             "1" = [ ];
@@ -119,9 +114,11 @@ in
         };
 
         clock = {
-          format = "{:%A %H:%M}";
-          format-alt = "{:%d %B W%V %Y}";
-          tooltip = false;
+          format = "󰥔 {:%H:%M}";
+        };
+
+        tray = {
+          icon-size = 18;
         };
 
         "custom/date" = {
@@ -166,118 +163,143 @@ in
         };
 
         network = {
-          format-icons = [
-            "󰤯"
-            "󰤟"
-            "󰤢"
-            "󰤥"
-            "󰤨"
-          ];
-          format = "{icon}";
-          format-wifi = "{icon}";
-          format-ethernet = "󰀂";
-          format-disconnected = "󰖪";
-          tooltip-format-wifi = "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}";
-          tooltip-format-ethernet = "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}";
-          tooltip-format-disconnected = "Disconnected";
-          interval = 3;
+          "format-disconnected" = "󰯡 Disconnected";
+          "format-ethernet" = "󰈀  Wired";
+          "format-linked" = "󰖪 {essid}";
+          "format-wifi" = "󰖩 {essid}";
+          "interval" = 1;
+          "tooltip" = true;
+          "tooltip-format" = "{ipaddr}";
+          "tooltip-format-wifi" = "{ipaddr} ({signalStrength}, {frequency})";
         };
 
-        bluetooth = {
-          format = "";
-          format-disabled = "󰂲";
-          format-connected = "";
-          tooltip-format = "Devices connected: {num_connections}";
-        };
-
-        pulseaudio = {
-          format = "{icon}";
-          on-click = "";
-          on-click-right = "pamixer -t";
-          tooltip-format = "Playing at {volume}%";
-          scroll-step = 5;
-          format-muted = "󰝟";
+        wireplumber = {
           format-icons = {
+            headphone = "";
             default = [
-              ""
-              ""
+              "󰖀"
+              "󰕾"
               ""
             ];
           };
-        };
-
-        "group/tray-expander" = {
-          orientation = "inherit";
-          drawer = {
-            transition-duration = 600;
-            children-class = "tray-group-item";
-          };
-          modules = [
-            "custom/expand-icon"
-            "tray"
-          ];
-        };
-        "custom/expand-icon" = {
-          format = " ";
-          tooltip = false;
-        };
-        tray = {
-          icon-size = 16;
-          spacing = 16;
+          format = "{icon} {volume}%";
+          format-muted = "󰝟 {volume}%";
+          on-click = "pavucontrol";
+          scroll-step = 1;
         };
       };
     };
 
     programs.waybar.style = lib.mkAfter ''
       * {
-        background-color: @base00;
-        color: @base07;
-
         border: none;
         border-radius: 0;
         min-height: 0;
-        font-family: SFProDisplay Nerd Font;
         font-size: 16px;
+        font-family: Iosevka NF;
+        font-weight: 600;
       }
 
-      .modules-left {
-        margin-left: 8px;
+      window#waybar {
+        background-color: rgba(0,0,0,0);
+        transition-property: background-color;
+        transition-duration: 0.5s;
       }
 
-      .modules-right {
-        margin-right: 8px;
+      .modules-left #workspaces button {
+          border-bottom: none;
+      }
+      .modules-left #workspaces button.focused,
+      .modules-left #workspaces button.active {
+          border-bottom: none;
+      }
+
+      window#waybar.hidden {
+        opacity: 0.5;
+      }
+
+      #workspaces {
+        background-color: @base00;
+        margin: 6px 10px 10px 16px;
+        padding: 0px 3px;
+        border-radius: 11;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
       }
 
       #workspaces button {
         all: initial;
-        padding: 0 6px;
-        margin: 0 1.5px;
-        min-width: 9px;
+        min-width: 0;
+        box-shadow: none;
+        padding: 8px 18px;
+        margin: 6px 3px;
+        border-radius: 8px;
+        background-color: @base02;
+        color: @base07;
       }
 
-      #workspaces button.empty {
-        opacity: 0.5;
+      #workspaces button.active {
+        color: @base00;
+        background-color: @base0D;
       }
 
-      #tray,
-      #cpu,
+      #workspaces button:hover {
+        box-shadow: none;
+        text-shadow: inherit;
+        color: @base07;
+        background-color: @base03;
+      }
+
+      #workspaces button.urgent {
+        background-color: @base08;
+      }
+
+      .modules-center {
+        background-color: @base00;
+        margin: 6px 10px 10px 10px;
+        padding: 0px 3px;
+        border-radius: 11;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .modules-right {
+        background-color: @base00;
+        margin: 6px 16px 10px 10px;
+        padding: 0px 3px;
+        border-radius: 11;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      #memory,
+      #custom-power,
       #battery,
+      #backlight,
+      #wireplumber,
       #network,
-      #bluetooth,
-      #pulseaudio,
       #clock,
+      #custom-date,
+      #custom-weather,
       #custom-spotify,
-      #custom-power-menu {
-        min-width: 12px;
-        margin: 0 7.5px;
-      }
-
-      #custom-expand-icon {
-        margin-right: 12px;
+      #cpu,
+      #memory,
+      #gamemode,
+      #custom-pomodoro,
+      #tray {
+        border-radius: 8px;
+        margin: 6px 3px;
+        padding: 8px 12px;
+        background-color: @base02;
+        color: @base07;
       }
 
       tooltip {
-        padding: 2px;
+        border-radius: 8px;
+        padding: 15px;
+        background-color: @base00;
+      }
+
+      tooltip label {
+        padding: 5px;
+        background-color: @base00;
       }
     '';
 
