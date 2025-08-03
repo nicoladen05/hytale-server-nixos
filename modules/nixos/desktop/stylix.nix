@@ -29,7 +29,7 @@
     stylix.enable = true;
     stylix.targets.console.enable = false;
 
-    stylix.targets.nvf.transparentBackground = false;
+    stylix.targets.nvf.transparentBackground = true;
 
     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.desktop.stylix.colorScheme}.yaml";
 
@@ -62,8 +62,8 @@
     stylix.cursor.size = 28;
 
     stylix.opacity = {
-      terminal = 1.0;
-      applications = 1.0;
+      terminal = 0.9;
+      applications = 0.9;
     };
 
     stylix.fonts = {

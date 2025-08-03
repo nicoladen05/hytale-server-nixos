@@ -152,9 +152,9 @@ in
           "${display.display}, ${display.resolution}@${toString display.refreshRate}, ${display.offset}, auto${vrrStr}${transformStr}"
         ))
 
-        (lib.forEach (lib.filter (display: display.primary) config.home-manager.hyprland.displays) (
-          display: "${display.display}, addreserved, -10, 0, 0, 0"
-        ))
+        # (lib.forEach (lib.filter (display: display.primary) config.home-manager.hyprland.displays) (
+        #   display: "${display.display}, addreserved, -10, 0, 0, 0"
+        # ))
       ];
 
       "$terminal" = "alacritty";
@@ -168,8 +168,8 @@ in
       ];
 
       general = {
-        gaps_in = 6;
-        gaps_out = 16;
+        gaps_in = 5;
+        gaps_out = 10;
 
         border_size = 2;
 
@@ -181,12 +181,12 @@ in
       };
 
       decoration = {
-        rounding = 10;
+        rounding = 5;
         rounding_power = 4;
 
         blur = {
           enabled = true;
-          size = 8;
+          size = 3;
           passes = 1;
 
           vibrancy = 0.1696;
@@ -194,21 +194,38 @@ in
 
         shadow = {
           enabled = true;
-          range = 4;
+          range = 2;
           render_power = 3;
+          color = lib.mkForce "rgba(1a1a1aee)";
         };
       };
 
       animations = {
         enabled = true;
 
-        bezier = "myBezier, .5, .25, 0, 1";
+        bezier = [
+          "easeOutQuint,0.23,1,0.32,1"
+          "easeInOutCubic,0.65,0.05,0.36,1"
+          "linear,0,0,1,1"
+          "almostLinear,0.5,0.5,0.75,1.0"
+          "quick,0.15,0,0.1,1"
+        ];
 
         animation = [
-          "windows, 1, 2.5, myBezier, popin 80%"
-          "border, 1, 2.5, myBezier"
-          "fade, 1, 2.5, myBezier"
-          "workspaces, 1, 2.5, default, slidefade 20%"
+          "global, 1, 10, default"
+          "border, 1, 5.39, easeOutQuint"
+          "windows, 1, 4.79, easeOutQuint"
+          "windowsIn, 1, 4.1, easeOutQuint, popin 87%"
+          "windowsOut, 1, 1.49, linear, popin 87%"
+          "fadeIn, 1, 1.73, almostLinear"
+          "fadeOut, 1, 1.46, almostLinear"
+          "fade, 1, 3.03, quick"
+          "layers, 1, 3.81, easeOutQuint"
+          "layersIn, 1, 4, easeOutQuint, fade"
+          "layersOut, 1, 1.5, linear, fade"
+          "fadeLayersIn, 1, 1.79, almostLinear"
+          "fadeLayersOut, 1, 1.39, almostLinear"
+          "workspaces, 0, 0, ease"
         ];
       };
 

@@ -11,12 +11,12 @@
 
       settings = {
 
-        font.offset.y = 10;
-        font.glyph_offset.y = 5;
+        font.offset.y = 4;
+        font.glyph_offset.y = 2;
 
         window = {
-          padding.x = 25;
-          padding.y = 25;
+          padding.x = 10;
+          padding.y = 10;
         };
 
         cursor = {

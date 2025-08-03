@@ -80,9 +80,9 @@
     stylix = {
       enable = true;
 
-      colorScheme = "catppuccin-macchiato";
-      wallpaper = "https://images.unsplash.com/photo-1752253509504-3c012e14df76?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=robert-bye-I9ilorvT0x4-unsplash.jpg";
-      wallpaperHash = "sha256-OkdA+FOjqPkR05P9/PA6fTTF/lMR2kxr8P0/Fw1lkUA=";
+      colorScheme = "everforest-dark-hard";
+      wallpaper = "https://xcu37g90vd.ufs.sh/f/gISQwWsUpMTPszxE95BpS4a3CPMLfQW2cm7kNg6AxX1o59rJ";
+      wallpaperHash = "sha256-3lJ8HnespTHwN4QUegdINodP5G6TwxtkWd4xi7updA8=";
     };
   };
 
