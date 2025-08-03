@@ -78,7 +78,10 @@ in
 
         output = primaryMonitor;
 
-        modules-left = [ "hyprland/workspaces" ];
+        modules-left = [
+          "hyprland/workspaces"
+          "custom/spotify"
+        ];
         modules-center = [
           "clock"
         ];
@@ -104,7 +107,7 @@ in
             "7" = "7";
             "8" = "8";
             "9" = "9";
-            "active" = "󱓻";
+            # "active" = "󱓻";
           };
           persistent_workspaces = {
             "1" = [ ];
@@ -215,7 +218,7 @@ in
           ];
         };
         "custom/expand-icon" = {
-          format = " ";
+          format = " ";
           tooltip = false;
         };
         tray = {
@@ -226,16 +229,16 @@ in
     };
 
     programs.waybar.style = lib.mkAfter ''
-        * {
-          background-color: @base00;
-          color: @base07;
+      * {
+        background-color: @base00;
+        color: @base07;
 
-          border: none;
-          border-radius: 0;
-          min-height: 0;
-          font-family: Iosevka NF;
-          font-size: 16px;
-        }
+        border: none;
+        border-radius: 0;
+        min-height: 0;
+        font-family: SFProDisplay Nerd Font;
+        font-size: 16px;
+      }
 
       .modules-left {
         margin-left: 8px;
@@ -263,6 +266,7 @@ in
       #bluetooth,
       #pulseaudio,
       #clock,
+      #custom-spotify,
       #custom-power-menu {
         min-width: 12px;
         margin: 0 7.5px;

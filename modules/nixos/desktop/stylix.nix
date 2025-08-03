@@ -69,8 +69,8 @@
 
     stylix.fonts = {
       monospace = {
-        package = pkgs.nerd-fonts.zed-mono;
-        name = "ZedMono Nerd Font";
+        package = pkgs.nerd-fonts.iosevka;
+        name = "Iosevka Nerd Font";
       };
       sansSerif = {
         package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro-nerd;
