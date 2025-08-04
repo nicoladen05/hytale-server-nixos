@@ -42,6 +42,8 @@
           };
         };
       };
+
+      windows.enable = true;
     };
   };
 
