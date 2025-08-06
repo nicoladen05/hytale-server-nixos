@@ -5,5 +5,6 @@
     ./homeassistant
     ./tailscale
     ./minecraft
+    ./windows
   ];
 }

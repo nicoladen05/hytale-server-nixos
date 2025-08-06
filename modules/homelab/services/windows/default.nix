@@ -9,8 +9,8 @@ in
       enable = lib.mkEnableOption "enables homeassistant";
 
       version = lib.mkOption {
-        type = lib.types.int;
-        default = 11;
+        type = lib.types.string;
+        default = "11";
       };
 
       url = lib.mkOption {
@@ -27,7 +27,7 @@ in
 
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers."windows" = {
-      image = "dockurr/windows";
+      image = "dockurr/windows-arm";
       autoStart = true;
       devices = [
         "/dev/kvm:/dev/kvm"
@@ -45,7 +45,7 @@ in
         "${cfg.configDir}:/storage"
       ];
       environment = {
-        VERSION = config.services.windows.version;
+        VERSION = cfg.version;
       };
     };
   };

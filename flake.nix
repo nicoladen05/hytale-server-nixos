@@ -98,16 +98,16 @@
         ];
       };
 
-      nixosConfigurations.rpi5 = inputs.nixos-raspberrypi.lib.nixosSystemFull {
-        system = "aarch64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/rpi5/configuration.nix
-          inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.base
-          inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.bluetooth
-          inputs.sops-nix.nixosModules.sops
-        ];
-      };
+      # nixosConfigurations.rpi5 = inputs.nixos-raspberrypi.lib.nixosSystemFull {
+      #   system = "aarch64-linux";
+      #   specialArgs = { inherit inputs; };
+      #   modules = [
+      #     ./hosts/rpi5/configuration.nix
+      #     inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.base
+      #     inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.bluetooth
+      #     inputs.sops-nix.nixosModules.sops
+      #   ];
+      # };
 
       # Configuration for homemanager only
       # homeConfigurations."nico" = inputs.home-manager.lib.homeManagerConfiguration {

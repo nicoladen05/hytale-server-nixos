@@ -94,6 +94,17 @@
           };
         };
       };
+
+      navigation.harpoon = {
+        enable = true;
+        mappings = {
+          file1 = "<C-n>";
+          file2 = "<C-e>";
+          file3 = "<C-i>";
+          file4 = "<C-o>";
+          listMarks = "<C-l>";
+        };
+      };
     };
   };
 }

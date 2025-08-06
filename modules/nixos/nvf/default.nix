@@ -153,48 +153,48 @@
               action = "E";
             }
             # Better window navigation
-            {
-              key = "<C-h>";
-              mode = "n";
-              action = "<C-w>h";
-            }
-            {
-              key = "<C-n>";
-              mode = "n";
-              action = "<C-w>j";
-            }
-            {
-              key = "<C-e>";
-              mode = "n";
-              action = "<C-w>k";
-            }
-            {
-              key = "<C-i>";
-              mode = "n";
-              action = "<C-w>l";
-            }
+            # {
+            #   key = "<C-h>";
+            #   mode = "n";
+            #   action = "<C-w>h";
+            # }
+            # {
+            #   key = "<C-n>";
+            #   mode = "n";
+            #   action = "<C-w>j";
+            # }
+            # {
+            #   key = "<C-e>";
+            #   mode = "n";
+            #   action = "<C-w>k";
+            # }
+            # {
+            #   key = "<C-i>";
+            #   mode = "n";
+            #   action = "<C-w>l";
+            # }
 
             # Resize with arrows
-            {
-              key = "<C-Up>";
-              mode = "n";
-              action = ":resize -2<CR>";
-            }
-            {
-              key = "<C-Down>";
-              mode = "n";
-              action = ":resize +2<CR>";
-            }
-            {
-              key = "<C-Left>";
-              mode = "n";
-              action = ":vertical resize -2<CR>";
-            }
-            {
-              key = "<C-Right>";
-              mode = "n";
-              action = ":vertical resize +2<CR>";
-            }
+            # {
+            #   key = "<C-Up>";
+            #   mode = "n";
+            #   action = ":resize -2<CR>";
+            # }
+            # {
+            #   key = "<C-Down>";
+            #   mode = "n";
+            #   action = ":resize +2<CR>";
+            # }
+            # {
+            #   key = "<C-Left>";
+            #   mode = "n";
+            #   action = ":vertical resize -2<CR>";
+            # }
+            # {
+            #   key = "<C-Right>";
+            #   mode = "n";
+            #   action = ":vertical resize +2<CR>";
+            # }
 
             # Stay in visual mode
             {

@@ -34,10 +34,13 @@
   nix.extraOptions = ''
     builders-use-substitutes = true
   '';
-  nix.settings.trusted-users = [
-    "root"
-    "nico"
-  ];
+  nix.settings = {
+    trusted-users = [
+      "root"
+      "nico"
+    ];
+    extra-platforms = [ "aarch64-linux" ];
+  };
 
   # CONFIG
   system = {

@@ -58,6 +58,10 @@
           enable = true;
           lsp.enable = true;
         };
+        csharp = {
+          enable = true;
+          lsp.enable = true;
+        };
 
         markdown.enable = true;
         rust.enable = true;
