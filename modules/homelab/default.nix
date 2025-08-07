@@ -8,6 +8,8 @@
   options.homelab = {
     enable = lib.mkEnableOption "enable homelab configuration";
 
+    external = lib.mkEnableOption "enable external access (forward port 80 and 443)";
+
     configDir = lib.mkOption {
       type = lib.types.str;
       example = "/mnt/homelab";
