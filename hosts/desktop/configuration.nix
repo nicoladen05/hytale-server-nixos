@@ -83,9 +83,9 @@
     stylix = {
       enable = true;
 
-      colorScheme = "everforest-dark-hard";
-      wallpaper = "https://xcu37g90vd.ufs.sh/f/gISQwWsUpMTPszxE95BpS4a3CPMLfQW2cm7kNg6AxX1o59rJ";
-      wallpaperHash = "sha256-3lJ8HnespTHwN4QUegdINodP5G6TwxtkWd4xi7updA8=";
+      colorScheme = "black-metal-nile";
+      wallpaper = "https://i.ibb.co/HjH3PPk/Witcher-4-Forest-Wallpaper-1.jpg";
+      wallpaperHash = "sha256-WF3uDkQsV9f/3yiNDQVcE548uwYqrA5T9HBj8URqlr4=";
     };
   };
 

@@ -25,11 +25,11 @@
       enable = true;
       settings = {
         vim = {
-          theme = {
-            enable = true;
-            name = "everforest";
-            style = "hard";
-          };
+          # theme = {
+          #   enable = true;
+          #   name = "everforest";
+          #   style = "hard";
+          # };
 
           options = {
             undofile = true;
