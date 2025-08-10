@@ -359,6 +359,7 @@ in
 
         "$mainMod, Escape, exec, rofi-power-menu"
 
+        ", code:121, exec, pamixer -t"
         ", code:122, exec, pamixer -d 5"
         ", code:123, exec, pamixer -i 5"
 
