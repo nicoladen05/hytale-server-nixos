@@ -3,10 +3,20 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ../../modules/home-manager
   ];
+
+  services.udiskie = {
+    enable = true;
+    settings = {
+      program_options = {
+        file_manager = "${pkgs.pcmanfm}/bin/pcmanfm";
+      };
+    };
+  };
 
   home-manager = {
     enable = true;

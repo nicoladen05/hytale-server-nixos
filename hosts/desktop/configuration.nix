@@ -60,6 +60,8 @@
     udpPorts = [ ];
   };
 
+  services.udisks2.enable = true;
+
   # homelab.services.ollama = {
   #   enable = true;
   #   useCuda = true;
