@@ -66,6 +66,11 @@
   #   modelDirectory = /home/nico/data/models;
   # };
 
+  services.hardware.openrgb = {
+    enable = true;
+    motherboard = "amd";
+  };
+
   packages = {
     enable = true;
     terminal.enable = true;
