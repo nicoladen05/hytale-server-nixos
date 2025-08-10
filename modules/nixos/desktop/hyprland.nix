@@ -3,7 +3,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   options = {
     desktop.hyprland.enable = lib.mkEnableOption "enable hyprland";
   };
@@ -33,7 +34,7 @@
               systemctl reboot
               ;;
            "󰤄 Sleep")
-              hyprshot -m output -m DP-6 -o /tmp -f screenshot.png -s ; hyprlock ; systemctl suspend
+              hyprshot -m output -m DP-6 -o /tmp -f screenshot.png -s ; hyprlock & systemctl suspend
               ;;
            "󰌾 Lock")
               hyprshot -m output -m DP-6 -o /tmp -f screenshot.png -s ; hyprlock
