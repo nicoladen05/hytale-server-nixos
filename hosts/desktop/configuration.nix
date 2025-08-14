@@ -62,6 +62,9 @@
 
   services.udisks2.enable = true;
 
+  networking.networkmanager.dns = "none";
+  networking.nameservers = [ "192.168.2.200" ];
+
   # homelab.services.ollama = {
   #   enable = true;
   #   useCuda = true;
