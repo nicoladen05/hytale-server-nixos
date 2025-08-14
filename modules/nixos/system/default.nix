@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./nh.nix
     ./nvidia.nix
@@ -64,14 +65,14 @@
 
     system.tcpPorts = lib.mkOption {
       type = lib.types.listOf lib.types.int;
-      default = [];
-      example = [22];
+      default = [ ];
+      example = [ 22 ];
     };
 
     system.udpPorts = lib.mkOption {
       type = lib.types.listOf lib.types.int;
-      default = [];
-      example = [22];
+      default = [ ];
+      example = [ 22 ];
     };
   };
 
@@ -108,7 +109,10 @@
     users.users."${config.system.userName}" = {
       isNormalUser = true;
       description = "${config.system.userName}";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
       shell = config.system.shell;
       # hashedPasswordFile = "${config.system.passwordFile}";
     };
@@ -131,6 +135,9 @@
     networking.firewall.allowedUDPPorts = config.system.udpPorts;
 
     nixpkgs.config.allowUnfree = true;
-    nix.settings.experimental-features = ["nix-command" "flakes"];
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 }
