@@ -167,7 +167,8 @@ in
           "format-ethernet" = "󰈀  Wired";
           "format-linked" = "󰖪 {essid}";
           "format-wifi" = "󰖩 {essid}";
-          "interval" = 1;
+          "format" = "󰈀  Wired";
+          "interval" = 5;
           "tooltip" = true;
           "tooltip-format" = "{ipaddr}";
           "tooltip-format-wifi" = "{ipaddr} ({signalStrength}, {frequency})";
