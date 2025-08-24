@@ -23,7 +23,11 @@
 
     shell = pkgs.zsh;
 
-    tcpPorts = [ 3000 ];
+    tcpPorts = [
+      16662
+      25565
+      3000
+    ];
   };
 
   homelab = {
@@ -34,18 +38,25 @@
 
     services = {
       minecraft-server = {
-        enable = true;
+        enable = false;
         servers = {
           main_server = {
             type = "fabric";
-            version = "1.21.7";
+            version = "1.21.8";
           };
         };
       };
-
-      windows.enable = true;
     };
   };
+
+  services.caddy.virtualHosts."obsidiansync.nicoladen.dev".extraConfig = ''
+    reverse_proxy 127.0.0.1:5984
+  '';
+
+  environment.systemPackages = with pkgs; [
+    docker-compose
+  ];
+  users.users.nico.extraGroups = [ "docker" ];
 
   home-manager = {
     extraSpecialArgs = {
