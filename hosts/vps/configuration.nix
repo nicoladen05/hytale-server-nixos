@@ -26,6 +26,7 @@
     tcpPorts = [
       16662
       25565
+      25566
       3000
     ];
   };
@@ -46,6 +47,20 @@
           };
         };
       };
+
+      wireguard = {
+        enable = true;
+        subnet = "192.168.250.0/24";
+        ip = "192.168.250.1/24";
+
+        peers = [
+          {
+            name = "nico-s24ultra";
+            publicKey = "zD+enM/J5erQn+hD9pauqvBR+Vr/Kpa0ocfVVe28BSc=";
+            allowedIPs = [ "0.0.0.0/0" ];
+          }
+        ];
+      };
     };
   };
 
@@ -56,7 +71,15 @@
   environment.systemPackages = with pkgs; [
     docker-compose
   ];
+
   users.users.nico.extraGroups = [ "docker" ];
+
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "5 3 * * * podman restart minecraft"
+    ];
+  };
 
   home-manager = {
     extraSpecialArgs = {
@@ -69,6 +92,7 @@
   };
 
   nvf.enable = true;
+  programs.nvf.settings.vim.theme.name = "github";
 
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ];
