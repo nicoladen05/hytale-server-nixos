@@ -9,11 +9,8 @@
 }:
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
-
     ../../modules/nixos
-    # ../../modules/homelab/services/ollama.nix
   ];
 
   nix.buildMachines = [
@@ -62,15 +59,6 @@
 
   services.udisks2.enable = true;
 
-  networking.networkmanager.dns = "none";
-  networking.nameservers = [ "192.168.2.200" ];
-
-  # homelab.services.ollama = {
-  #   enable = true;
-  #   useCuda = true;
-  #   modelDirectory = /home/nico/data/models;
-  # };
-
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";
@@ -111,15 +99,6 @@
 
   gaming.enable = true;
   gaming.controller.xbox.enable = true;
-
-  # specialisation = {
-  #   jovian.configuration = {
-  #     gaming = {
-  #       jovian.enable = true;
-  #       controller.xbox.enable = true;
-  #     };
-  #   };
-  # };
 
   nvf.enable = true;
 
