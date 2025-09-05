@@ -81,8 +81,8 @@
     stylix = {
       enable = true;
 
-      colorScheme = "black-metal-nile";
-      wallpaper = "https://i.ibb.co/HjH3PPk/Witcher-4-Forest-Wallpaper-1.jpg";
+      colorScheme = "material";
+      wallpaper = "https://images.unsplash.com/photo-1756567579531-405e4df07572?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=kristaps-ungurs-4orvBonHMGk-unsplash.jpg";
       wallpaperHash = "sha256-WF3uDkQsV9f/3yiNDQVcE548uwYqrA5T9HBj8URqlr4=";
     };
   };
