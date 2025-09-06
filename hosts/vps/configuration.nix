@@ -47,20 +47,6 @@
           };
         };
       };
-
-      wireguard = {
-        enable = true;
-        subnet = "192.168.250.0/24";
-        ip = "192.168.250.1/24";
-
-        peers = [
-          {
-            name = "nico-s24ultra";
-            publicKey = "zD+enM/J5erQn+hD9pauqvBR+Vr/Kpa0ocfVVe28BSc=";
-            allowedIPs = [ "0.0.0.0/0" ];
-          }
-        ];
-      };
     };
   };
 
@@ -92,7 +78,11 @@
   };
 
   nvf.enable = true;
-  programs.nvf.settings.vim.theme.name = "github";
+  programs.nvf.settings.vim.theme = {
+    enable = true;
+    name = "github";
+    style = "dark_dimmed";
+  };
 
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ];
