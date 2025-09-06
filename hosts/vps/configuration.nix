@@ -1,25 +1,28 @@
-{
-  modulesPath,
-  config,
-  inputs,
-  pkgs,
-  ...
-}:
+{ modulesPath, config, inputs, pkgs, ... }:
+
+let
+  userName = "nico";
+  hostName = "vps";
+in
+
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
+
     ./disko.nix
     ./hardware-configuration.nix
+
     ../../modules/nixos
     ../../modules/homelab
   ];
 
+  # System config
   system = {
     enable = true;
 
-    userName = "nico";
-    hostName = "vps";
+    inherit userName;
+    inherit hostName;
 
     shell = pkgs.zsh;
 
@@ -36,18 +39,6 @@
 
     configDir = "/home/nico/services";
     baseDomain = "nicoladen.dev";
-
-    services = {
-      minecraft-server = {
-        enable = false;
-        servers = {
-          main_server = {
-            type = "fabric";
-            version = "1.21.8";
-          };
-        };
-      };
-    };
   };
 
   services.caddy.virtualHosts."obsidiansync.nicoladen.dev".extraConfig = ''

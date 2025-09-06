@@ -10,7 +10,7 @@
     programs.nvf.settings.vim = {
       lsp = {
         enable = true;
-        formatOnSave = true;
+        formatOnSave = false;
         mappings = {
           goToDefinition = "gd";
           goToDeclaration = "gD";
@@ -28,7 +28,7 @@
           enable = true;
           lsp.enable = true;
           treesitter.enable = true;
-          format.enable = true;
+          format.enable = false;
           format.package = pkgs.nixfmt;
           format.type = "nixfmt";
         };

@@ -1,15 +1,6 @@
 {
   description = "Nixos config flake";
 
-  # nixConfig = {
-  #   extra-substituters = [
-  #     "https://nixos-raspberrypi.cachix.org"
-  #   ];
-  #   extra-trusted-public-keys = [
-  #     "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
-  #   ];
-  # };
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -49,79 +40,37 @@
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
     };
-
-    nix-minecraft = {
-      url = "github:Infinidoge/nix-minecraft";
-    };
-
-    nixos-raspberrypi = {
-      url = "github:nvmd/nixos-raspberrypi/main";
-    };
-
-    jovian = {
-      url = "github:Jovian-Experiments/Jovian-NixOS";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs =
+  outputs = { self, nixpkgs, ... }@inputs:
     {
-      self,
-      nixpkgs,
-      ...
-    }@inputs:
-    {
+      # NixOS Configurations
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
-        modules = [
+        modules = with inputs; [
           ./hosts/desktop/configuration.nix
-          inputs.nur.modules.nixos.default
-          inputs.home-manager.nixosModules.home-manager
-          inputs.sops-nix.nixosModules.sops
-          inputs.stylix.nixosModules.stylix
-          inputs.nvf.nixosModules.default
-          inputs.jovian.nixosModules.default
+          nur.modules.nixos.default
+          home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
+          stylix.nixosModules.stylix
+          nvf.nixosModules.default
         ];
       };
 
       nixosConfigurations.vps = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = { inherit inputs; };
-        modules = [
+        modules = with inputs; [
           ./hosts/vps/configuration.nix
-          inputs.disko.nixosModules.disko
-          inputs.sops-nix.nixosModules.sops
-          inputs.home-manager.nixosModules.home-manager
-          inputs.stylix.nixosModules.stylix
-          inputs.nvf.nixosModules.default
-          inputs.jovian.nixosModules.default
+          disko.nixosModules.disko
+          sops-nix.nixosModules.sops
+          home-manager.nixosModules.home-manager
+          stylix.nixosModules.stylix
+          nvf.nixosModules.default
         ];
       };
 
-      # nixosConfigurations.rpi5 = inputs.nixos-raspberrypi.lib.nixosSystemFull {
-      #   system = "aarch64-linux";
-      #   specialArgs = { inherit inputs; };
-      #   modules = [
-      #     ./hosts/rpi5/configuration.nix
-      #     inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.base
-      #     inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.bluetooth
-      #     inputs.sops-nix.nixosModules.sops
-      #   ];
-      # };
-
-      # Configuration for homemanager only
-      # homeConfigurations."nico" = inputs.home-manager.lib.homeManagerConfiguration {
-      #   pkgs = nixpkgs.legacyPackages.aarch64-linux;
-      #   modules = [
-      #     ./hosts/dev-server/home.nix
-      #     inputs.nvf.homeManagerModules.default
-      #     inputs.stylix.homeManagerModules.stylix
-      #   ];
-      #   extraSpecialArgs = {
-      #     userName = "nico";
-      #   };
-      # };
-
+      # DeployRS Nodes
       deploy.nodes.vps = {
         hostname = "130.61.231.173";
         interactiveSudo = true;
@@ -131,15 +80,5 @@
           path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.vps;
         };
       };
-
-      # deploy.nodes.rpi5 = {
-      #   hostname = "rpi5";
-      #   interactiveSudo = true;
-      #   profiles.system = {
-      #     user = "root";
-      #     sshUser = "nico";
-      #     path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.rpi5;
-      #   };
-      # };
     };
 }

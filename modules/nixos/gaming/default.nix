@@ -2,11 +2,11 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./steam.nix
     ./controller.nix
-    ./jovian.nix
   ];
 
   options = {
