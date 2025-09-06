@@ -124,7 +124,7 @@ in
           prefixLength = 24;
         }
       ];
-      # Only "required" for IPv6, can be false if only IPv4 is needed
+      # For IPv6
       useDHCP = true;
     };
   };
