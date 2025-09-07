@@ -1,9 +1,35 @@
-{ config, modulesPath, pkgs, lib, ... }:
+{ modulesPath, pkgs, lib, ... }:
+
+let
+  userName = "nico";
+  hostName = "vps";
+in
 
 {
   imports = [ 
     (modulesPath + "/virtualisation/proxmox-lxc.nix") 
+    ../../modules/nixos
+    ../../modules/homelab
   ];
+
+  system = {
+    enable = true;
+
+    inherit userName;
+    inherit hostName;
+
+    shell = pkgs.bash;
+  };
+
+  nix.optimise.automatic = true;
+  nix.optimise.dates = [ "03:45" ];
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
+
 
   nix.settings = { sandbox = false; };  
 
