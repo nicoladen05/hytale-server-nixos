@@ -14,11 +14,10 @@ in
 
   system = {
     enable = true;
+    systemdBoot = false;
 
     inherit userName;
     inherit hostName;
-
-    shell = pkgs.bash;
   };
 
   nix.optimise.automatic = true;
