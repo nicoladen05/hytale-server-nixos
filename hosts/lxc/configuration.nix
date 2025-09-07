@@ -2,7 +2,7 @@
 
 let
   userName = "nico";
-  hostName = "vps";
+  hostName = "lxc";
 in
 
 {
