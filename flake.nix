@@ -73,8 +73,11 @@
       nixosConfigurations.lxc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
-        modules = [
+        modules = with inputs; [
           ./hosts/lxc/configuration.nix
+          sops-nix.nixosModules.sops
+          stylix.nixosModules.stylix
+          nvf.nixosModules.default
         ];
       };
 
