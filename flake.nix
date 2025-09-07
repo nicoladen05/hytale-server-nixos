@@ -70,6 +70,14 @@
         ];
       };
 
+      nixosConfigurations.lxc = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/lxc/configuration.nix
+        ];
+      };
+
       # DeployRS Nodes
       deploy.nodes.vps = {
         hostname = "130.61.231.173";
@@ -78,6 +86,15 @@
           user = "root";
           sshUser = "nico";
           path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.vps;
+        };
+      };
+
+
+      deploy.nodes.lxc = {
+        hostname = "192.168.2.53";
+        profiles.system = {
+          user = "root";
+          path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.lxc;
         };
       };
     };
