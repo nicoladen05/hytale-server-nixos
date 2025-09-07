@@ -14,7 +14,7 @@ in
 
   system = {
     enable = true;
-    systemdBoot = false;
+    boot.systemdBoot = false;
 
     inherit userName;
     inherit hostName;
