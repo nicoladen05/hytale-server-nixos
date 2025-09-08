@@ -25,12 +25,6 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  fileSystems."/home/nico/data" =
-    { device = "/dev/nvme0n1p1";
-      fsType = "ntfs-3g";
-      options = [ "uid=1000" "gid=100" "rw" "user" "exec" "umask=000" ];
-    };
-
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
