@@ -26,11 +26,23 @@
 
         nix = {
           enable = true;
-          lsp.enable = true;
+          lsp = { 
+            enable = true;
+            package = pkgs.nixd;
+            server = "nixd";
+            options = {
+              nixos = {
+                expr = "(builtins.getFlake \"github:nicoladen05/nix\").nixosConfigurations.desktop.options";
+              };
+              nixos_vps = {
+                expr = "(builtins.getFlake \"github:nicoladen05/nix\").nixosConfigurations.vps.options";
+              };
+            };
+          };
           treesitter.enable = true;
           format.enable = false;
-          format.package = pkgs.nixfmt;
-          format.type = "nixfmt";
+          format.package = pkgs.alejandra;
+          format.type = "alejandra";
         };
         python = {
           enable = true;
