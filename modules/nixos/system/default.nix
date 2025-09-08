@@ -12,67 +12,74 @@
   ];
 
   options = {
-    system.enable = lib.mkEnableOption "enable the basic system configuration";
+    system = {
+      enable = lib.mkEnableOption "enable the basic system configuration";
 
-    system.userName = lib.mkOption {
-      type = lib.types.str;
-      default = "nico";
-    };
+      userName = lib.mkOption {
+        type = lib.types.str;
+        default = "nico";
+      };
 
-    system.passwordFile = lib.mkOption {
-      type = lib.types.path;
-    };
+      passwordFile = lib.mkOption {
+        type = lib.types.path;
+      };
 
-    system.hostName = lib.mkOption {
-      type = lib.types.str;
-    };
+      hostName = lib.mkOption {
+        type = lib.types.str;
+      };
 
-    system.timeZone = lib.mkOption {
-      type = lib.types.str;
-      default = "Europe/Berlin";
-      example = "Europe/Berlin";
-    };
+      timeZone = lib.mkOption {
+        type = lib.types.str;
+        default = "Europe/Berlin";
+        example = "Europe/Berlin";
+      };
 
-    system.locale.language = lib.mkOption {
-      type = lib.types.str;
-      default = "en_US.UTF-8";
-      example = "en_US.UTF-8";
-    };
+      locale.language = lib.mkOption {
+        type = lib.types.str;
+        default = "en_US.UTF-8";
+        example = "en_US.UTF-8";
+      };
 
-    system.locale.unitFormat = lib.mkOption {
-      type = lib.types.str;
-      default = "de_DE.UTF-8";
-      example = "de_DE.UTF-8";
-    };
+      locale.unitFormat = lib.mkOption {
+        type = lib.types.str;
+        default = "de_DE.UTF-8";
+        example = "de_DE.UTF-8";
+      };
 
-    system.shell = lib.mkOption {
-      type = lib.types.package;
-      default = pkgs.bash;
-      example = pkgs.zsh;
-    };
+      shell = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.bash;
+        example = pkgs.zsh;
+      };
 
-    system.boot.systemdBoot = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      example = false;
-    };
+      boot.systemdBoot = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        example = false;
+      };
 
-    system.bluetooth.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      example = true;
-    };
+      bluetooth.enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        example = true;
+      };
 
-    system.tcpPorts = lib.mkOption {
-      type = lib.types.listOf lib.types.int;
-      default = [ ];
-      example = [ 22 ];
-    };
+      tcpPorts = lib.mkOption {
+        type = lib.types.listOf lib.types.int;
+        default = [ ];
+        example = [ 22 ];
+      };
 
-    system.udpPorts = lib.mkOption {
-      type = lib.types.listOf lib.types.int;
-      default = [ ];
-      example = [ 22 ];
+      udpPorts = lib.mkOption {
+        type = lib.types.listOf lib.types.int;
+        default = [ ];
+        example = [ 22 ];
+      };
+
+      ssh = {
+        enable = lib.mkOption { type = lib.types.bool; default = false; };
+        allowEmptyPasswords = lib.mkOption { type = lib.types.bool; default = false; };
+      };
     };
   };
 
