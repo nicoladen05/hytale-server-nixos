@@ -26,12 +26,30 @@ in
     };
   };
 
+  # Impermanence
+  environment.persistence."/persistent" = {
+    enable = true;
+    hideMounts = true;
+    directories = [
+      "/var/log"
+      "/var/lib/nixos"
+    ];
+    files = [
+      "/etc/shadow"
+    ];
+    users."${userName}" = {
+      directories = [
+        ".config/nixos"
+      ];
+    };
+  };
+
   # System configuration
   system = {
     # Essentials
     enable = true;
     nvidia.enable = true;
-    sops.enable = true;
+    sops.enable = false;
 
     # User account
     inherit userName;
