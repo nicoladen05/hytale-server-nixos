@@ -27,6 +27,7 @@ in
   };
 
   # Impermanence
+  programs.fuse.userAllowOther = true;
   environment.persistence."/persistent" = {
     enable = true;
     hideMounts = true;
@@ -34,14 +35,6 @@ in
       "/var/log"
       "/var/lib/nixos"
     ];
-    files = [
-      "/etc/shadow"
-    ];
-    users."${userName}" = {
-      directories = [
-        ".config/nixos"
-      ];
-    };
   };
 
   # System configuration

@@ -121,7 +121,12 @@
         "wheel"
       ];
       shell = config.system.shell;
+      hashedPassword = "$6$FdDJt3LLc3Iu0r14$DKRv42b0IsqkW6OFkWr0WnUoxMPPaFUnSZgBFJKfR4elFeGRU3NfhP1rXbWd.b9073ZucRQrFto130F3eBVjj0";
       # hashedPasswordFile = "${config.system.passwordFile}";
+    };
+
+    users.users.root = {
+      hashedPassword = "$6$FdDJt3LLc3Iu0r14$DKRv42b0IsqkW6OFkWr0WnUoxMPPaFUnSZgBFJKfR4elFeGRU3NfhP1rXbWd.b9073ZucRQrFto130F3eBVjj0";
     };
 
     # Bluetooth
