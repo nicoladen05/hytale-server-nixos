@@ -22,13 +22,14 @@
   home.persistence."/persistent/home/nico" = {
     allowOther = true;
     directories = [
-      ".ssh"
       ".config/nixos"
+      ".config/sops"
+      ".ssh"
 
       "docs"
        
-      ".config/spotify"
       ".config/discord"
+      ".config/spotify"
     ];
   };
 
