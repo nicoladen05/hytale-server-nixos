@@ -15,8 +15,8 @@
         font.glyph_offset.y = 2;
 
         window = {
-          padding.x = 10;
-          padding.y = 10;
+          padding.x = 15;
+          padding.y = 15;
         };
 
         cursor = {
