@@ -49,7 +49,7 @@ in
     inherit hostName;
     password = {
       enable = true;
-      passwordFile = config.sops.secrets."user/nico/password".path;
+      hashedPasswordFile = config.sops.secrets."user/nico/password_hash".path;
     };
 
     shell = pkgs.zsh;

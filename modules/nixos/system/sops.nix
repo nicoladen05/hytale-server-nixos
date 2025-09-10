@@ -25,5 +25,8 @@
 
     sops.secrets."user/nico/password" = { };
     sops.secrets."user/nico/password_long" = { };
+    sops.secrets."user/nico/password_hash" = {
+      neededForUsers = true;
+    };
   };
 }
