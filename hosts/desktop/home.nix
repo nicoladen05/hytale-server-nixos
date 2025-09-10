@@ -30,6 +30,7 @@
        
       ".config/discord"
       ".config/spotify"
+      ".config/vivalidi"
     ];
   };
 

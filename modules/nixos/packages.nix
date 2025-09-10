@@ -60,6 +60,7 @@
         lazygit
         eza
         neovim
+        sops
       ]
       ++ lib.optionals config.packages.gaming.enable [
         mangohud
@@ -83,15 +84,13 @@
           spotify
           spotify-player
 
+          vivaldi
+
           poppler
           ueberzugpp
 
           pavucontrol
           pamixer
-
-          bottles
-
-          inputs.zen-browser.packages."${system}".default
         ]
         ++ lib.optionals config.packages.coding.enable [
           python3
@@ -101,12 +100,6 @@
           runc
         ]
         ++ lib.optionals config.packages.productivity.enable [
-          # (obsidian.override {
-          #   electron = electron_32.overrideAttrs (_: {
-          #     preFixup = "patchelf --add-needed ${libglvnd}/lib/libEGL.so.1 $out/bin/electron";
-          #     meta.knownVulnerabilities = [ ];
-          #   });
-          # })
           obsidian
           nextcloud-client
           anki
