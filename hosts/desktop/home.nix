@@ -6,6 +6,7 @@
 }:
 {
   imports = [
+    inputs.impermanence.homeManagerModules.impermanence
     ../../modules/home-manager
   ];
 
@@ -16,6 +17,13 @@
         file_manager = "${pkgs.pcmanfm}/bin/pcmanfm";
       };
     };
+  };
+
+  home.persistence."/persistent/home/nico" = {
+    allowOther = true;
+    directories = [
+      ".config/nixos"
+    ];
   };
 
   home-manager = {
