@@ -12,7 +12,7 @@
 
       ageKeyFile = lib.mkOption {
         type = lib.types.path;
-        default = builtins.toPath "/home/${config.system.userName}/.config/sops/age/keys.txt";
+        default = builtins.toPath "/persistent/home/${config.system.userName}/.config/sops/age/keys.txt";
       };
     };
   };
