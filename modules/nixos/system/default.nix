@@ -20,8 +20,11 @@
         default = "nico";
       };
 
-      passwordFile = lib.mkOption {
-        type = lib.types.path;
+      password = {
+        enable = lib.mkEnableOption "enable password management";
+        passwordFile = lib.mkOption {
+          type = lib.types.path;
+        };
       };
 
       hostName = lib.mkOption {
@@ -121,8 +124,8 @@
         "wheel"
       ];
       shell = config.system.shell;
-      hashedPassword = "$6$FdDJt3LLc3Iu0r14$DKRv42b0IsqkW6OFkWr0WnUoxMPPaFUnSZgBFJKfR4elFeGRU3NfhP1rXbWd.b9073ZucRQrFto130F3eBVjj0";
-      # hashedPasswordFile = "${config.system.passwordFile}";
+      # hashedPassword = "$6$FdDJt3LLc3Iu0r14$DKRv42b0IsqkW6OFkWr0WnUoxMPPaFUnSZgBFJKfR4elFeGRU3NfhP1rXbWd.b9073ZucRQrFto130F3eBVjj0";
+      passwordFile = lib.mkIf config.system.password.enable "${config.system.password.passwordFile}";
     };
 
     users.users.root = {

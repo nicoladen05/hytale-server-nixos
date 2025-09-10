@@ -42,12 +42,16 @@ in
     # Essentials
     enable = true;
     nvidia.enable = true;
-    sops.enable = false;
+    sops.enable = true;
 
     # User account
     inherit userName;
     inherit hostName;
-    passwordFile = config.sops.secrets.password.path;
+    password = {
+      enable = true;
+      passwordFile = config.sops.secrets."user/nico/password".path;
+    };
+
     shell = pkgs.zsh;
 
     # Extra settings
