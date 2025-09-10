@@ -23,6 +23,7 @@
     allowOther = true;
     directories = [
       ".config/nixos"
+      "docs"
     ];
   };
 
