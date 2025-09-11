@@ -52,6 +52,7 @@
           resolution = "2560x1440";
           refreshRate = 165;
           vrr = false;
+          scale = "1.25";
         }
         {
           display = "HDMI-A-2";
