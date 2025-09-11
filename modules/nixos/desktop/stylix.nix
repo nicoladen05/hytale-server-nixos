@@ -62,7 +62,7 @@
 
     stylix.cursor.package = pkgs.banana-cursor;
     stylix.cursor.name = "Banana";
-    stylix.cursor.size = 56;
+    stylix.cursor.size = 48;
 
     stylix.opacity = {
       terminal = 0.9;
@@ -85,9 +85,9 @@
     };
 
     stylix.fonts.sizes = {
-      terminal = 16;
-      desktop = 15;
-      applications = 13;
+      terminal = 14;
+      desktop = 13;
+      applications = 12;
     };
   };
 }
