@@ -32,6 +32,7 @@
       ".config/spotify"
       ".cache/spotify"
       ".config/vivalidi"
+      ".local/share/PrismLauncher"
     ];
   };
 
