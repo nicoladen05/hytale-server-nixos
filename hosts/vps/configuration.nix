@@ -110,6 +110,8 @@ in
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEztxKjajt/4t2hhu80eEiLps75mewRnILzlBs01RFYk"
   ];
 
+  nix.settings.trusted-users = [ "root" "${userName}" ];
+
   system.stateVersion = "25.05";
 
   networking = {
