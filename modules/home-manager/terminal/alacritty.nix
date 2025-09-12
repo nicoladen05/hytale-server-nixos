@@ -11,8 +11,8 @@
 
       settings = {
 
-        font.offset.y = 4;
-        font.glyph_offset.y = 2;
+        font.offset.y = 6;
+        font.glyph_offset.y = 3;
 
         window = {
           padding.x = 15;

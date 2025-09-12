@@ -71,8 +71,8 @@
 
     stylix.fonts = {
       monospace = {
-        package = pkgs.nerd-fonts.iosevka;
-        name = "Iosevka Nerd Font";
+        package = pkgs.maple-mono.NF-CN;
+        name = "Maple Mono NF CN";
       };
       sansSerif = {
         package = inputs.apple-fonts.packages.${pkgs.system}.sf-pro-nerd;
@@ -85,9 +85,9 @@
     };
 
     stylix.fonts.sizes = {
-      terminal = 14;
-      desktop = 13;
-      applications = 12;
+      terminal = 13;
+      desktop = 12;
+      applications = 11;
     };
   };
 }
