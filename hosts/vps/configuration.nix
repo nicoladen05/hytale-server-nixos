@@ -24,6 +24,8 @@ in
     inherit userName;
     inherit hostName;
 
+    passwordlessRebuild = true;
+
     shell = pkgs.zsh;
 
     tcpPorts = [
