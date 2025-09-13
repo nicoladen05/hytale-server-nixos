@@ -268,6 +268,10 @@ in
         };
       };
 
+      xwayland = {
+        force_zero_scaling = true;
+      };
+
       gestures = {
         workspace_swipe = false;
       };
