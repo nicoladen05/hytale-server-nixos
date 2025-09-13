@@ -20,8 +20,11 @@
         default = "nico";
       };
 
-      passwordFile = lib.mkOption {
-        type = lib.types.path;
+      password = {
+        enable = lib.mkEnableOption "enable password management";
+        hashedPasswordFile = lib.mkOption {
+          type = lib.types.path;
+        };
       };
 
       hostName = lib.mkOption {
@@ -121,7 +124,11 @@
         "wheel"
       ];
       shell = config.system.shell;
-      # hashedPasswordFile = "${config.system.passwordFile}";
+      hashedPasswordFile = lib.mkIf config.system.password.enable "${config.system.password.hashedPasswordFile}";
+    };
+
+    users.users.root = {
+      hashedPassword = "$6$FdDJt3LLc3Iu0r14$DKRv42b0IsqkW6OFkWr0WnUoxMPPaFUnSZgBFJKfR4elFeGRU3NfhP1rXbWd.b9073ZucRQrFto130F3eBVjj0";
     };
 
     # Bluetooth

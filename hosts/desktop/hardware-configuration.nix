@@ -14,15 +14,54 @@
   boot.extraModulePackages = [ ];
   boot.loader.systemd-boot.configurationLimit = 5;
 
+  boot.initrd.postResumeCommands = lib.mkAfter ''
+    mkdir /btrfs_tmp
+    mount /dev/disk/by-uuid/99320d6a-b249-4b97-8e96-16e3426b9439 /btrfs_tmp
+    if [[ -e /btrfs_tmp/root ]]; then
+        mkdir -p /btrfs_tmp/old_roots
+        timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+        mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+    fi
+
+    delete_subvolume_recursively() {
+        IFS=$'\n'
+        for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+            delete_subvolume_recursively "/btrfs_tmp/$i"
+        done
+        btrfs subvolume delete "$1"
+    }
+
+    for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
+        delete_subvolume_recursively "$i"
+    done
+
+    btrfs subvolume create /btrfs_tmp/root
+    umount /btrfs_tmp
+  '';
+
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/b91cd2e4-20b7-4c26-9bce-8113814ea9c6";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/99320d6a-b249-4b97-8e96-16e3426b9439";
+      fsType = "btrfs";
+      options = [ "subvol=root" ];
+    };
+
+  fileSystems."/persistent" =
+    { device = "/dev/disk/by-uuid/99320d6a-b249-4b97-8e96-16e3426b9439";
+      fsType = "btrfs";
+      neededForBoot = true;
+      options = [ "subvol=persistent" ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/99320d6a-b249-4b97-8e96-16e3426b9439";
+      fsType = "btrfs";
+      options = [ "subvol=nix" ];
     };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/8CA3-5228";
       fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
   swapDevices = [ ];

@@ -6,6 +6,7 @@
 }:
 {
   imports = [
+    inputs.impermanence.homeManagerModules.impermanence
     ../../modules/home-manager
   ];
 
@@ -16,6 +17,23 @@
         file_manager = "${pkgs.pcmanfm}/bin/pcmanfm";
       };
     };
+  };
+
+  home.persistence."/persistent/home/nico" = {
+    allowOther = true;
+    directories = [
+      ".config/nixos"
+      ".config/sops"
+      ".ssh"
+
+      "docs"
+       
+      ".config/discord"
+      ".config/spotify"
+      ".cache/spotify"
+      ".config/vivalidi"
+      ".local/share/PrismLauncher"
+    ];
   };
 
   home-manager = {
@@ -35,6 +53,7 @@
           resolution = "2560x1440";
           refreshRate = 165;
           vrr = false;
+          scale = "1.25";
         }
         {
           display = "HDMI-A-2";

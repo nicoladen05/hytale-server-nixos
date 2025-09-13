@@ -42,6 +42,10 @@ in
               type = lib.types.str;
               default = "0x0";
             };
+            scale = lib.mkOption {
+              type = lib.types.str;
+              default = "auto";
+            };
             vrr = lib.mkOption {
               type = lib.types.bool;
               default = false;
@@ -149,7 +153,7 @@ in
             vrrStr = if display.vrr then ", vrr, 1" else "";
             transformStr = if display.rotate != null then ", transform, ${toString display.rotate}" else "";
           in
-          "${display.display}, ${display.resolution}@${toString display.refreshRate}, ${display.offset}, auto${vrrStr}${transformStr}"
+          "${display.display}, ${display.resolution}@${toString display.refreshRate}, ${display.offset}, ${display.scale}${vrrStr}${transformStr}"
         ))
 
         (lib.forEach (lib.filter (display: display.primary) config.home-manager.hyprland.displays) (

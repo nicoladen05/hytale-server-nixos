@@ -26,6 +26,17 @@ in
     };
   };
 
+  # Impermanence
+  programs.fuse.userAllowOther = true;
+  environment.persistence."/persistent" = {
+    enable = true;
+    hideMounts = true;
+    directories = [
+      "/var/log"
+      "/var/lib/nixos"
+    ];
+  };
+
   # System configuration
   system = {
     # Essentials
@@ -36,7 +47,11 @@ in
     # User account
     inherit userName;
     inherit hostName;
-    passwordFile = config.sops.secrets.password.path;
+    password = {
+      enable = true;
+      hashedPasswordFile = config.sops.secrets."user/nico/password_hash".path;
+    };
+
     shell = pkgs.zsh;
 
     # Extra settings
@@ -70,7 +85,7 @@ in
       enable = true;
       colorScheme = "material";
       wallpaper = "https://images.unsplash.com/photo-1756567579531-405e4df07572?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=kristaps-ungurs-4orvBonHMGk-unsplash.jpg";
-      wallpaperHash = "sha256-WF3uDkQsV9f/3yiNDQVcE548uwYqrA5T9HBj8URqlr4=";
+      wallpaperHash = "sha256-NvkaN3xoQNlg0ieonWl88EFoxiJ3RtMghDamNFZMXYc=";
     };
   };
 
