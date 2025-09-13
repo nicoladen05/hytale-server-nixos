@@ -35,6 +35,9 @@ in
       "/var/log"
       "/var/lib/nixos"
     ];
+    files = [
+      "/etc/machine-id"
+    ];
   };
 
   # System configuration

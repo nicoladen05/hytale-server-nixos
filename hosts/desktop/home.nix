@@ -31,8 +31,11 @@
       ".config/discord"
       ".config/spotify"
       ".cache/spotify"
-      ".config/vivalidi"
       ".local/share/PrismLauncher"
+      ".librewolf"
+    ];
+    files = [
+      ".zsh_history"
     ];
   };
 
