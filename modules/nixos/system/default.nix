@@ -27,6 +27,12 @@
         };
       };
 
+      passwordlessRebuild = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Rebuild the system without sudo password";
+      };
+
       hostName = lib.mkOption {
         type = lib.types.str;
       };
@@ -128,8 +134,24 @@
     };
 
     users.users.root = {
-      hashedPassword = "$6$FdDJt3LLc3Iu0r14$DKRv42b0IsqkW6OFkWr0WnUoxMPPaFUnSZgBFJKfR4elFeGRU3NfhP1rXbWd.b9073ZucRQrFto130F3eBVjj0";
+      hashedPasswordFile = lib.mkIf config.system.password.enable "${config.system.password.hashedPasswordFile}";
     };
+
+    # Rebuild without password
+    security.sudo.extraRules = lib.mkIf config.system.passwordlessRebuild [
+      {
+        users = [ "${config.system.userName}" ];
+        commands = [
+          { command = "/run/current-system/sw/bin/nix"; options = [ "NOPASSWD" ]; }
+          { command = "/run/current-system/sw/bin/nixos-rebuild"; options = [ "NOPASSWD" ]; }
+          { command = "/nix/var/nix/profiles/system/bin/switch-to-configuration"; options = [ "NOPASSWD" ]; }
+          { command = "/run/current-system/sw/bin/systemctl"; options = [ "NOPASSWD" ]; }
+          { command = "/run/current-system/sw/bin/nix-env"; options = [ "NOPASSWD" ]; }
+          { command = "/run/current-system/sw/bin/nix-store"; options = [ "NOPASSWD" ]; }
+        ];
+      }
+    ];
+
 
     # Bluetooth
     hardware.bluetooth = lib.mkIf config.system.bluetooth.enable {

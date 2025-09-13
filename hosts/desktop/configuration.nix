@@ -51,6 +51,7 @@ in
       enable = true;
       hashedPasswordFile = config.sops.secrets."user/nico/password_hash".path;
     };
+    passwordlessRebuild = true;
 
     shell = pkgs.zsh;
 
