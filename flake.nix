@@ -77,8 +77,10 @@
       deploy.nodes.vps = {
         hostname = "130.61.231.173";
         remoteBuild = true;
+        interactiveSudo = true;
         profiles.system = {
-          user = "nico";
+          user = "root";
+          sshUser = "nico";
           path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.vps;
         };
       };
