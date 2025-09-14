@@ -96,12 +96,11 @@
 
       deploy.nodes.lxc = {
         hostname = "192.168.2.53";
-        remoteBuild = true;
         interactiveSudo = true;
         profiles.system = {
           user = "root";
           sshUser = "nico";
-          path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.lxc;
+          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.lxc;
         };
       };
     };

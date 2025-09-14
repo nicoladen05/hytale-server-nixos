@@ -20,10 +20,24 @@ in
     inherit hostName;
   };
 
+  homelab = {
+    enable = true;
+    configDir = "/opt";
+    baseDomain = "lxc.local";
+    services = {
+      homeassistant = {
+        enable = true;
+      };
+    };
+  };
+
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ];
 
-  nix.settings = { sandbox = false; };  
+  nix.settings = { 
+    sandbox = false; 
+    trusted-users = [ "@wheel" ];
+  };  
 
   proxmoxLXC = {
     manageNetwork = false;

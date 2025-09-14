@@ -5,7 +5,7 @@
     tailscale.enable = lib.mkEnableOption "enable tailscale";
   };
 
-  config = {
+  config = lib.mkIf config.tailscale.enable {
     services.tailscale.enable = true;
     services.tailscale.useRoutingFeatures = "server";
   };
