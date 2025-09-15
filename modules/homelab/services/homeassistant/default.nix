@@ -5,6 +5,10 @@ let
   mkContainer = (import ../../helpers/container.nix { inherit lib; });
 in
 {
+  imports = [
+    ./vm.nix
+  ];
+
   options = {
     homelab.services.homeassistant = {
       enable = lib.mkEnableOption "enables homeassistant";

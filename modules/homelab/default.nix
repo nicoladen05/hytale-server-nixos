@@ -12,7 +12,7 @@
 
     configDir = lib.mkOption {
       type = lib.types.str;
-      example = "/mnt/homelab";
+      example = "/opt/services";
       description = "Directory where homelab configuration files are stored.";
     };
 

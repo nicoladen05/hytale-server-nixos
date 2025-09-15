@@ -25,10 +25,11 @@ in
     configDir = "/opt";
     baseDomain = "lxc.local";
     services = {
-      homeassistant = {
-        enable = true;
-      };
+      immich.enable = true;
     };
+    # vms = {
+    #   haos.enable = true;
+    # };
   };
 
   nix.optimise.automatic = true;
@@ -43,6 +44,8 @@ in
     manageNetwork = false;
     privileged = true;
   };
+
+  networking.firewall.enable = false;
 
   security.pam.services.sshd.allowNullPassword = true;
   services.openssh = {

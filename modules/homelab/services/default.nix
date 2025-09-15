@@ -6,7 +6,7 @@
     ./wireguard.nix
 
     ./homeassistant
-    ./tailscale
     ./windows
+    ./immich
   ];
 }

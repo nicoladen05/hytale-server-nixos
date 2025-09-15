@@ -85,9 +85,11 @@
 
   config = lib.mkIf config.system.enable {
     nh.enable = true;
-     
+
     # Overlays
-    nixpkgs.overlays = [ (import ../../../overlays/homelab-helpers.nix) ];
+    nixpkgs.overlays = [
+      (import ../../../overlays/default.nix)
+    ];
 
     # Bootloader.
     boot.loader.systemd-boot.enable = lib.mkIf config.system.boot.systemdBoot true;

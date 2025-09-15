@@ -40,9 +40,17 @@
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
     };
+
+    nixvirt = {
+      url = "https://flakehub.com/f/AshleyYakeley/NixVirt/0.6.0";
+      inputs.nixvirt.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
+    let
+      pkgs = import nixpkgs { system = "x86_64-linux"; };
+    in
     {
       # NixOS Configurations
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
@@ -67,6 +75,7 @@
           home-manager.nixosModules.home-manager
           stylix.nixosModules.stylix
           nvf.nixosModules.default
+          nixvirt.nixosModules.default
         ];
       };
 
@@ -75,11 +84,15 @@
         specialArgs = { inherit inputs; };
         modules = with inputs; [
           ./hosts/lxc/configuration.nix
+          nixvirt.nixosModules.default
           sops-nix.nixosModules.sops
           stylix.nixosModules.stylix
           nvf.nixosModules.default
         ];
       };
+
+      # Packages
+      packages."x86_64-linux".pycord = pkgs.callPackage ./packages/pycord.nix { };
 
       # DeployRS Nodes
       deploy.nodes.vps = {
