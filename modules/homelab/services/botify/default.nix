@@ -29,8 +29,8 @@ let
   botify = pkgs.fetchFromGitHub {
     owner = "nicoladen05";
     repo = "botify";
-    rev = "94b88e36e4b45a55dd55a79309028e90b2c32ca2";
-    sha256 = "sha256-JS/EFRLrbTf3/RmwLKYG46AOrLP+5g6m2IqcJpTqx9I=";
+    rev = "cdb880d92a497608e68810fa3dc9785789b315df";
+    sha256 = "sha256-EjP9Do1ZUTWZELy7ah7PaPnoS4LNeH1p+k4LcS5O5O0=";
   };
 in
 {
