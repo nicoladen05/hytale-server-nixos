@@ -8,7 +8,7 @@
   config = lib.mkIf config.home-manager.rofi.enable {
     programs.rofi = {
       enable = true;
-      package = pkgs.rofi-wayland;
+      package = pkgs.rofi;
       location = "center";
       theme = {
         "*" = {
