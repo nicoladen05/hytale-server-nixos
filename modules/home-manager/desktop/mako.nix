@@ -9,13 +9,15 @@
     services.mako = {
       enable = true;
 
-      anchor = "top-center";
-      borderRadius = 10;
-      borderSize = 2;
-      defaultTimeout = 5000;
-      icons = true;
-      layer = "overlay";
-      margin = "6";
+      settings = {
+        anchor = "top-center";
+        border-radius = 10;
+        border-size = 2;
+        default-timeout = 5000;
+        icons = true;
+        layer = "overlay";
+        margin = "6";
+      };
     };
   };
 }
