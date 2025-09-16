@@ -93,6 +93,7 @@
 
       # Packages
       packages."x86_64-linux".pycord = pkgs.callPackage ./packages/pycord.nix { };
+      packages."x86_64-linux".wavelink = pkgs.callPackage ./packages/wavelink.nix { };
 
       # DeployRS Nodes
       deploy.nodes.vps = {

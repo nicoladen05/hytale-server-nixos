@@ -24,7 +24,7 @@ python313Packages.buildPythonPackage {
   dependencies = with python313Packages; [
     aiohttp
     typing-extensions
-  ];
+  ] ++ lib.optionals voiceSupport [pynacl];
 
   postPatch = ''
     substituteInPlace pyproject.toml \

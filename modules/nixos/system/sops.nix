@@ -23,7 +23,12 @@
 
     sops.age.keyFile = config.system.sops.ageKeyFile;
 
-    sops.secrets.password = { };
-    sops.secrets.password_strong = { };
+    sops.secrets."user/nico/password" = { };
+    sops.secrets."user/nico/password_long" = { };
+    sops.secrets."user/nico/password_hash" = {
+      neededForUsers = true;
+    };
+
+    sops.secrets."services/botify/token" = { };
   };
 }

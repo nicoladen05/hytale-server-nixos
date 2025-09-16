@@ -1,4 +1,4 @@
-{ modulesPath, pkgs, lib, ... }:
+{ modulesPath, config, ... }:
 
 let
   userName = "nico";
@@ -14,6 +14,7 @@ in
 
   system = {
     enable = true;
+    sops.enable = true;
     boot.systemdBoot = false;
 
     inherit userName;
@@ -26,6 +27,8 @@ in
     baseDomain = "lxc.local";
     services = {
       immich.enable = true;
+      botify.enable = true;
+      botify.tokenFile = config.sops.secrets."services/botify/token".path;
     };
     # vms = {
     #   haos.enable = true;
