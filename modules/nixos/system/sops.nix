@@ -28,5 +28,6 @@
     sops.secrets."user/nico/password_hash" = {
       neededForUsers = true;
     };
+    sops.secrets."services/botify/token" = { };
   };
 }

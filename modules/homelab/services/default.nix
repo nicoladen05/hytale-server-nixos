@@ -5,8 +5,10 @@
     ./caddy.nix
     ./wireguard.nix
 
+    ./botify
+    ./pihole
     ./homeassistant
-    ./tailscale
     ./windows
+    ./immich
   ];
 }

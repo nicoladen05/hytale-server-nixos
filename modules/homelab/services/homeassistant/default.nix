@@ -2,8 +2,13 @@
 
 let
   cfg = config.homelab.services.homeassistant;
+  mkContainer = (import ../../helpers/container.nix { inherit lib; });
 in
 {
+  imports = [
+    ./vm.nix
+  ];
+
   options = {
     homelab.services.homeassistant = {
       enable = lib.mkEnableOption "enables homeassistant";
@@ -20,9 +25,10 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    virtualisation.oci-containers.containers."homeassistant" = {
-      image = "homeassistant/home-assistant:stable";
+  config = lib.mkIf cfg.enable (
+    mkContainer {
+      name = "homeassistant";
+      image = "ghcr.io/homeassistant/home-assistant:stable";
       autoStart = true;
       volumes = [
         "${cfg.configDir}:/config"
@@ -31,6 +37,6 @@ in
       environment = {
         TZ = config.system.timeZone;
       };
-    };
-  };
+    }
+  );
 }
