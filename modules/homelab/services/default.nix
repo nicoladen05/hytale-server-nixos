@@ -6,6 +6,7 @@
     ./wireguard.nix
 
     ./botify
+    ./pihole
     ./homeassistant
     ./windows
     ./immich
