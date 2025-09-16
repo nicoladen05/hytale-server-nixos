@@ -272,9 +272,9 @@ in
         force_zero_scaling = true;
       };
 
-      gestures = {
-        workspace_swipe = false;
-      };
+      # gestures = {
+      #   workspace_swipe = false;
+      # };
 
       "$mainMod" = "SUPER";
       "$secondaryMod" = "ALT";
