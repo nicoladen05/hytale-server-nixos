@@ -26,6 +26,20 @@ in
     };
   };
 
+  # Impermanence
+  programs.fuse.userAllowOther = true;
+  environment.persistence."/persistent" = {
+    enable = true;
+    hideMounts = true;
+    directories = [
+      "/var/log"
+      "/var/lib/nixos"
+    ];
+    files = [
+      "/etc/machine-id"
+    ];
+  };
+
   # System configuration
   system = {
     # Essentials
@@ -36,7 +50,12 @@ in
     # User account
     inherit userName;
     inherit hostName;
-    passwordFile = config.sops.secrets.password.path;
+    password = {
+      enable = true;
+      hashedPasswordFile = config.sops.secrets."user/nico/password_hash".path;
+    };
+    passwordlessRebuild = true;
+
     shell = pkgs.zsh;
 
     # Extra settings

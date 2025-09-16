@@ -20,8 +20,17 @@
         default = "nico";
       };
 
-      passwordFile = lib.mkOption {
-        type = lib.types.path;
+      password = {
+        enable = lib.mkEnableOption "enable password management";
+        hashedPasswordFile = lib.mkOption {
+          type = lib.types.path;
+        };
+      };
+
+      passwordlessRebuild = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Rebuild the system without sudo password";
       };
 
       hostName = lib.mkOption {
@@ -126,8 +135,28 @@
         "wheel"
       ];
       shell = config.system.shell;
-      # hashedPasswordFile = "${config.system.passwordFile}";
+      hashedPasswordFile = lib.mkIf config.system.password.enable "${config.system.password.hashedPasswordFile}";
     };
+
+    users.users.root = {
+      hashedPasswordFile = lib.mkIf config.system.password.enable "${config.system.password.hashedPasswordFile}";
+    };
+
+    # Rebuild without password
+    security.sudo.extraRules = lib.mkIf config.system.passwordlessRebuild [
+      {
+        users = [ "${config.system.userName}" ];
+        commands = [
+          { command = "/run/current-system/sw/bin/nix"; options = [ "NOPASSWD" ]; }
+          { command = "/run/current-system/sw/bin/nixos-rebuild"; options = [ "NOPASSWD" ]; }
+          { command = "/nix/var/nix/profiles/system/bin/switch-to-configuration"; options = [ "NOPASSWD" ]; }
+          { command = "/run/current-system/sw/bin/systemctl"; options = [ "NOPASSWD" ]; }
+          { command = "/run/current-system/sw/bin/nix-env"; options = [ "NOPASSWD" ]; }
+          { command = "/run/current-system/sw/bin/nix-store"; options = [ "NOPASSWD" ]; }
+        ];
+      }
+    ];
+
 
     # Bluetooth
     hardware.bluetooth = lib.mkIf config.system.bluetooth.enable {

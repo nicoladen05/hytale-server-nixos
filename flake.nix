@@ -16,6 +16,8 @@
 
     disko.url = "github:nix-community/disko";
 
+    impermanence.url = "github:nix-community/impermanence";
+
     sops-nix.url = "github:Mic92/sops-nix";
 
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -57,6 +59,7 @@
         specialArgs = { inherit inputs; };
         modules = with inputs; [
           ./hosts/desktop/configuration.nix
+          impermanence.nixosModules.impermanence
           nur.modules.nixos.default
           home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops
