@@ -101,8 +101,10 @@ in
 
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
-    permitRootLogin = "no";
+    settings = {
+      passwordAuthentication = false;
+      permitRootLogin = "no";
+    };
   };
 
   services.fail2ban.enable = true;
