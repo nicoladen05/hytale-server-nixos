@@ -176,7 +176,7 @@
     networking.firewall.allowedUDPPorts = config.system.udpPorts;
 
     # SSH
-    services.openssh = lib.mkIf config.system.ssh {
+    services.openssh = lib.mkIf config.system.ssh.enable {
       enable = true;
     };
 
