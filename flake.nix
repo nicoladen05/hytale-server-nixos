@@ -83,18 +83,6 @@
         ];
       };
 
-      nixosConfigurations.lxc = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = with inputs; [
-          ./hosts/lxc/configuration.nix
-          nixvirt.nixosModules.default
-          sops-nix.nixosModules.sops
-          stylix.nixosModules.stylix
-          nvf.nixosModules.default
-        ];
-      };
-
       nixosConfigurations.server = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
@@ -124,14 +112,13 @@
         };
       };
 
-
-      deploy.nodes.lxc = {
-        hostname = "192.168.2.53";
+      deploy.nodes.server = {
+        hostname = "192.168.2.171";
         interactiveSudo = true;
         profiles.system = {
           user = "root";
           sshUser = "nico";
-          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.lxc;
+          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.server;
         };
       };
     };
