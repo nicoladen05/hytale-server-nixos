@@ -7,7 +7,7 @@
 
 let
     userName = "nico";
-    hostName = "homeserver";
+    hostName = "server";
 in
 {
     imports = [
