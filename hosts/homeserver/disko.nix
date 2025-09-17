@@ -37,8 +37,13 @@
                                 };
                                 services = {
                                     mountpoint = "/opt/services";
-                                    mountOptions = [ "compress=zstd" "ssd" ]
-                                }
+                                    mountOptions = [ "compress=zstd" "ssd" ];
+                                };
+                                swap = {
+                                    mountpoint = "/.swapvol";
+                                    mountOptions = [ "nodatacow" "noatime" ];
+                                    swap.swapfile.size = "4G";
+                                };
                             };
                         };
                     };
