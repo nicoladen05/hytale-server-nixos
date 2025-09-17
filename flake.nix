@@ -95,6 +95,18 @@
         ];
       };
 
+      nixosConfigurations.server = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = with inputs; [
+          ./hosts/server/configuration.nix
+          nixvirt.nixosModules.default
+          sops-nix.nixosModules.sops
+          stylix.nixosModules.stylix
+          nvf.nixosModules.default       
+        ]
+      }
+
       # Packages
       packages."x86_64-linux".pycord = pkgs.callPackage ./packages/pycord.nix { };
       packages."x86_64-linux".wavelink = pkgs.callPackage ./packages/wavelink.nix { };
