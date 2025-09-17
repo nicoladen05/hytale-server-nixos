@@ -1,8 +1,8 @@
-{ lib, device, ... }:
+{ lib, ... }:
 {
     disko.devices = {
         disk.disk1 = {
-            inherit device;
+            device = lib.mkDefault "/dev/sda";
             type = "disk";
             content = {
                 type = "gpt";
