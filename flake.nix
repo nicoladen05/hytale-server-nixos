@@ -92,7 +92,7 @@
           nixvirt.nixosModules.default
           sops-nix.nixosModules.sops
           stylix.nixosModules.stylix
-          nvf.nixosModules.default       
+          nvf.nixosModules.default
         ];
       };
 
@@ -113,7 +113,7 @@
       };
 
       deploy.nodes.server = {
-        hostname = "192.168.2.171";
+        hostname = "192.168.2.2";
         interactiveSudo = true;
         profiles.system = {
           user = "root";
