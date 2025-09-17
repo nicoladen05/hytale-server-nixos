@@ -31,6 +31,10 @@
                                     mountpoint = "/nix";
                                     mountOptions = [ "compress=zstd" "noatime" "ssd" ];
                                 };
+                                persistent = {
+                                    mountpoint = "/persistent";
+                                    mountOptions = [ "compress=zstd" "ssd" ];
+                                };
                                 data = {
                                     mountpoint = "/data";
                                     mountOptions = [ "compress=zstd" "ssd" ];

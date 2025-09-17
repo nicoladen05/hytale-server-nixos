@@ -175,6 +175,11 @@
     networking.firewall.allowedTCPPorts = config.system.tcpPorts;
     networking.firewall.allowedUDPPorts = config.system.udpPorts;
 
+    # SSH
+    services.openssh = lib.mkIf config.system.ssh {
+      enable = true;
+    };
+
     nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = [
       "nix-command"
