@@ -100,12 +100,13 @@
         specialArgs = { inherit inputs; };
         modules = with inputs; [
           ./hosts/server/configuration.nix
+          disko.nixosModules.disko
           nixvirt.nixosModules.default
           sops-nix.nixosModules.sops
           stylix.nixosModules.stylix
           nvf.nixosModules.default       
-        ]
-      }
+        ];
+      };
 
       # Packages
       packages."x86_64-linux".pycord = pkgs.callPackage ./packages/pycord.nix { };
