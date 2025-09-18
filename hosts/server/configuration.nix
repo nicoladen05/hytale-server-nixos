@@ -35,8 +35,8 @@ in
   };
 
   # Static ip
-  networking.interfaces.enp1s0= {
-    ipv4.addresses = [
+  networking = {
+    interfaces.enp1s0.ipv4.addresses = [
       {
         address = "192.168.2.2";
         prefixLength = 24;
