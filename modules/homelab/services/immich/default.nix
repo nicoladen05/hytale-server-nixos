@@ -24,14 +24,22 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    # Create mediaLocation if it does not exist and set permission
+    systemd.tmpfiles.rules = [ 
+      "d ${cfg.mediaLocation} 0755 immich immich -" 
+    ];
+
+    # Immich config
     services.immich = {
       enable = true;
       accelerationDevices = lib.mkIf cfg.hardwareAcceleration [ "/dev/dri/renderD128" ];
       mediaLocation = cfg.mediaLocation;
       openFirewall = true;
+      host = "0.0.0.0";
       port = 2283;
-      host = "192.168.2.53";
       settings.server.externalDomain = cfg.domain;
     };
+
+    networking.firewall.allowedTCPPorts = [ 2283 ];
   };
 }

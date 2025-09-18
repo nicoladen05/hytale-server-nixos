@@ -34,6 +34,38 @@ in
       tcpPorts = [ 22 ];
   };
 
+  # Homelab
+  homelab = {
+    enable = true;
+    external = true;
+
+    baseDomain = "nicoladen.dev";
+
+    services = {
+      botify = {
+        enable = true;
+        tokenFile = config.sops.secrets."services/botify/token".path;
+      };
+
+      blocky = {
+        enable = true;
+        settings = {
+          blockLists = (import ../../configs/network/blocklists.nix);
+          clients = lib.mapAttrs (_: v: [ v ]) (import ../../configs/network/clients.nix);
+          blockGroups = {
+            default = [ "ads" "security" ];
+          };
+        };
+      };
+
+      immich = {
+        enable = true;
+        hardwareAcceleration = true;
+        mediaLocation = "/data/immich";
+      };
+    };
+  };
+
   # Static ip
   networking = {
     interfaces.enp1s0.ipv4.addresses = [
