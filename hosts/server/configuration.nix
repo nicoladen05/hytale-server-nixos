@@ -35,18 +35,24 @@ in
   };
 
   # Static ip
-  networking.interfaces.enp1s0.ipv4.addresses = [
-    {
-      address = "192.168.2.2";
-      prefixLength = 24;
-    }
-  ];
+  networking.interfaces.enp1s0= {
+    ipv4.addresses = [
+      {
+        address = "192.168.2.2";
+        prefixLength = 24;
+      }
+    ];
+    defaultGateway = {
+      addresses = "192.168.2.1";
+      interface = "enp1s0";
+    };
+  };
 
   # Users
   users.users.root.hashedPassword = "$6$FdDJt3LLc3Iu0r14$DKRv42b0IsqkW6OFkWr0WnUoxMPPaFUnSZgBFJKfR4elFeGRU3NfhP1rXbWd.b9073ZucRQrFto130F3eBVjj0";
   users.users.root.hashedPasswordFile = lib.mkForce null;
 
-  users.users.nico.openssh.authorizedKeys = [
+  users.users.nico.openssh.authorizedKeys.keys = [
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC5BIr0SEPaA6JLVriI5tpbiOORp6qE+D25uqEEY+BvtAwUxpn8PWo33il8bw1aD8HUptiToPBFHcx3H7TL2o1O+b1kADvfOsCSfZM2bATp1fZ6zkzeSpApG5Ahu5CgpZnL+PMwIyeY4o2G/iRLGyF9Q3+edyhBOX+jbbdW9Xht35nne87/3rUCoiXXXLK6vwY5FIFxNzxU/40JWVhdlbXSvXVVPpx+eNnnJcOdUWGcDIk6ozLihZW21uwmwnfHN99ndibAMF0GHB+lPBIe9GGJHF/KQHJI4glz7Dta0pI30BHR2ZXaEVXI265NTVdY0tKqsoT5bwOeJ+14tivkpnXfbxpBBCx3n/Cts/Rs3PCBCCKzhxvNdx5S08dF/5xQXMzoYRABbMPVxqDvjnNY8chhDlLkfDv9vEE44llzuBwSby83n0Ikn9NVn3Q5vbbZYYpS96agYdbiL0ia65TfMyIKVRfx+YLG6YtDYRuf1qvxsZsWrfi2BvXUvYx/+PaelW+lp0O5/3BFZSId4Bk25Z73lwEaucWw/Z2zim0C425o++Tu0u3tVkvglFgs2kbVJUpXn9gtxzihU0bW7sF8LuuUkg0LL/mcpR3q445I1W3AVcayuWCd3GCWRN/Aw22d3egVbVv2Ku7FrEUelBXupfo4NO9UqUlcNj/04WQb34jZKQ== nico@desktop"
   ];
   nix.settings.trusted-users = [ userName ];
