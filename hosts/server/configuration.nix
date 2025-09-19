@@ -63,6 +63,8 @@ in
         hardwareAcceleration = true;
         mediaLocation = "/data/immich";
       };
+
+      homeassistant.enable = true;
     };
   };
 
