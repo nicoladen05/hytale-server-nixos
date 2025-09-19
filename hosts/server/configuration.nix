@@ -67,6 +67,23 @@ in
       homeassistant.enable = true;
 
       vaultwarden.enable = true;
+
+      ocis.enable = true;
+
+      wireguard = {
+        enable = false;
+        subnet = "192.168.255.0/24";
+        ip = "192.168.255.1/24";
+        privateKeyFile = config.sops.secrets."wireguard/privkey".path;
+        peers = [
+          {
+            name = "phone";
+            publicKey = "HUJGJf2uFa8p8EpwQNS5ZKz06qIQOd1uquA8zGkB1Ag=";
+            allowedIPs = ["0.0.0.0/0" "::/128"];
+            endpoint = "ddns.nicoladen.dev:51820";
+          }
+        ];
+      };
     };
   };
 

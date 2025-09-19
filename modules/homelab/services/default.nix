@@ -3,7 +3,6 @@
 {
   imports = [
     ./caddy.nix
-    ./wireguard.nix
 
     ./blocky
     ./botify
@@ -13,5 +12,6 @@
     ./pihole
     ./vaultwarden
     ./windows
+    ./wireguard
   ];
 }

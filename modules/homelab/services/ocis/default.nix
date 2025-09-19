@@ -38,7 +38,7 @@ in
 
     services.caddy.virtualHosts."${cfg.url}" = {
       extraConfig = ''
-        reverse_proxy 127.0.0.1:${cfg.port}
+        reverse_proxy 127.0.0.1:${builtins.toString cfg.port}
       '';
     };
   };
