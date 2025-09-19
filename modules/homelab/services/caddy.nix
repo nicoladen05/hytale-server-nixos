@@ -1,12 +1,11 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }:
 
 {
-  config = lib.mkIf config.homelab.enable {
+  config = lib.mkIf config.homelab.external {
     services.caddy = {
       enable = true;
       acmeCA = "https://acme-v02.api.letsencrypt.org/directory";

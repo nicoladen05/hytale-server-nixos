@@ -65,6 +65,8 @@ in
       };
 
       homeassistant.enable = true;
+
+      vaultwarden.enable = true;
     };
   };
 

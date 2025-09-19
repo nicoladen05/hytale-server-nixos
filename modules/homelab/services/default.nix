@@ -5,11 +5,13 @@
     ./caddy.nix
     ./wireguard.nix
 
-    ./botify
     ./blocky
-    ./pihole
+    ./botify
     ./homeassistant
-    ./windows
     ./immich
+    ./ocis
+    ./pihole
+    ./vaultwarden
+    ./windows
   ];
 }
