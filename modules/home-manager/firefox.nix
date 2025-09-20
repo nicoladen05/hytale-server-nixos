@@ -24,15 +24,7 @@
         ];
 
         search = {
-          engines = {
-            "Unduck" = {
-              urls = [{
-                template = "https://unduck.link?q={searchTerms}";
-              }];
-            };
-          };
-          force = true;
-          default = "Unduck";
+          default = "Google";
         };
 
         settings = {
