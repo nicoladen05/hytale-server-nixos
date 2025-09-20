@@ -4,9 +4,9 @@ let
   cfg = config.homelab.services.homeassistant;
 in
 {
-  imports = [
-    ./vm.nix
-  ];
+  # imports = [
+  #   ./vm.nix
+  # ];
 
   options = {
     homelab.services.homeassistant = {

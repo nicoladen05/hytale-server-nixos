@@ -1,6 +1,7 @@
 {
     config,
     lib,
+    network,
     ...
 }:
 
@@ -56,7 +57,7 @@ in
         enable = true;
         settings = {
           blockLists = (import ../../configs/network/blocklists.nix);
-          clients = lib.mapAttrs (_: v: [ v ]) (import ../../configs/network/clients.nix);
+          clients = lib.mapAttrs (_: c: [ c.ip ]) (import ../../configs/network/clients.nix);
           blockGroups = {
             default = [ "ads" "security" ];
           };
