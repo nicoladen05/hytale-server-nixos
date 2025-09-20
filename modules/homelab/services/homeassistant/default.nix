@@ -26,10 +26,14 @@ in
         # Required for onboarding
         "analytics"
         "google_translate"
+        "isal"
         "met"
         "radio_browser"
         "shopping_list"
-        "isal"
+
+        # Integrations
+        "prusalink"
+        "wake_on_lan"
       ] ;
       config = import ./config.nix;
     };
