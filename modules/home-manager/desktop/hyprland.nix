@@ -162,7 +162,7 @@ in
       ];
 
       "$terminal" = "alacritty";
-      "$browser" = "zen";
+      "$browser" = "librewolf";
       "$fileManager" = "yazi";
       "$menu" = "rofi -show drun -show-icons";
 

@@ -39,15 +39,6 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-    };
-
-    nixvirt = {
-      url = "https://flakehub.com/f/AshleyYakeley/NixVirt/0.6.0";
-      inputs.nixvirt.follows = "nixpkgs";
-    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -80,7 +71,6 @@
           home-manager.nixosModules.home-manager
           stylix.nixosModules.stylix
           nvf.nixosModules.default
-          nixvirt.nixosModules.default
         ];
       };
 
@@ -90,7 +80,6 @@
         modules = with inputs; [
           ./hosts/server/configuration.nix
           disko.nixosModules.disko
-          nixvirt.nixosModules.default
           sops-nix.nixosModules.sops
           stylix.nixosModules.stylix
           nvf.nixosModules.default
