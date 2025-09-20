@@ -32,5 +32,6 @@
     sops.secrets."wireguard/privkey" = {
       mode = "0640";
     };
+    sops.secrets."cloudflare/api_token" = { };
   };
 }

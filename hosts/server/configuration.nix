@@ -42,6 +42,11 @@ in
     baseDomain = "nicoladen.dev";
 
     services = {
+      ddns = {
+        enable = true;
+        tokenFile = config.sops.secrets."cloudflare/api_token".path;
+      };
+
       botify = {
         enable = true;
         tokenFile = config.sops.secrets."services/botify/token".path;

@@ -3,6 +3,7 @@
 {
   imports = [
     ./caddy.nix
+    ./ddns.nix
 
     ./blocky
     ./botify
