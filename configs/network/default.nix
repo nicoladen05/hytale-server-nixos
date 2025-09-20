@@ -1,0 +1,3 @@
+{
+  clients = import ./clients.nix;
+}

@@ -53,11 +53,12 @@
   outputs = { self, nixpkgs, ... }@inputs:
     let
       pkgs = import nixpkgs { system = "x86_64-linux"; };
+      network = import ./configs/network;
     in
     {
       # NixOS Configurations
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs network; };
         modules = with inputs; [
           ./hosts/desktop/configuration.nix
           impermanence.nixosModules.impermanence
@@ -71,7 +72,7 @@
 
       nixosConfigurations.vps = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs network; };
         modules = with inputs; [
           ./hosts/vps/configuration.nix
           disko.nixosModules.disko
@@ -85,7 +86,7 @@
 
       nixosConfigurations.server = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs network; };
         modules = with inputs; [
           ./hosts/server/configuration.nix
           disko.nixosModules.disko
@@ -113,7 +114,7 @@
       };
 
       deploy.nodes.server = {
-        hostname = "192.168.2.2";
+        hostname = network.clients.server.ip;
         interactiveSudo = true;
         profiles.system = {
           user = "root";

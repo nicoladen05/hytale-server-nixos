@@ -1,7 +1,11 @@
 let
-  prefix = "192.168.2";
+  v4prefix = "192.168.2";
 in
 {
-  router = prefix + ".1";
-  server = prefix + ".2";
+  router = {
+    ip = v4prefix + ".1";
+  };
+  server = {
+    ip = v4prefix + ".2";
+  };
 }
