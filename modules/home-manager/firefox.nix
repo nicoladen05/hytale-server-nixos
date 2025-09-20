@@ -24,7 +24,7 @@
         ];
 
         search = {
-          default = "Google";
+          default = "google";
         };
 
         settings = {
