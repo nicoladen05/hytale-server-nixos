@@ -71,18 +71,20 @@ in
       ocis.enable = true;
 
       wireguard = {
-        enable = false;
-        subnet = "192.168.255.0/24";
-        ip = "192.168.255.1/24";
-        privateKeyFile = config.sops.secrets."wireguard/privkey".path;
-        peers = [
-          {
-            name = "phone";
-            publicKey = "HUJGJf2uFa8p8EpwQNS5ZKz06qIQOd1uquA8zGkB1Ag=";
-            allowedIPs = ["0.0.0.0/0" "::/128"];
-            endpoint = "ddns.nicoladen.dev:51820";
-          }
+        enable = true;
+        ips = [
+          "192.168.255.1/32"
+          "fd3a:6c4f:1b2e::1/128"
+          "2003:e0:17ff:3b42::1/128"
         ];
+        privateKeyFile = config.sops.secrets."wireguard/privkey".path;
+        peers = {
+          phone = {
+            PublicKey = "HUJGJf2uFa8p8EpwQNS5ZKz06qIQOd1uquA8zGkB1Ag=";
+            AllowedIPs = ["0.0.0.0/0" "::/128"];
+            Endpoint = "ddns.nicoladen.dev:51820";
+          };
+        };
       };
     };
   };

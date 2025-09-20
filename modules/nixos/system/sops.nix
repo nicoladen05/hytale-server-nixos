@@ -29,5 +29,8 @@
       neededForUsers = true;
     };
     sops.secrets."services/botify/token" = { };
+    sops.secrets."wireguard/privkey" = {
+      mode = "0640";
+    };
   };
 }

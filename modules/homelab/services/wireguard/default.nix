@@ -12,16 +12,10 @@ in
   options = {
     homelab.services.wireguard.enable = lib.mkEnableOption "enable wireguard vpn";
 
-    homelab.services.wireguard.subnet = lib.mkOption {
-      type = lib.types.str;
-      description = "Subnet of the vpn.";
-      default = "192.168.255.0/24";
-    };
-
-    homelab.services.wireguard.ip = lib.mkOption {
-      type = lib.types.str;
-      description = "IP and subnet of the server in the tunnel network.";
-      default = "192.168.255.1/24";
+    homelab.services.wireguard.ips = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = "IPs and subnets of the server in the tunnel network.";
+      default = [ "192.168.255.1/24" ];
     };
 
     homelab.services.wireguard.port = lib.mkOption {
@@ -37,12 +31,13 @@ in
     };
 
     homelab.services.wireguard.peers = lib.mkOption {
-      type = lib.types.listOf (
+      type = lib.types.attrsOf (
         lib.types.submodule {
           options = {
-            name = lib.mkOption { type = lib.types.str; };
-            publicKey = lib.mkOption { type = lib.types.str; };
-            allowedIPs = lib.mkOption { type = lib.types.listOf lib.types.str; };
+            Name = lib.mkOption { type = lib.types.str; };
+            PublicKey = lib.mkOption { type = lib.types.str; };
+            AllowedIPs = lib.mkOption { type = lib.types.listOf lib.types.str; };
+            Endpoint = lib.mkOption { type = lib.types.listOf lib.types.str; };
           };
         }
       );
@@ -52,37 +47,60 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    boot.kernelModules = [ "wireguard" ];
+
     networking = {
       nat = {
         enable = true;
-        externalInterface = "eth0";
+        enableIPv6 = true;
+        externalInterface = "enp1s0";
         internalInterfaces = [ "wg0" ];
       };
 
-      firewall.allowedTCPPorts = [ 51820 ];
+      firewall.allowedUDPPorts = [ cfg.port ];
 
-      wireguard = {
-        enable = true;
-        interfaces = {
-          wg0 = {
-            ips = [ cfg.ip ];
-            listenPort = cfg.port;
+      useNetworkd = true;
+    };
 
-            # Allow NAT
-            postSetup = ''
-              ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${cfg.subnet} -o eth0 -j MASQUERADE
-            '';
+    systemd.network = {
+      enable = true;
 
-            # Remove NAT rule on shutdown
-            postShutdown = ''
-              ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s ${cfg.subnet} -o eth0 -j MASQUERADE
-            '';
+      networks."50-wg0" = {
+        matchConfig.Name = "wg0";
 
-            privateKeyFile = cfg.privateKeyFile;
+        address = cfg.ips;
 
-            peers = cfg.peers;
-          };
+        networkConfig = {  
+          IPv4Forwarding = true;
+          IPv6Forwarding = true;
         };
+
+        routes = [
+          { Destination = "192.168.255.0/24"; Gateway = "0.0.0.0"; }
+          { Destination = "fd3a:6c4f:1b2e::/64"; Gateway = "::"; }
+          { Destination = "2003:e0:17ff:3b42::/64"; Gateway = "::"; }
+        ];
+      };
+
+      netdevs."50-wg0" = {
+        netdevConfig = {
+          Kind = "wireguard";
+          Name = "wg0";
+        };
+
+        wireguardConfig = {
+          ListenPort = cfg.port;
+          PrivateKeyFile = cfg.privateKeyFile;
+          # RouteTable = "main";
+        };
+
+        wireguardPeers = [ 
+          {
+            PublicKey = "HUJGJf2uFa8p8EpwQNS5ZKz06qIQOd1uquA8zGkB1Ag=";
+            AllowedIPs = ["0.0.0.0/0" "::/128"];
+            # Endpoint = "ddns.nicoladen.dev:51820";
+          }
+        ];
       };
     };
   };
