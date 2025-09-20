@@ -25,11 +25,11 @@ in
   config = lib.mkIf cfg.enable {
     services.cloudflare-dyndns = {
       enable = true;
+      apiTokenFile = cfg.tokenFile;
       inherit (cfg) domains;
 
       ipv4 = true;
       ipv6 = true;
-      
     };
   };
 }
