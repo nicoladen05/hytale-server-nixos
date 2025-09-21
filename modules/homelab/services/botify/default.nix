@@ -15,6 +15,7 @@ let
     pexpect
     aiohttp
     mcstatus
+    requests
     # We need to replace discord.py with pycord in the wavelink
     # build inputs, otherwise we'll have two derivations providing
     # the discord namespace
@@ -29,8 +30,8 @@ let
   botify = pkgs.fetchFromGitHub {
     owner = "nicoladen05";
     repo = "botify";
-    rev = "cdb880d92a497608e68810fa3dc9785789b315df";
-    sha256 = "sha256-EjP9Do1ZUTWZELy7ah7PaPnoS4LNeH1p+k4LcS5O5O0=";
+    rev = "6332a9754927fef988ae14ba1b07279eb7de5049";
+    sha256 = "sha256-8fNZImDdZ+DmoJvmhDYtIowu6x79bGgtGhUVNY4hl8A=";
   };
 in
 {
