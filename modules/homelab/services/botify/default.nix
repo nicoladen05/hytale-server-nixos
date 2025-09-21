@@ -52,6 +52,10 @@ in
         ExecStart = "${pythonEnvironment}/bin/python ${botify}/src/bot.py";
         Restart = "always";
         EnvironmentFile = cfg.tokenFile;
+        # Required for minecraft server commands
+        Environment = "PATH=${pkgs.openssh}/bin:/run/current-system/sw/bin:/bin:/usr/bin";
+        User="${config.system.userName}";
+        Group="users";
       };
     };
   };
