@@ -4,10 +4,6 @@ let
   cfg = config.homelab.services.homeassistant;
 in
 {
-  # imports = [
-  #   ./vm.nix
-  # ];
-
   options = {
     homelab.services.homeassistant = {
       enable = lib.mkEnableOption "enables homeassistant";
@@ -16,29 +12,26 @@ in
         type = lib.types.str;
         default = "home.${config.homelab.baseDomain}";
       };
+
+      configDir = lib.mkOption {
+        type = lib.types.path;
+        default = "${config.homelab.configDir}/hass";
+      };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    services.home-assistant = {
-      enable = true;
-      extraComponents = [
-        # Required for onboarding
-        "analytics"
-        "google_translate"
-        "isal"
-        "met"
-        "radio_browser"
-        "shopping_list"
-
-        # Integrations
-        "prusalink"
-        "wake_on_lan"
-      ] ;
-      extraPackages = python3Packages: with python3Packages; [
-        pyprusalink
+    virtualisation.oci-containers."homeassistant" = {
+      name = "homeassistant";
+      image = "ghcr.io/homeassistant/home-assistant:stable";
+      autoStart = true;
+      volumes = [
+        "${builtins.toString cfg.configDir}:/config"
       ];
-      config = import ./config.nix;
+      privileged = true;
+      environment = {
+        TZ = config.system.timeZone;
+      };
     };
 
     networking.firewall.allowedTCPPorts = [ 8123 ];
