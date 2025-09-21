@@ -9,6 +9,7 @@
     ./botify
     ./homeassistant
     ./immich
+    ./media
     ./ocis
     ./pihole
     ./vaultwarden
