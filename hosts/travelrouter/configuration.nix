@@ -4,6 +4,8 @@
   imports = with nixos-raspberrypi.nixosModules; [
     raspberry-pi-5.base
     raspberry-pi-5.bluetooth
+    raspberry-pi-5.bluetooth
+    sd-image
   ];
 
   networking.hostName = "travelrouter";
