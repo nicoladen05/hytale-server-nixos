@@ -21,17 +21,28 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    virtualisation.oci-containers."homeassistant" = {
-      name = "homeassistant";
-      image = "ghcr.io/homeassistant/home-assistant:stable";
+    systemd.tmpfiles.rules = [ "d ${cfg.configDir} 0775 nico users -" ];
+
+    virtualisation.containers.enable = true;
+    virtualisation.oci-containers.backend = "podman";
+    virtualisation = {
+      podman = {
+        enable = true;
+        dockerCompat = true;
+        defaultNetwork.settings.dns_enabled = true;
+      };
+    };
+
+    virtualisation.oci-containers.containers."homeassistant" = {
+      image = "ghcr.io/home-assistant/home-assistant:stable";
       autoStart = true;
       volumes = [
         "${builtins.toString cfg.configDir}:/config"
       ];
-      privileged = true;
       environment = {
         TZ = config.system.timeZone;
       };
+      extraOptions = [ "--network=host" ];
     };
 
     networking.firewall.allowedTCPPorts = [ 8123 ];

@@ -22,16 +22,4 @@
       description = "Base domain for homelab services. Should not include https:// or http://.";
     };
   };
-
-  config = lib.mkIf config.homelab.enable {
-    virtualisation.containers.enable = true;
-    virtualisation.oci-containers.backend = "podman";
-    virtualisation = {
-      podman = {
-        enable = true;
-        dockerCompat = true;
-        defaultNetwork.settings.dns_enabled = true;
-      };
-    };
-  };
 }
