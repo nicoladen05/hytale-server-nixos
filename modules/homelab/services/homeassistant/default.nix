@@ -35,6 +35,9 @@ in
         "prusalink"
         "wake_on_lan"
       ] ;
+      extraPackages = python3Packages: with python3Packages; [
+        pyprusalink
+      ];
       config = import ./config.nix;
     };
 

@@ -7,9 +7,14 @@ in
   options.homelab.services.immich = {
     enable = lib.mkEnableOption "Enable Immich";
 
-    domain = lib.mkOption {
+    url = lib.mkOption {
       type = lib.types.str;
-      default = "";
+      default = "immich.${config.homelab.baseDomain}";
+    };
+
+    port = lib.mkOption {
+      type = lib.types.int;
+      default = 2283;
     };
 
     hardwareAcceleration = lib.mkOption {
@@ -36,10 +41,16 @@ in
       mediaLocation = cfg.mediaLocation;
       openFirewall = true;
       host = "0.0.0.0";
-      port = 2283;
-      settings.server.externalDomain = cfg.domain;
+      port = cfg.port;
+      settings.server.externalDomain = "https://${cfg.url}";
     };
 
     networking.firewall.allowedTCPPorts = [ 2283 ];
+
+    services.caddy.virtualHosts."${cfg.url}" = {
+      extraConfig = ''
+        reverse_proxy 127.0.0.1:${builtins.toString cfg.port}
+      '';
+    };
   };
 }
