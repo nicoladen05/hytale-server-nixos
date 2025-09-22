@@ -46,6 +46,8 @@ in
         # Disable forced password on shares
         OCIS_SHARING_PUBLIC_SHARE_MUST_HAVE_PASSWORD = "false";
         OCIS_SHARING_PUBLIC_WRITEABLE_SHARE_MUST_HAVE_PASSWORD = "false";
+
+        PROXY_ENABLE_BASIC_AUTH = "true";
       };
     };
 
