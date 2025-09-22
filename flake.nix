@@ -131,5 +131,15 @@
           path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.server;
         };
       };
+
+      deploy.nodes.travelrouter = {
+        hostname = "travelrouter";
+        interactiveSudo = true;
+        profiles.system = {
+          user = "root";
+          sshUser = "nico";
+          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.travelrouter;
+        };
+      };
     };
 }
