@@ -1,6 +1,15 @@
 {
   description = "Nixos config flake";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://nixos-raspberrypi.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -23,6 +32,8 @@
     deploy-rs.url = "github:serokell/deploy-rs";
 
     stylix.url = "github:danth/stylix";
+
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -86,9 +97,18 @@
         ];
       };
 
+      nixosConfigurations.travelrouter = inputs.nixos-raspberrypi.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = { inherit network; inherit (inputs) nixos-raspberrypi; };
+        modules = [
+          ./hosts/travelrouter/configuration.nix
+        ];
+      };
+
       # Packages
       packages."x86_64-linux".pycord = pkgs.callPackage ./packages/pycord.nix { };
       packages."x86_64-linux".wavelink = pkgs.callPackage ./packages/wavelink.nix { };
+      packages."aarch64-linux".travelrouterSdImage = self.nixosConfigurations.travelrouter.config.system.build.sdImage;
 
       # DeployRS Nodes
       deploy.nodes.vps = {
@@ -109,6 +129,16 @@
           user = "root";
           sshUser = "nico";
           path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.server;
+        };
+      };
+
+      deploy.nodes.travelrouter = {
+        hostname = "travelrouter";
+        interactiveSudo = true;
+        profiles.system = {
+          user = "root";
+          sshUser = "nico";
+          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.travelrouter;
         };
       };
     };
