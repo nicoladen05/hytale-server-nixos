@@ -37,22 +37,22 @@
     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.desktop.stylix.colorScheme}.yaml";
 
     # stylix.base16Scheme = {
-    # base00 = "282828";
-    # base01 = "32302f";
-    # base02 = "504945";
-    # base03 = "665c54";
-    # base04 = "bdae93";
-    # base05 = "ddc7a1";
-    # base06 = "ebdbb2";
-    # base07 = "fbf1c7";
-    # base08 = "ea6962";
-    # base09 = "e78a4e";
-    # base0A = "d8a657";
-    # base0B = "a9b665";
-    # base0C = "89b482";
-    # base0D = "7daea3";
-    # base0E = "d3869b";
-    # base0F = "bd6f3e";
+    #   base00 = "151515";
+    #   base01 = "424242";
+    #   base02 = "8C977D";
+    #   base03 = "D9BC8C";
+    #   base04 = "8DA3B9";
+    #   base05 = "E8E3E3";
+    #   base06 = "A988B0";
+    #   base07 = "E8E3E3";
+    #   base08 = "B66467";
+    #   base09 = "D9BC8C";
+    #   base0A = "D9BC8C";
+    #   base0B = "8C977D";
+    #   base0C = "8AA6A2";
+    #   base0D = "8DA3B9";
+    #   base0E = "A988B0";
+    #   base0F = "B66467";
     # };
 
     stylix.image = pkgs.fetchurl {
@@ -65,8 +65,8 @@
     stylix.cursor.size = 48;
 
     stylix.opacity = {
-      terminal = 0.9;
-      applications = 0.9;
+      terminal = 1.0;
+      applications = 1.0;
     };
 
     stylix.fonts = {

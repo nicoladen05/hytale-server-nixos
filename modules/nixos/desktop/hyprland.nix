@@ -19,7 +19,6 @@
       pkgs.grim
 
       pkgs.slurp
-      pkgs.hyprsunset
 
       (pkgs.writeScriptBin "rofi-power-menu" ''
         options="󰌾 Lock\n󰤄 Sleep\n󰜉 Reboot\n󰐥 Shutdown"

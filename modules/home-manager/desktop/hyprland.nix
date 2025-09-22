@@ -137,6 +137,42 @@ in
       enable = true;
     };
 
+    services.hyprsunset = {
+      enable = true;
+      settings = {
+        max-gamma = 100;
+
+        profile = [
+          # Day
+          {
+            time = "7:00";
+            identity = true;
+          }
+          # Wind-Down
+          {
+            time = "18:30";
+            temperature = 5000;
+          }
+          {
+            time = "19:00";
+            temperature = 4500;
+            gamma = 0.95;
+          }
+          {
+            time = "19:30";
+            temperature = 4000;
+            gamma = 0.9;
+          }
+          # Night
+          {
+            time = "20:00";
+            temperature = 3000;
+            gamma = 0.6;
+          }
+        ];
+      };
+    };
+
     wayland.windowManager.hyprland.xwayland.enable = true;
 
     wayland.windowManager.hyprland.enable = true;
@@ -175,7 +211,7 @@ in
         gaps_in = 6;
         gaps_out = 16;
 
-        border_size = 2;
+        border_size = 0;
 
         resize_on_border = false;
 
@@ -185,7 +221,7 @@ in
       };
 
       decoration = {
-        rounding = 8;
+        rounding = 12;
         rounding_power = 4;
 
         blur = {
@@ -198,10 +234,13 @@ in
 
         shadow = {
           enabled = true;
-          range = 2;
+          range = 4;
           render_power = 3;
           color = lib.mkForce "rgba(1a1a1aee)";
         };
+
+        dim_inactive = true;
+        dim_strength = 0.15;
       };
 
       animations = {
