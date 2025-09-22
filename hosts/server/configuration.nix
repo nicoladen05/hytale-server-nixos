@@ -43,6 +43,13 @@ in
     baseDomain = "nicoladen.dev";
 
     services = {
+      backup = {
+        enable = true;
+        repositoryFile = config.sops.secrets."restic/repository".path;
+        passwordFile = config.sops.secrets."restic/password".path;
+        environmentFile = config.sops.secrets."restic/environment".path;
+      };
+
       ddns = {
         enable = true;
         tokenFile = config.sops.secrets."cloudflare/api_token".path;

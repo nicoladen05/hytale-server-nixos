@@ -7,6 +7,7 @@
 
     ./blocky
     ./botify
+    ./backup
     ./homeassistant
     ./immich
     ./media

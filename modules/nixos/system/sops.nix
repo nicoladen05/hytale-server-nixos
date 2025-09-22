@@ -28,10 +28,16 @@
     sops.secrets."user/nico/password_hash" = {
       neededForUsers = true;
     };
+
     sops.secrets."services/botify/token" = { };
     sops.secrets."wireguard/privkey" = {
       mode = "0640";
     };
+
     sops.secrets."cloudflare/api_token" = { };
+
+    sops.secrets."restic/password" = { };
+    sops.secrets."restic/environment" = { };
+    sops.secrets."restic/repository" = { };
   };
 }
