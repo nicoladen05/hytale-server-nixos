@@ -83,6 +83,8 @@ in
 
       ocis.enable = true;
 
+      n8n.enable = true;
+
       wireguard = {
         enable = true;
         ips = [
