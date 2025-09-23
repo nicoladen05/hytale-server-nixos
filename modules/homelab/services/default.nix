@@ -5,12 +5,13 @@
     ./caddy.nix
     ./ddns.nix
 
+    ./backup
     ./blocky
     ./botify
-    ./backup
     ./homeassistant
     ./immich
     ./media
+    ./n8n
     ./ocis
     ./pihole
     ./vaultwarden
