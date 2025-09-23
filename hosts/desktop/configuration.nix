@@ -87,7 +87,7 @@ in
     # Colors
     stylix = {
       enable = true;
-      colorScheme = "gruvbox-dark-hard";
+      colorScheme = "gruvbox-material-dark-hard";
       wallpaper = "https://images.unsplash.com/photo-1580111116173-171ccf58fe3d?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=jonas-denil-_PKzBUfuhgg-unsplash.jpg";
       wallpaperHash = "sha256-1lSVmc3CI2G0F7y7iwjszP3bFgtYb1h5VfAl8bUVJQo=";
     };
