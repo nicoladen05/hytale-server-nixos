@@ -27,6 +27,7 @@
       ".ssh"
 
       "docs"
+      "dev"
        
       ".config/discord"
       ".config/spotify"
