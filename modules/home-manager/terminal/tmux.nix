@@ -5,24 +5,31 @@
   ...
 }:
 
-# let
-#   minimal-tmux-status = pkgs.tmuxPlugins.mkTmuxPlugin {
-#       pluginName = "minimal-tmux-status";
-#       version = "v1.0.0";
-#       src = pkgs.fetchFromGitHub {
-#         owner = "niksingh710";
-#         repo = "minimal-tmux-status";
-#         rev = "d7188c1aeb1c7dd03230982445b7360f5e230131";
-#         sha256 = "JtbuSxWFR94HiUdQL9uIm2V/kwGz0gbVbqvYWmEncbc=";
-#       };
-#     };
-# in
+let
+  tmuxSessionizer = pkgs.fetchFromGitHub {
+    owner = "ThePrimeagen";
+    repo = "tmux-sessionizer";
+    rev = "7edf8211e36368c29ffc0d2c6d5d2d350b4d729b";
+    sha256 = "sha256-4QGlq/cLbed7AZhQ3R1yH+44gmgp9gSzbiQft8X5NwU=";
+  };
+in
 {
   options = {
     home-manager.tmux.enable = lib.mkEnableOption "enable tmux";
   };
 
   config = lib.mkIf config.home-manager.tmux.enable {
+    home.packages = with pkgs; [
+      fzf
+      (writeShellScriptBin "tmux-sessionizer" ''
+        exec ${tmuxSessionizer}/tmux-sessionizer "$@"
+      '')
+    ];
+
+    home.file.".config/tmux-sessionizer/tmux-sessionizer.conf".text = ''
+      TS_EXTRA_SEARCH_PATHS=(~/.config/:1 ~/dev:1 ~/docs:2)
+    '';
+
     stylix.targets.tmux.enable = false;
 
     programs.tmux = {
@@ -44,10 +51,8 @@
       ];
 
       extraConfig = ''
-        set -g default-terminal "xterm-256color"
-        set -ga terminal-overrides ",*256col*:Tc"
-        set -ga terminal-overrides ",xterm-256color:Tc"
-        set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+        set -g default-terminal "tmux-256color"
+        set -as terminal-overrides ",alacritty*:Tc"
         set-environment -g COLORTERM "truecolor"
 
         set -g status-position top

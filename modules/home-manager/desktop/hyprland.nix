@@ -167,7 +167,7 @@ in
           {
             time = "20:00";
             temperature = 3000;
-            gamma = 0.6;
+            gamma = 0.7;
           }
         ];
       };

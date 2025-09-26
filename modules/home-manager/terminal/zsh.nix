@@ -32,6 +32,10 @@
         rb = "sudo nixos-rebuild switch --flake ~/.config/nixos/#default";
         rt = "sudo nixos-rebuild test --flake ~/.config/nixos/#default";
       };
+
+      initContent = ''
+        bindkey -s ^f "tmux-sessionizer\n"
+      '';
     };
 
     programs.zoxide = {
