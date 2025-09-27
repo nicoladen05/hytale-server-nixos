@@ -35,6 +35,7 @@
 
       initContent = ''
         bindkey -s ^f "tmux-sessionizer\n"
+        bindkey -s ^e "nvim \$\(find . | fzf\)\n"
       '';
     };
 
