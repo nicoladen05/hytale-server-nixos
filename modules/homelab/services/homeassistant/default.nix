@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, network, ... }:
 
 let
   cfg = config.homelab.services.homeassistant;
@@ -17,11 +17,29 @@ in
         type = lib.types.path;
         default = "${config.homelab.configDir}/hass";
       };
+
+      esphomeConfigDir = lib.mkOption {
+        type = lib.types.path;
+        default = "${config.homelab.configDir}/esphome";
+      };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.tmpfiles.rules = [ "d ${cfg.configDir} 0775 nico users -" ];
+    systemd.tmpfiles.rules = [ 
+      "d ${cfg.configDir} 0775 nico users -" 
+      "d ${cfg.esphomeConfigDir} 0775 nico users -" 
+    ];
+
+    # ESPHome
+    # programs.nix-ld.enable = true;
+    # services.esphome = {
+    #   enable = true;
+    #   address = "0.0.0.0";
+    #   openFirewall = true;
+    #   allowedDevices = [ "/dev/ttyUSB0" ];
+    #   usePing = true;
+    # };
 
     virtualisation.containers.enable = true;
     virtualisation.oci-containers.backend = "podman";
@@ -42,9 +60,29 @@ in
       environment = {
         TZ = config.system.timeZone;
       };
-      extraOptions = [ "--network=host" ];
+      extraOptions = [ 
+        "--network=host"
+        "--dns=${network.clients.router.ip}"
+      ];
     };
 
-    networking.firewall.allowedTCPPorts = [ 8123 ];
+    virtualisation.oci-containers.containers."esphome" = {
+      image = "ghcr.io/esphome/esphome:latest";
+      autoStart = true;
+      privileged = true;
+      volumes = [
+        "${builtins.toString cfg.esphomeConfigDir}:/config"
+      ];
+      environment = {
+        TZ = config.system.timeZone;
+        ESPHOME_DASHBOARD_USE_PING = "true";
+      };
+      extraOptions = [ 
+        "--network=host"
+        "--dns=${network.clients.router.ip}"
+      ];
+    };
+
+    networking.firewall.allowedTCPPorts = [ 8123 6052 ];
   };
 }
