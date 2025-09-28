@@ -9,7 +9,6 @@
   ];
 
   networking.hostName = "travelrouter";
-  boot.loader.raspberryPi.bootloader = "kernelboot";
 
   users.users."nico" = {
     isNormalUser = true;
