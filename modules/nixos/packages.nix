@@ -94,10 +94,7 @@
         ]
         ++ lib.optionals config.packages.coding.enable [
           python3
-          nodejs_22
-          pnpm
-          cargo
-          runc
+          typst
         ]
         ++ lib.optionals config.packages.productivity.enable [
           obsidian

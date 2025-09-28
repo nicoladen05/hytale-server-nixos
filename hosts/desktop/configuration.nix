@@ -73,7 +73,7 @@ in
   packages = {
     enable = true;
     terminal.enable = true;
-    # coding.enable = true;
+    coding.enable = true;
     desktop.enable = true;
     gaming.enable = true;
     productivity.enable = true;
