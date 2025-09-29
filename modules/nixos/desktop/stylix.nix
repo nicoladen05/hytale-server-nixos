@@ -34,7 +34,9 @@
       transparentBackground = true;
     };
 
-    stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.desktop.stylix.colorScheme}.yaml";
+    stylix.polarity = "dark";
+
+    # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.desktop.stylix.colorScheme}.yaml";
 
     # stylix.base16Scheme = {
     #   base00 = "151515";
@@ -60,9 +62,13 @@
       sha256 = "${config.desktop.stylix.wallpaperHash}}";
     };
 
-    stylix.cursor.package = pkgs.banana-cursor;
-    stylix.cursor.name = "Banana";
-    stylix.cursor.size = 48;
+    # stylix.cursor.package = pkgs.banana-cursor;
+    # stylix.cursor.name = "Banana";
+    # stylix.cursor.size = 48;
+
+    stylix.cursor.package = pkgs.apple-cursor;
+    stylix.cursor.name = "macOS";
+    stylix.cursor.size = 28;
 
     stylix.opacity = {
       terminal = 1.0;

@@ -213,7 +213,7 @@ in
 
         border_size = 0;
 
-        resize_on_border = false;
+        resize_on_border = true;
 
         allow_tearing = false;
 
@@ -234,13 +234,13 @@ in
 
         shadow = {
           enabled = true;
-          range = 4;
+          range = 20;
           render_power = 3;
-          color = lib.mkForce "rgba(1a1a1aee)";
+          color = lib.mkForce "rgba(111111aa)";
         };
 
         dim_inactive = true;
-        dim_strength = 0.15;
+        dim_strength = 0.1;
       };
 
       animations = {
