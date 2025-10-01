@@ -41,14 +41,12 @@ in
       ];
       environment = {
         TZ = config.system.timeZone;
-        PUID = 1000;
-        PGID = 1000;
+        PUID = "1000";
+        PGID = "1000";
         PROXY_DOMAIN = cfg.url;
       };
       ports = [ "8443:8443" ];
-      extraOptions = [ 
-        "--dns=${network.clients.router.ip}"
-      ];
+      extraOptions = [ "--dns=${network.clients.router.ip}" ];
     };
 
     networking.firewall.allowedTCPPorts = [ 8443 ];

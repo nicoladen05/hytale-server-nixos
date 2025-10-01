@@ -77,6 +77,8 @@ in
         mediaLocation = "/data/immich";
       };
 
+      code-server.enable = true;
+
       homeassistant.enable = true;
 
       vaultwarden.enable = true;
