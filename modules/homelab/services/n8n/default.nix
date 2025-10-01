@@ -16,6 +16,7 @@ in
   config = lib.mkIf cfg.enable {
     services.n8n = {
       enable = true;
+      webhookUrl = "https://${cfg.url}";
     };
 
     services.caddy.virtualHosts."${cfg.url}" = {

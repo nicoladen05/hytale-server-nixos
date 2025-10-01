@@ -8,6 +8,7 @@
     ./backup
     ./blocky
     ./botify
+    ./code-server
     ./homeassistant
     ./immich
     ./media
