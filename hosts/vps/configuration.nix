@@ -42,6 +42,30 @@ in
 
     configDir = "/home/nico/services";
     baseDomain = "nicoladen.dev";
+
+    services = {
+      wireguard = {
+        enable = true;
+        externalInterface = "eth0";
+        ips = [
+          "192.168.255.2/32"
+          "fd3a:6c4f:1b2e::2/128"
+          "2003:e0:17ff:3b42::2/128"
+        ];
+        privateKeyFile = config.sops.secrets."wireguard/privkey".path;
+        peers = {
+          phone = {
+            publicKey = "HUJGJf2uFa8p8EpwQNS5ZKz06qIQOd1uquA8zGkB1Ag=";
+            allowedIPs = ["0.0.0.0/0" "::/128"];
+            endpoint = "ddns.nicoladen.dev:51820";
+          };
+          server = {
+            publicKey = config.sops.secrets."wireguard/pubkey".value;
+            allowedIPs = ["0.0.0.0/0" "::/128"];
+            endpoint = "ddns.nicoladen.dev:51820";
+          };
+        };
+    }
   };
 
   services.caddy.virtualHosts."obsidiansync.nicoladen.dev".extraConfig = ''

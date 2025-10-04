@@ -12,6 +12,10 @@ in
   options = {
     homelab.services.wireguard.enable = lib.mkEnableOption "enable wireguard vpn";
 
+    homelab.services.wireguard.externalInterface = lib.mkOption {
+      type = lib.types.str;
+    }
+
     homelab.services.wireguard.ips = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "IPs and subnets of the server in the tunnel network.";
@@ -34,10 +38,9 @@ in
       type = lib.types.attrsOf (
         lib.types.submodule {
           options = {
-            Name = lib.mkOption { type = lib.types.str; };
-            PublicKey = lib.mkOption { type = lib.types.str; };
-            AllowedIPs = lib.mkOption { type = lib.types.listOf lib.types.str; };
-            Endpoint = lib.mkOption { type = lib.types.listOf lib.types.str; };
+            publicKey = lib.mkOption { type = lib.types.str; };
+            allowedIPs = lib.mkOption { type = lib.types.listOf lib.types.str; };
+            endpoint = lib.mkOption { type = lib.types.listOf lib.types.str; };
           };
         }
       );
@@ -53,7 +56,7 @@ in
       nat = {
         enable = true;
         enableIPv6 = true;
-        externalInterface = "enp1s0";
+        externalInterface = cfg.externalInterface;
         internalInterfaces = [ "wg0" ];
       };
 
@@ -94,13 +97,11 @@ in
           # RouteTable = "main";
         };
 
-        wireguardPeers = [ 
-          {
-            PublicKey = "HUJGJf2uFa8p8EpwQNS5ZKz06qIQOd1uquA8zGkB1Ag=";
-            AllowedIPs = ["0.0.0.0/0" "::/128"];
-            # Endpoint = "ddns.nicoladen.dev:51820";
-          }
-        ];
+        wireguardPeers = lib.mapAttrsToList (_: peer: {
+          PublicKey = peer.publicKey;
+          AllowedIPs = peer.allowedIPs;
+          Endpoint = peer.endpoint;
+        }) cfg.peers;
       };
     };
   };
