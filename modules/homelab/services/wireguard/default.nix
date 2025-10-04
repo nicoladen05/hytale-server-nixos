@@ -40,7 +40,7 @@ in
           options = {
             publicKey = lib.mkOption { type = lib.types.str; };
             allowedIPs = lib.mkOption { type = lib.types.listOf lib.types.str; };
-            endpoint = lib.mkOption { type = lib.types.listOf lib.types.str; };
+            endpoint = lib.mkOption { type = lib.types.str; };
           };
         }
       );
