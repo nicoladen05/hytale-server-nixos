@@ -65,7 +65,8 @@ in
             endpoint = "ddns.nicoladen.dev:51820";
           };
         };
-    }
+      };
+    };
   };
 
   services.caddy.virtualHosts."obsidiansync.nicoladen.dev".extraConfig = ''
