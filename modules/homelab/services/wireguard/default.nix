@@ -14,7 +14,7 @@ in
 
     homelab.services.wireguard.externalInterface = lib.mkOption {
       type = lib.types.str;
-    }
+    };
 
     homelab.services.wireguard.ips = lib.mkOption {
       type = lib.types.listOf lib.types.str;
