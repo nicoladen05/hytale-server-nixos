@@ -138,16 +138,19 @@ in
 
   # Static ip
   networking = {
-    interfaces.eth0.ipv4.addresses = [
-      {
-        address = "10.0.0.68"; # This is the ip from the oracle webinterface
-        prefixLength = 24;
-      }
+    defaultGateway = "10.0.0.1";
+    nameservers = [
+      "8.8.8.8"
     ];
-    defaultGateway = {
-      address = "10.0.0.1";
-      interface = "eth0";
+    interfaces.eth0 = {
+      ipv4.addresses = [
+        {
+          address = "10.0.0.68"; # This is the ip address configured in oracle cloud
+          prefixLength = 24;
+        }
+      ];
+      # For IPv6
+      useDHCP = true;
     };
   };
-
 }
