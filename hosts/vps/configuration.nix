@@ -45,7 +45,7 @@ in
 
     services = {
       wireguard = {
-        enable = true;
+        enable = false;
         externalInterface = "eth0";
         ips = [
           "192.168.255.2/32"
