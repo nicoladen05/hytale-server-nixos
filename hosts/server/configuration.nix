@@ -102,11 +102,6 @@ in
             allowedIPs = ["0.0.0.0/0" "::/128"];
             endpoint = "ddns.nicoladen.dev:51820";
           };
-          vps = {
-            publicKey = config.sops.secrets."wireguard/pubkey".value;
-            allowedIPs = ["0.0.0.0/0" "::/128"];
-            endpoint = "ddns.nicoladen.dev:51820";
-          };
         };
       };
     };
