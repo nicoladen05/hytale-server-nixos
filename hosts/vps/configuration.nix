@@ -65,6 +65,7 @@ in
       vaultwarden.enable = true;
 
       ocis.enable = true;
+      ocis.configDir = "/data/ocis_config";
 
       n8n.enable = true;
         
