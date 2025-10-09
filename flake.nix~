@@ -100,11 +100,9 @@
       nixosConfigurations.travelrouter = inputs.nixos-raspberrypi.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = { inherit network; inherit (inputs) nixos-raspberrypi; };
-        modules = with inputs; [
+        modules = [
           ./hosts/travelrouter/configuration.nix
           nvf.nixosModules.default
-          sops-nix.nixosModules.sops
-          stylix.nixosModules.stylix
         ];
       };
 

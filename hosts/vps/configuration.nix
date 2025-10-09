@@ -20,6 +20,7 @@ in
   # System config
   system = {
     enable = true;
+    sops.enable = true;
 
     inherit userName;
     inherit hostName;
@@ -39,11 +40,34 @@ in
 
   homelab = {
     enable = true;
+    external = true;
 
     configDir = "/home/nico/services";
     baseDomain = "nicoladen.dev";
 
     services = {
+      botify = {
+        enable = false;
+        tokenFile = config.sops.secrets."services/botify/token".path;
+      };
+      
+      ddns = {
+        enable = true;
+        tokenFile = config.sops.secrets."cloudflare/api_token".path;
+      };
+
+      immich = {
+        enable = true;
+        hardwareAcceleration = true;
+        mediaLocation = "/data/immich";
+      };
+      
+      vaultwarden.enable = true;
+
+      ocis.enable = true;
+
+      n8n.enable = true;
+        
       wireguard = {
         enable = false;
         externalInterface = "eth0";

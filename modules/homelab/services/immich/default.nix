@@ -45,7 +45,7 @@ in
       settings.server.externalDomain = "https://${cfg.url}";
     };
 
-    networking.firewall.allowedTCPPorts = [ 2283 ];
+    #networking.firewall.allowedTCPPorts = [ 2283 ];
 
     services.caddy.virtualHosts."${cfg.url}" = {
       extraConfig = ''

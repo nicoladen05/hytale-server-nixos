@@ -44,19 +44,19 @@ in
 
     services = {
       backup = {
-        enable = true;
+        enable = false;
         repositoryFile = config.sops.secrets."restic/repository".path;
         passwordFile = config.sops.secrets."restic/password".path;
         environmentFile = config.sops.secrets."restic/environment".path;
       };
 
       ddns = {
-        enable = true;
+        enable = false;
         tokenFile = config.sops.secrets."cloudflare/api_token".path;
       };
 
       botify = {
-        enable = true;
+        enable = false;
         tokenFile = config.sops.secrets."services/botify/token".path;
       };
 
@@ -102,11 +102,6 @@ in
             allowedIPs = ["0.0.0.0/0" "::/128"];
             endpoint = "ddns.nicoladen.dev:51820";
           };
-          vps = {
-            publicKey = config.sops.secrets."wireguard/pubkey".value;
-            allowedIPs = ["0.0.0.0/0" "::/128"];
-            endpoint = "ddns.nicoladen.dev:51820";
-          };
         };
       };
     };
@@ -131,7 +126,7 @@ in
   users.users.root.hashedPasswordFile = lib.mkForce null;
 
   users.users.nico.openssh.authorizedKeys.keys = [
-    "sssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDXGyUgkeoDxvW+FiwBHqPbtwzvyb5GosDgIaE3uBihImtMZTjEHVKWob8nkMqGqu+ga+axck5F1rwvIDcLufnin3N74D2R6xVa4VwC2DNHThzxoyfDvjxTqvaxAoqnQWLd3IyLKxTgnstdXsOwIgTKtqWcL5g5CvSpsHmxVSQVFlUXpuhM8F8jDr573dpCtBrD7fpkC64Q4hMtWUDch1DLleHLv9Jjf1GYe01sPvrRfzKC5pXnHSXiddOgyzDHnU+MK6vqbETGcrB89ENcFZUveJGON1KfwM9x3JCiP5IVz3Pxam72XKy0eRMUda2ZGgT7EP/KpJA+ESlkT58qf103KDRy71R0IlSi64o2ruoUP271rPoZsc/MUbvssbBvJyolVz6O54uQUs2sJMZMOFIecMeSs/NwxMi2aeNRAHZ3Xik55nULmgWMMLPO04ZBmEl8evssvUfMTqdDaFbJgBj2OEfqHt2ygWKhWmCNzqIgu3upuBidKAnbPfn9ChPWVjiAukNt6ftz4eA3ze0CyeSLTiezELX6I/eyiNx3iRhyc9e7cz1WtLWr6rv7anztQ7oej7WjBBwP0f2XJmngKtG6bZTx/JghDx2qTx4ZKSHkQPkaTFzU5/57bXPTjHA6wEnyzIPHvr7S379TZjl4xnuNyJcr0sLG3nFr66i1CerDvQ== nico@desktop"
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDXGyUgkeoDxvW+FiwBHqPbtwzvyb5GosDgIaE3uBihImtMZTjEHVKWob8nkMqGqu+ga+axck5F1rwvIDcLufnin3N74D2R6xVa4VwC2DNHThzxoyfDvjxTqvaxAoqnQWLd3IyLKxTgnstdXsOwIgTKtqWcL5g5CvSpsHmxVSQVFlUXpuhM8F8jDr573dpCtBrD7fpkC64Q4hMtWUDch1DLleHLv9Jjf1GYe01sPvrRfzKC5pXnHSXiddOgyzDHnU+MK6vqbETGcrB89ENcFZUveJGON1KfwM9x3JCiP5IVz3Pxam72XKy0eRMUda2ZGgT7EP/KpJA+ESlkT58qf103KDRy71R0IlSi64o2ruoUP271rPoZsc/MUbvssbBvJyolVz6O54uQUs2sJMZMOFIecMeSs/NwxMi2aeNRAHZ3Xik55nULmgWMMLPO04ZBmEl8evssvUfMTqdDaFbJgBj2OEfqHt2ygWKhWmCNzqIgu3upuBidKAnbPfn9ChPWVjiAukNt6ftz4eA3ze0CyeSLTiezELX6I/eyiNx3iRhyc9e7cz1WtLWr6rv7anztQ7oej7WjBBwP0f2XJmngKtG6bZTx/JghDx2qTx4ZKSHkQPkaTFzU5/57bXPTjHA6wEnyzIPHvr7S379TZjl4xnuNyJcr0sLG3nFr66i1CerDvQ== nico@desktop"
   ];
   nix.settings.trusted-users = [ userName ];
 

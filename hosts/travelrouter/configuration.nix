@@ -1,19 +1,32 @@
-{ nixos-raspberrypi, config, ... }:
+{ nixos-raspberrypi, config, pkgs, ... }:
 
+let
+  userName = "nico";
+  hostName = "travelrouter";
+in
 {
   imports = with nixos-raspberrypi.nixosModules; [
     raspberry-pi-5.base
     raspberry-pi-5.bluetooth
     raspberry-pi-5.bluetooth
     sd-image
+    
+    ../../modules/nixos
   ];
+  
+  system = {
+    enable = true;
+    sops.enable = true;
+    boot.systemdBoot = false;
 
-  networking.hostName = "travelrouter";
+    inherit userName;
+    inherit hostName;
+    password = {
+      enable = true;
+      hashedPasswordFile = config.sops.secrets."user/nico/password_hash".path;
+    };
 
-  users.users."nico" = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    hashedPassword = "$6$FdDJt3LLc3Iu0r14$DKRv42b0IsqkW6OFkWr0WnUoxMPPaFUnSZgBFJKfR4elFeGRU3NfhP1rXbWd.b9073ZucRQrFto130F3eBVjj0";
+    passwordlessRebuild = true;
   };
 
   services.openssh = {

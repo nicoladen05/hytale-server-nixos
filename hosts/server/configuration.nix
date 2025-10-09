@@ -44,19 +44,19 @@ in
 
     services = {
       backup = {
-        enable = true;
+        enable = false;
         repositoryFile = config.sops.secrets."restic/repository".path;
         passwordFile = config.sops.secrets."restic/password".path;
         environmentFile = config.sops.secrets."restic/environment".path;
       };
 
       ddns = {
-        enable = true;
+        enable = false;
         tokenFile = config.sops.secrets."cloudflare/api_token".path;
       };
 
       botify = {
-        enable = true;
+        enable = false;
         tokenFile = config.sops.secrets."services/botify/token".path;
       };
 
@@ -79,13 +79,13 @@ in
 
       code-server.enable = true;
 
-      homeassistant.enable = true;
+      homeassistant.enable = false;
 
       vaultwarden.enable = true;
 
-      ocis.enable = true;
+      ocis.enable = false;
 
-      n8n.enable = true;
+      n8n.enable = false;
 
       wireguard = {
         enable = true;
