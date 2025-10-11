@@ -16,7 +16,7 @@
 
   boot.initrd.postResumeCommands = lib.mkAfter ''
     mkdir /btrfs_tmp
-    mount /dev/disk/by-uuid/99320d6a-b249-4b97-8e96-16e3426b9439 /btrfs_tmp
+    mount /dev/disk/by-uuid/71925944-7d4a-4c0d-b886-4f9fe8d6c181 /btrfs_tmp
     if [[ -e /btrfs_tmp/root ]]; then
         mkdir -p /btrfs_tmp/old_roots
         timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
@@ -40,26 +40,26 @@
   '';
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/99320d6a-b249-4b97-8e96-16e3426b9439";
+    { device = "/dev/disk/by-uuid/71925944-7d4a-4c0d-b886-4f9fe8d6c181";
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
 
   fileSystems."/persistent" =
-    { device = "/dev/disk/by-uuid/99320d6a-b249-4b97-8e96-16e3426b9439";
+    { device = "/dev/disk/by-uuid/71925944-7d4a-4c0d-b886-4f9fe8d6c181";
       fsType = "btrfs";
       neededForBoot = true;
       options = [ "subvol=persistent" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/99320d6a-b249-4b97-8e96-16e3426b9439";
+    { device = "/dev/disk/by-uuid/71925944-7d4a-4c0d-b886-4f9fe8d6c181";
       fsType = "btrfs";
       options = [ "subvol=nix" ];
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/8CA3-5228";
+  fileSystems."/boot/esp" =
+    { device = "/dev/disk/by-uuid/2205-A5C3";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };

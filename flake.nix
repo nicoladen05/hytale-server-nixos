@@ -108,6 +108,17 @@
         ];
       };
 
+      # HomeManager Configurations
+      homeConfigurations.nico = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgs;
+        extraSpecialArgs = { inherit inputs; };
+        modules = with inputs; [
+          ./home/nico.nix
+          stylix.homeModules.stylix
+          nvf.homeManagerModules.default
+        ];
+      };
+
       # Packages
       packages."x86_64-linux".pycord = pkgs.callPackage ./packages/pycord.nix { };
       packages."x86_64-linux".wavelink = pkgs.callPackage ./packages/wavelink.nix { };
