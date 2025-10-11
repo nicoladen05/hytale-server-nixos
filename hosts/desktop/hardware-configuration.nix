@@ -13,6 +13,7 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.efi.efiSysMountPoint = "/boot/esp";
 
   boot.initrd.postResumeCommands = lib.mkAfter ''
     mkdir /btrfs_tmp
