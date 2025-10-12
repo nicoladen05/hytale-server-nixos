@@ -211,7 +211,7 @@ in
         gaps_in = 6;
         gaps_out = 16;
 
-        border_size = 0;
+        border_size = 1;
 
         resize_on_border = true;
 
@@ -234,13 +234,11 @@ in
 
         shadow = {
           enabled = true;
-          range = 20;
+          range = 4;
           render_power = 3;
-          color = lib.mkForce "rgba(111111aa)";
+          color = lib.mkForce "0xee1a1a1a";
         };
 
-        dim_inactive = true;
-        dim_strength = 0.1;
       };
 
       animations = {

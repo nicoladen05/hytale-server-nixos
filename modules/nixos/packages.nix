@@ -123,5 +123,6 @@
     ];
 
     programs.zsh.enable = lib.mkIf config.packages.terminal.enable true;
+    programs.winboat.enable = lib.mkIf config.packages.desktop.enable true;
   };
 }

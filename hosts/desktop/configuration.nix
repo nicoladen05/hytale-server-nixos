@@ -88,9 +88,9 @@ in
     # Colors
     stylix = {
       enable = true;
-      colorScheme = "gruvbox-material-dark-hard";
-      wallpaper = "https://images.unsplash.com/photo-1583144568008-76743354fa5a?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=parco-chan-BeNerxxCKLU-unsplash.jpg";
-      wallpaperHash = "sha256-PSjwaqIR6G9wPDqfarEUDRUHwZa41ubomCDzn+WGRDw=";
+      colorScheme = "catppuccin-mocha";
+      wallpaper = "https://misc-assets.raycast.com/wallpapers/moonrise.png";
+      wallpaperHash = "sha256-MTLCyBgyY7JXjyE0oInKaCMeP8/zOuFhcsCv1R3TY/c=";
     };
   };
 

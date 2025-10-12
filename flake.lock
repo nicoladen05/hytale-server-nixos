@@ -15,15 +15,15 @@
         "sf-pro": "sf-pro"
       },
       "locked": {
-        "lastModified": 1758038670,
+        "lastModified": 1758228441,
         "narHash": "sha256-3mA9oFuhJ1EHyhPd17g/EuJi4jDYPGhyxkEitdh3Kmc=",
-        "owner": "momo-p",
+        "owner": "Lyndeno",
         "repo": "apple-fonts.nix",
-        "rev": "6e93b85b563e00c828bff27fc6bb7ed3ed9efab8",
+        "rev": "aba9944f6606a69ebedf7bfb723316139eec3f72",
         "type": "github"
       },
       "original": {
-        "owner": "momo-p",
+        "owner": "Lyndeno",
         "repo": "apple-fonts.nix",
         "type": "github"
       }
@@ -603,7 +603,8 @@
         "nur": "nur",
         "nvf": "nvf",
         "sops-nix": "sops-nix",
-        "stylix": "stylix"
+        "stylix": "stylix",
+        "winboat": "winboat"
       }
     },
     "sf-arabic": {
@@ -881,6 +882,26 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "winboat": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1760183562,
+        "narHash": "sha256-lauscAI61WXjLTuGiRDMUAEeTqvOTSWhRoHDaor5sfE=",
+        "owner": "TibixDev",
+        "repo": "winboat",
+        "rev": "ae60de6c2cba7a2001fef1027d5c2e06614e6904",
+        "type": "github"
+      },
+      "original": {
+        "owner": "TibixDev",
+        "repo": "winboat",
         "type": "github"
       }
     }

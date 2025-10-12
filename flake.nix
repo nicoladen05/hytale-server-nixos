@@ -41,13 +41,17 @@
     };
 
     apple-fonts = {
-      # url = "github:Lyndeno/apple-fonts.nix";
-      url = "github:momo-p/apple-fonts.nix";
+      url = "github:Lyndeno/apple-fonts.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nvf = {
       url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    winboat = {
+      url = "github:TibixDev/winboat";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

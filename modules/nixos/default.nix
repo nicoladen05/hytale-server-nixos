@@ -6,6 +6,7 @@
     ./gaming
     ./system
     ./nvf
+    ./programs
 
     ./packages.nix
   ];

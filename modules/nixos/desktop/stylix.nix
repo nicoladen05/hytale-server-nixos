@@ -34,9 +34,9 @@
       transparentBackground = true;
     };
 
-    stylix.polarity = "dark";
+    # stylix.polarity = "dark";
 
-    # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.desktop.stylix.colorScheme}.yaml";
+    stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.desktop.stylix.colorScheme}.yaml";
 
     # stylix.base16Scheme = {
     #   base00 = "151515";
