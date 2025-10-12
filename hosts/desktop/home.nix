@@ -7,6 +7,7 @@
 {
   imports = [
     inputs.impermanence.homeManagerModules.impermanence
+    inputs.vicinae.homeManagerModules.default
     ../../modules/home-manager
   ];
 

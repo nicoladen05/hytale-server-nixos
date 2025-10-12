@@ -13,6 +13,7 @@ in
     ./mako.nix
     ./rofi.nix
     ./waybar.nix
+    ./vicinae.nix
   ];
 
   options = {
@@ -72,6 +73,7 @@ in
   config = lib.mkIf config.home-manager.hyprland.enable {
     home-manager.mako.enable = true;
     home-manager.rofi.enable = true;
+    home-manager.vicinae.enable = true;
     home-manager.waybar.enable = true;
 
     gtk.enable = true;
@@ -221,7 +223,7 @@ in
       };
 
       decoration = {
-        rounding = 12;
+        rounding = 10;
         rounding_power = 4;
 
         blur = {
@@ -323,6 +325,7 @@ in
         "$mainMod, E, exec, $fileManager"
         "$mainMod SHIFT, Space, togglefloating,"
         "$mainMod, Space, exec, $menu"
+        "ALT, Space, exec, vicinae toggle"
         "$mainMod, P, pseudo, # dwindle"
         "$mainMod, J, togglesplit, # dwindle"
 
@@ -398,9 +401,9 @@ in
         "$mainMod, B, exec, pgrep waybar && pkill waybar || waybar &"
 
         # Screenshots
-        "$mainMod, code:127, exec, hyprshot -m region"
-        "$mainMod SHIFT, code:127, exec, hyprshot -m output -m active"
-        "$mainMod CTRL, code:127, exec, hyprshot -m window -m active"
+        "CTRL SHIFT, 3, exec, hyprshot -m output -m active"
+        "CTRL SHIFT, 4, exec, hyprshot -m region"
+        "CTRL SHIFT, 5, exec, hyprshot -m window -m active"
 
         "$mainMod, Escape, exec, rofi-power-menu"
 

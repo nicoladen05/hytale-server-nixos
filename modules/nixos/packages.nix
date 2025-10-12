@@ -84,13 +84,14 @@
           spotify
           spotify-player
 
-          vivaldi
-
           poppler
           ueberzugpp
 
           pavucontrol
           pamixer
+
+          sxiv
+          mpv
         ]
         ++ lib.optionals config.packages.coding.enable [
           python3
@@ -98,7 +99,6 @@
         ]
         ++ lib.optionals config.packages.productivity.enable [
           obsidian
-          nextcloud-client
           anki
         ]
         ++ lib.optionals config.packages.kde.enable [

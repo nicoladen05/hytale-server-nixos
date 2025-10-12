@@ -89,8 +89,8 @@ in
     stylix = {
       enable = true;
       colorScheme = "catppuccin-mocha";
-      wallpaper = "https://misc-assets.raycast.com/wallpapers/moonrise.png";
-      wallpaperHash = "sha256-MTLCyBgyY7JXjyE0oInKaCMeP8/zOuFhcsCv1R3TY/c=";
+      wallpaper = "https://misc-assets.raycast.com/wallpapers/blue_distortion_2.heic";
+      wallpaperHash = "sha256-5UtlRojlZ7FAg0jJWS1FxBPVX3zisirfudip2u1tYDU=";
     };
   };
 
