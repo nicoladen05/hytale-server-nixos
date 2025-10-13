@@ -188,7 +188,7 @@ in
         (lib.forEach config.home-manager.hyprland.displays (
           display:
           let
-            vrrStr = if display.vrr then ", vrr, 1" else "";
+            vrrStr = if display.vrr then ", vrr, 2" else "";
             transformStr = if display.rotate != null then ", transform, ${toString display.rotate}" else "";
           in
           "${display.display}, ${display.resolution}@${toString display.refreshRate}, ${display.offset}, ${display.scale}${vrrStr}${transformStr}"

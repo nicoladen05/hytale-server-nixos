@@ -57,8 +57,6 @@
           primary = true;
           resolution = "2560x1440";
           refreshRate = 165;
-          vrr = false;
-          scale = "1.25";
         }
         {
           display = "HDMI-A-2";
@@ -66,6 +64,7 @@
           offset = "-1080x0";
           refreshRate = 75;
           rotate = 3;
+          vrr = true;
         }
       ];
     };

@@ -83,6 +83,7 @@ in
           "custom/weather"
         ];
         modules-right = [
+          "privacy"
           "tray"
           "gamemode"
           "network"
@@ -246,7 +247,7 @@ in
       #workspaces button:hover {
         box-shadow: none;
         text-shadow: inherit;
-        color: @base07;
+        color: @base06;
         background-color: @base03;
       }
 
@@ -284,12 +285,18 @@ in
       #memory,
       #gamemode,
       #custom-pomodoro,
+      #privacy,
       #tray {
         border-radius: 8px;
         margin: 6px 3px;
         padding: 8px 12px;
         background-color: @base02;
-        color: @base07;
+        color: @base06;
+      }
+
+      #privacy {
+        background-color: @base09;
+        color: @base02;
       }
 
       tooltip {

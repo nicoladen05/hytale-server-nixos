@@ -89,8 +89,8 @@ in
     stylix = {
       enable = true;
       colorScheme = "catppuccin-mocha";
-      wallpaper = "https://misc-assets.raycast.com/wallpapers/blue_distortion_2.heic";
-      wallpaperHash = "sha256-5UtlRojlZ7FAg0jJWS1FxBPVX3zisirfudip2u1tYDU=";
+      wallpaper = "https://raw.githubusercontent.com/orangci/walls-catppuccin-mocha/master/keyboard.png";
+      wallpaperHash = "sha256-IUkujJbnij/Xa79oCo+92dKcpEOpsF2pBPIvLB1+OWQ=";
     };
   };
 
