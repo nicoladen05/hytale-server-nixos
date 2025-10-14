@@ -6,7 +6,6 @@
 }:
 {
   imports = [
-    inputs.impermanence.homeManagerModules.impermanence
     inputs.vicinae.homeManagerModules.default
     ../../modules/home-manager
   ];
@@ -18,27 +17,6 @@
         file_manager = "${pkgs.pcmanfm}/bin/pcmanfm";
       };
     };
-  };
-
-  home.persistence."/persistent/home/nico" = {
-    allowOther = true;
-    directories = [
-      ".config/nixos"
-      ".config/sops"
-      ".ssh"
-
-      "docs"
-      "dev"
-       
-      ".config/discord"
-      ".config/spotify"
-      ".cache/spotify"
-      ".local/share/PrismLauncher"
-      ".librewolf"
-    ];
-    files = [
-      ".zsh_history"
-    ];
   };
 
   home-manager = {

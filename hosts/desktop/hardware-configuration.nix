@@ -43,20 +43,26 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/71925944-7d4a-4c0d-b886-4f9fe8d6c181";
       fsType = "btrfs";
-      options = [ "subvol=root" ];
+      options = [ "subvol=root" "noatime" "ssd" ];
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/71925944-7d4a-4c0d-b886-4f9fe8d6c181";
+      fsType = "btrfs";
+      options = [ "subvol=home" "compress=zstd" "ssd"];
     };
 
   fileSystems."/persistent" =
     { device = "/dev/disk/by-uuid/71925944-7d4a-4c0d-b886-4f9fe8d6c181";
       fsType = "btrfs";
       neededForBoot = true;
-      options = [ "subvol=persistent" ];
+      options = [ "subvol=persistent" "compress=zstd" "noatime" "ssd" ];
     };
 
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/71925944-7d4a-4c0d-b886-4f9fe8d6c181";
       fsType = "btrfs";
-      options = [ "subvol=nix" ];
+      options = [ "subvol=nix" "compress=zstd" "noatime" "ssd" ];
     };
 
   fileSystems."/boot/esp" =
