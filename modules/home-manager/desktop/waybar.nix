@@ -72,16 +72,17 @@ in
     programs.waybar.settings = {
       mainBar = {
         height = 30;
+        width = 1000;
         position = "top";
 
         output = primaryMonitor;
 
-        modules-left = [ "hyprland/workspaces" ];
-        modules-center = [
+        modules-left = [
           "clock"
           "custom/date"
           "custom/weather"
         ];
+        modules-center = [ "hyprland/workspaces" ];
         modules-right = [
           "privacy"
           "tray"
@@ -203,29 +204,25 @@ in
       }
 
       window#waybar {
-        background-color: rgba(0,0,0,0);
         transition-property: background-color;
         transition-duration: 0.5s;
+        background-color: @base00;
+        margin: 6px 10px 10px 10px;
+        padding: 0px 3px;
+        border-radius: 11;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
       }
 
-      .modules-left #workspaces button {
+      .modules-center #workspaces button {
           border-bottom: none;
       }
-      .modules-left #workspaces button.focused,
-      .modules-left #workspaces button.active {
+      .modules-center #workspaces button.focused,
+      .modules-center #workspaces button.active {
           border-bottom: none;
       }
 
       window#waybar.hidden {
         opacity: 0.5;
-      }
-
-      #workspaces {
-        background-color: @base00;
-        margin: 6px 10px 10px 16px;
-        padding: 0px 3px;
-        border-radius: 11;
-        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
       }
 
       #workspaces button {
@@ -253,22 +250,6 @@ in
 
       #workspaces button.urgent {
         background-color: @base08;
-      }
-
-      .modules-center {
-        background-color: @base00;
-        margin: 6px 10px 10px 10px;
-        padding: 0px 3px;
-        border-radius: 11;
-        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
-      }
-
-      .modules-right {
-        background-color: @base00;
-        margin: 6px 16px 10px 10px;
-        padding: 0px 3px;
-        border-radius: 11;
-        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
       }
 
       #memory,
