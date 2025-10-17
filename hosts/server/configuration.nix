@@ -1,38 +1,38 @@
 {
-    config,
-    lib,
-    network,
-    ...
+  config,
+  lib,
+  network,
+  ...
 }:
 
 let
-    userName = "nico";
-    hostName = "server";
+  userName = "nico";
+  hostName = "server";
 in
 {
   imports = [
-      ./hardware-configuration.nix
-      ./disko.nix
+    ./hardware-configuration.nix
+    ./disko.nix
 
-      ../../modules/nixos
-      ../../modules/homelab
+    ../../modules/nixos
+    ../../modules/homelab
   ];
 
   # System configuration
   system = {
-      enable = true;
-      sops.enable = true;
+    enable = true;
+    sops.enable = true;
 
-      # User account
-      inherit userName;
-      inherit hostName;
-      password = {
-          enable = true;
-          hashedPasswordFile = config.sops.secrets."user/nico/password_hash".path;
-      };
-      passwordlessRebuild = true;
-      ssh.enable = true;
-      tcpPorts = [ 22 ];
+    # User account
+    inherit userName;
+    inherit hostName;
+    password = {
+      enable = true;
+      hashedPasswordFile = config.sops.secrets."user/nico/password_hash".path;
+    };
+    passwordlessRebuild = true;
+    ssh.enable = true;
+    tcpPorts = [ 22 ];
   };
 
   # Homelab
@@ -61,12 +61,15 @@ in
       };
 
       blocky = {
-        enable = true;
+        enable = false;
         settings = {
           blockLists = (import ../../configs/network/blocklists.nix);
           clients = lib.mapAttrs (_: c: [ c.ip ]) (import ../../configs/network/clients.nix);
           blockGroups = {
-            default = [ "ads" "security" ];
+            default = [
+              "ads"
+              "security"
+            ];
           };
         };
       };
@@ -77,9 +80,9 @@ in
         mediaLocation = "/data/immich";
       };
 
-      code-server.enable = true;
+      code-server.enable = false;
 
-      homeassistant.enable = false;
+      homeassistant.enable = true;
 
       vaultwarden.enable = true;
 
@@ -99,7 +102,10 @@ in
         peers = {
           phone = {
             publicKey = "HUJGJf2uFa8p8EpwQNS5ZKz06qIQOd1uquA8zGkB1Ag=";
-            allowedIPs = ["0.0.0.0/0" "::/128"];
+            allowedIPs = [
+              "0.0.0.0/0"
+              "::/128"
+            ];
             endpoint = "ddns.nicoladen.dev:51820";
           };
         };
