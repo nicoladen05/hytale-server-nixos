@@ -19,9 +19,15 @@
 
   # NVF
   nvf.enable = true;
+
   programs.nvf.settings.vim.theme = {
     enable = true;
     name = "catppuccin";
     style = "mocha";
+  };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 }
