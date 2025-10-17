@@ -53,6 +53,7 @@ in
       extraConfig = ''
         set -g default-terminal "tmux-256color"
         set -as terminal-overrides ",alacritty*:Tc"
+        set -as terminal-overrides ",xterm-256color*:Tc"
         set-environment -g COLORTERM "truecolor"
 
         set -g status-position top

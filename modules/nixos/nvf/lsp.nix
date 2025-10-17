@@ -18,18 +18,12 @@
           hover = "K";
           openDiagnosticFloat = "gi";
         };
-      };
 
-      languages = {
-        enableTreesitter = true;
-        enableFormat = true;
+        servers = {
+          python.cmd = [ "${pkgs.pyright}/bin/pyright" ];
 
-        nix = {
-          enable = true;
-          lsp = { 
-            enable = true;
-            package = pkgs.nixd;
-            server = "nixd";
+          nix = {
+            cmd = [ "${pkgs.nixd}/bin/nixd" ];
             options = {
               nixos = {
                 expr = "(builtins.getFlake \"github:nicoladen05/nix\").nixosConfigurations.desktop.options";
@@ -39,6 +33,19 @@
               };
             };
           };
+        };
+      };
+
+      languages = {
+        enableTreesitter = true;
+        enableFormat = true;
+
+        nix = {
+          enable = true;
+          lsp = {
+            enable = true;
+            server = "nixd";
+          };
           treesitter.enable = true;
           format.enable = false;
           format.package = pkgs.alejandra;
@@ -47,7 +54,6 @@
         python = {
           enable = true;
           lsp.enable = true;
-          lsp.package = pkgs.pyright;
           lsp.server = "pyright";
           format.enable = true;
           format.type = "black-and-isort";

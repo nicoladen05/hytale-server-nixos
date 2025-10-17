@@ -17,7 +17,7 @@
 
   config = lib.mkIf config.nvf.enable {
     # Set $EDITOR as nvim
-    environment.sessionVariables = {
+    home.sessionVariables = {
       EDITOR = "nvim";
     };
 
@@ -27,7 +27,7 @@
         vim = {
           options = {
             undofile = true;
-            undodir = "/home/${config.system.userName}/.cache";
+            undodir = "/tmp/nvim-undo";
 
             autoindent = true;
             expandtab = true;

@@ -1,6 +1,7 @@
 {
-  lib,
   config,
+  lib,
+  pkgs,
   ...
 }:
 {
@@ -9,6 +10,11 @@
   };
 
   config = lib.mkIf config.home-manager.zsh.enable {
+    home.packages = with pkgs; [
+      eza
+      lazygit
+    ];
+
     programs.zsh = {
       enable = true;
       enableCompletion = true;
@@ -35,7 +41,7 @@
 
       initContent = ''
         bindkey -s ^f "tmux-sessionizer\n"
-        bindkey -s ^e "nvim \$\(find . | fzf\)\n"
+        bindkey -s ^o "nvim \$\(find . | fzf\)\n"
       '';
     };
 

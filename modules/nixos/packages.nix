@@ -4,7 +4,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   options = {
     packages.enable = lib.mkEnableOption "enable basic packages";
 
@@ -47,7 +48,8 @@
 
   config = lib.mkIf config.packages.enable {
     # Essentials
-    environment.systemPackages = with pkgs;
+    environment.systemPackages =
+      with pkgs;
       [
         git
         killall
@@ -57,8 +59,6 @@
         deploy-rs
       ]
       ++ lib.optionals config.packages.terminal.enable [
-        lazygit
-        eza
         neovim
         sops
       ]
@@ -73,7 +73,8 @@
       ];
 
     users.users."${config.system.userName}" = {
-      packages = with pkgs;
+      packages =
+        with pkgs;
         [
           git-crypt
           fontconfig

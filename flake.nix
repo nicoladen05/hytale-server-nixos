@@ -46,7 +46,7 @@
     };
 
     nvf = {
-      url = "github:notashelf/nvf";
+      url = "github:notashelf/nvf/v0.8";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -61,7 +61,8 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs =
+    { self, nixpkgs, ... }@inputs:
     let
       pkgs = import nixpkgs { system = "x86_64-linux"; };
       network = import ./configs/network;
@@ -108,7 +109,10 @@
 
       nixosConfigurations.travelrouter = inputs.nixos-raspberrypi.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = { inherit network; inherit (inputs) nixos-raspberrypi; };
+        specialArgs = {
+          inherit network;
+          inherit (inputs) nixos-raspberrypi;
+        };
         modules = with inputs; [
           ./hosts/travelrouter/configuration.nix
           nvf.nixosModules.default
@@ -120,18 +124,23 @@
       # HomeManager Configurations
       homeConfigurations.nico = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs;
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = {
+          inherit inputs;
+          userName = "nico";
+        };
         modules = with inputs; [
           ./home/nico.nix
           stylix.homeModules.stylix
           nvf.homeManagerModules.default
+          vicinae.homeManagerModules.default
         ];
       };
 
       # Packages
       packages."x86_64-linux".pycord = pkgs.callPackage ./packages/pycord.nix { };
       packages."x86_64-linux".wavelink = pkgs.callPackage ./packages/wavelink.nix { };
-      packages."aarch64-linux".travelrouterSdImage = self.nixosConfigurations.travelrouter.config.system.build.sdImage;
+      packages."aarch64-linux".travelrouterSdImage =
+        self.nixosConfigurations.travelrouter.config.system.build.sdImage;
 
       # DeployRS Nodes
       deploy.nodes.vps = {
