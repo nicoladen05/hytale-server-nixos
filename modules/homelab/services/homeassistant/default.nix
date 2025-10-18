@@ -31,15 +31,15 @@ in
       "d ${cfg.esphomeConfigDir} 0775 nico users -" 
     ];
 
-    # ESPHome
-    # programs.nix-ld.enable = true;
-    # services.esphome = {
-    #   enable = true;
-    #   address = "0.0.0.0";
-    #   openFirewall = true;
-    #   allowedDevices = [ "/dev/ttyUSB0" ];
-    #   usePing = true;
-    # };
+    ESPHome
+    programs.nix-ld.enable = true;
+    services.esphome = {
+      enable = true;
+      address = "0.0.0.0";
+      openFirewall = true;
+      allowedDevices = [ "/dev/ttyUSB0" ];
+      usePing = true;
+    };
 
     virtualisation.containers.enable = true;
     virtualisation.oci-containers.backend = "podman";

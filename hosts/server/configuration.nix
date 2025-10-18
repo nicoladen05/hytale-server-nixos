@@ -80,8 +80,6 @@ in
         mediaLocation = "/data/immich";
       };
 
-      code-server.enable = false;
-
       homeassistant.enable = true;
 
       vaultwarden.enable = true;
