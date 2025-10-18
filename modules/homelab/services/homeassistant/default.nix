@@ -1,4 +1,9 @@
-{ lib, config, network, ... }:
+{
+  lib,
+  config,
+  network,
+  ...
+}:
 
 let
   cfg = config.homelab.services.homeassistant;
@@ -26,20 +31,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.tmpfiles.rules = [ 
-      "d ${cfg.configDir} 0775 nico users -" 
-      "d ${cfg.esphomeConfigDir} 0775 nico users -" 
+    systemd.tmpfiles.rules = [
+      "d ${cfg.configDir} 0775 nico users -"
+      "d ${cfg.esphomeConfigDir} 0775 nico users -"
     ];
-
-    ESPHome
-    programs.nix-ld.enable = true;
-    services.esphome = {
-      enable = true;
-      address = "0.0.0.0";
-      openFirewall = true;
-      allowedDevices = [ "/dev/ttyUSB0" ];
-      usePing = true;
-    };
 
     virtualisation.containers.enable = true;
     virtualisation.oci-containers.backend = "podman";
@@ -60,7 +55,7 @@ in
       environment = {
         TZ = config.system.timeZone;
       };
-      extraOptions = [ 
+      extraOptions = [
         "--network=host"
         "--dns=${network.clients.router.ip}"
       ];
@@ -77,12 +72,15 @@ in
         TZ = config.system.timeZone;
         ESPHOME_DASHBOARD_USE_PING = "true";
       };
-      extraOptions = [ 
+      extraOptions = [
         "--network=host"
         "--dns=${network.clients.router.ip}"
       ];
     };
 
-    networking.firewall.allowedTCPPorts = [ 8123 6052 ];
+    networking.firewall.allowedTCPPorts = [
+      8123
+      6052
+    ];
   };
 }
