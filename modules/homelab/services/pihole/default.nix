@@ -53,7 +53,7 @@ in
 
     services.pihole-web = {
       enable = true;
-      ports = [ "8080r" ];
+      ports = [ "8080s" ];
     };
   };
 }
