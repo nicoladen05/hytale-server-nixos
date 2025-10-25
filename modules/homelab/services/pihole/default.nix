@@ -39,7 +39,7 @@ in
         "${network.clients.server.ip}:53:53/udp"
         "${network.clients.server.ip}:53:53/tcp"
         "${network.clients.server.ip}:8080:80/tcp"
-        "${network.clients.server.ip}:8443:443/tcp"
+        "${network.clients.server.ip}:8081:443/tcp"
       ];
       volumes = [
         "${builtins.toString cfg.configDir}:/etc/pihole"
