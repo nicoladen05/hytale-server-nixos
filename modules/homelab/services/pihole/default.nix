@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf cfg.enable {
     systemd.tmpfiles.rules = [
-      "d ${cfg.configDir} 0775 pihole pihole -"
+      "d ${cfg.configDir} 0775 nico users -"
     ];
 
     virtualisation.containers.enable = true;
