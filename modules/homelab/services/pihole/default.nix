@@ -13,6 +13,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    systemd.tmpfiles.rules = [
+      "d ${cfg.configDir} 0775 pihole pihole -"
+    ];
+
     virtualisation.containers.enable = true;
     virtualisation.oci-containers.backend = "podman";
     virtualisation = {
