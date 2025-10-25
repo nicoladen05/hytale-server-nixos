@@ -28,7 +28,7 @@ in
     };
 
     virtualisation.oci-containers.containers."pihole" = {
-      image = "ghcr.io/pihole/pihole:latest";
+      image = "docker.io/pihole/pihole:latest";
       autoStart = true;
       ports = [
         "53:53/udp"
