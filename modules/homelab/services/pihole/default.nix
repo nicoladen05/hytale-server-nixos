@@ -6,54 +6,47 @@ in
 {
   options.homelab.services.pihole = {
     enable = lib.mkEnableOption "Enable Pihole";
-    blockLists = lib.mkOption {
-      type = lib.types.attrsOf (lib.types.listOf lib.types.str);
-      default = {
-        ads = [ "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" ];
-      };
-      description = "List of blocklists to use in Pihole.";
-    };
-    allowLists = lib.mkOption {
-      type = lib.types.attrsOf (lib.types.listOf lib.types.str);
-      default = { };
-      description = "List of allowlists to use in Pihole.";
+    configDir = lib.mkOption {
+      type = lib.types.path;
+      default = "${config.homelab.configDir}/pihole";
     };
   };
 
   config = lib.mkIf cfg.enable {
-    services.pihole-ftl = {
-      enable = true;
-      openFirewallDNS = true;
-      openFirewallWebserver = true;
-
-      lists =
-        lib.flatten (
-          lib.mapAttrsToList (
-            name: list:
-            builtins.map (url: {
-              enabled = true;
-              description = "${name} blocklist";
-              type = "block";
-              url = url;
-            }) list
-          ) cfg.blockLists
-        )
-        ++ lib.flatten (
-          lib.mapAttrsToList (
-            name: list:
-            builtins.map (url: {
-              enabled = true;
-              description = "${name} allowlist";
-              type = "allow";
-              url = url;
-            }) list
-          ) cfg.allowLists
-        );
+    virtualisation.containers.enable = true;
+    virtualisation.oci-containers.backend = "podman";
+    virtualisation = {
+      podman = {
+        enable = true;
+        dockerCompat = true;
+        defaultNetwork.settings.dns_enabled = false;
+      };
     };
 
-    services.pihole-web = {
-      enable = true;
-      ports = [ "8080s" ];
+    virtualisation.oci-containers.containers."pihole" = {
+      image = "ghcr.io/pihole/pihole:latest";
+      autoStart = true;
+      ports = [
+        "53:53/udp"
+        "53:53/tcp"
+        "8080:80/tcp"
+        "8443:443/tcp"
+      ];
+      volumes = [
+        "${builtins.toString cfg.configDir}:/etc/pihole"
+      ];
+      environment = {
+        TZ = config.system.timeZone;
+        FTLCONF_webserver_api_password = "correct horse battery staple";
+        FTLCONF_dns_listeningMode = "all";
+      };
     };
+
+    networking.firewall.allowedTCPPorts = [
+      53
+      8080
+      8443
+    ];
+
   };
 }

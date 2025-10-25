@@ -66,10 +66,7 @@ in
         mediaLocation = "/data/immich";
       };
 
-      pihole = {
-        enable = true;
-        blockLists = network.blocklists;
-      };
+      pihole.enable = true;
 
       homeassistant.enable = true;
 
