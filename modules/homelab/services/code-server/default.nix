@@ -1,4 +1,9 @@
-{ lib, config, network, ... }:
+{
+  lib,
+  config,
+  network,
+  ...
+}:
 
 let
   cfg = config.homelab.services.homeassistant;
@@ -29,7 +34,7 @@ in
       podman = {
         enable = true;
         dockerCompat = true;
-        defaultNetwork.settings.dns_enabled = true;
+        defaultNetwork.settings.dns_enabled = false;
       };
     };
 

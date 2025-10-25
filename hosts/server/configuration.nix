@@ -60,24 +60,15 @@ in
         tokenFile = config.sops.secrets."services/botify/token".path;
       };
 
-      blocky = {
-        enable = false;
-        settings = {
-          blockLists = (import ../../configs/network/blocklists.nix);
-          clients = lib.mapAttrs (_: c: [ c.ip ]) (import ../../configs/network/clients.nix);
-          blockGroups = {
-            default = [
-              "ads"
-              "security"
-            ];
-          };
-        };
-      };
-
       immich = {
         enable = true;
         hardwareAcceleration = true;
         mediaLocation = "/data/immich";
+      };
+
+      pihole = {
+        enable = true;
+        blockLists = network.blocklists;
       };
 
       homeassistant.enable = true;
@@ -112,6 +103,7 @@ in
   };
 
   # Static ip
+  services.resolved.enable = false;
   networking = {
     interfaces.enp1s0.ipv4.addresses = [
       {
@@ -123,6 +115,7 @@ in
       address = "192.168.2.1";
       interface = "enp1s0";
     };
+    resolvconf.enable = true;
   };
 
   # Users
