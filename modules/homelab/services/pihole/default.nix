@@ -36,10 +36,10 @@ in
       image = "docker.io/pihole/pihole:latest";
       autoStart = true;
       ports = [
-        "${network.clients.server}:53:53/udp"
-        "${network.clients.server}:53:53/tcp"
-        "${network.clients.server}:8080:80/tcp"
-        "${network.clients.server}:8443:443/tcp"
+        "${network.clients.server.ip}:53:53/udp"
+        "${network.clients.server.ip}:53:53/tcp"
+        "${network.clients.server.ip}:8080:80/tcp"
+        "${network.clients.server.ip}:8443:443/tcp"
       ];
       volumes = [
         "${builtins.toString cfg.configDir}:/etc/pihole"
