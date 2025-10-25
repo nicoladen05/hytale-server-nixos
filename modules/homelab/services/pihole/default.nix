@@ -1,4 +1,9 @@
-{ lib, config, networking ... }:
+{
+  lib,
+  config,
+  network,
+  ...
+}:
 
 let
   cfg = config.homelab.services.pihole;
