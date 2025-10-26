@@ -142,6 +142,13 @@
       packages."aarch64-linux".travelrouterSdImage =
         self.nixosConfigurations.travelrouter.config.system.build.sdImage;
 
+      # Dev Shells
+      devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShell {
+        packages = [
+          inputs.deploy-rs.packages.x86_64-linux.deploy-rs
+        ];
+      };
+
       # DeployRS Nodes
       deploy.nodes.vps = {
         hostname = "130.61.231.173";
