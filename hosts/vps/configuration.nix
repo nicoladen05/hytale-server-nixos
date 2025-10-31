@@ -1,4 +1,10 @@
-{ modulesPath, config, inputs, pkgs, ... }:
+{
+  modulesPath,
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 
 let
   userName = "nico";
@@ -50,7 +56,7 @@ in
         enable = false;
         tokenFile = config.sops.secrets."services/botify/token".path;
       };
-      
+
       ddns = {
         enable = true;
         tokenFile = config.sops.secrets."cloudflare/api_token".path;
@@ -61,14 +67,14 @@ in
         hardwareAcceleration = true;
         mediaLocation = "/data/immich";
       };
-      
+
       vaultwarden.enable = true;
 
       ocis.enable = true;
       ocis.configDir = "/data/ocis_config";
 
       n8n.enable = true;
-        
+
       wireguard = {
         enable = false;
         externalInterface = "eth0";
@@ -81,12 +87,18 @@ in
         peers = {
           phone = {
             publicKey = "HUJGJf2uFa8p8EpwQNS5ZKz06qIQOd1uquA8zGkB1Ag=";
-            allowedIPs = ["0.0.0.0/0" "::/128"];
+            allowedIPs = [
+              "0.0.0.0/0"
+              "::/128"
+            ];
             endpoint = "ddns.nicoladen.dev:51820";
           };
           server = {
             publicKey = config.sops.secrets."wireguard/pubkey".value;
-            allowedIPs = ["0.0.0.0/0" "::/128"];
+            allowedIPs = [
+              "0.0.0.0/0"
+              "::/128"
+            ];
             endpoint = "ddns.nicoladen.dev:51820";
           };
         };
@@ -152,7 +164,7 @@ in
   services.fail2ban.enable = true;
 
   users.users.nico.openssh.authorizedKeys.keys = [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDXGyUgkeoDxvW+FiwBHqPbtwzvyb5GosDgIaE3uBihImtMZTjEHVKWob8nkMqGqu+ga+axck5F1rwvIDcLufnin3N74D2R6xVa4VwC2DNHThzxoyfDvjxTqvaxAoqnQWLd3IyLKxTgnstdXsOwIgTKtqWcL5g5CvSpsHmxVSQVFlUXpuhM8F8jDr573dpCtBrD7fpkC64Q4hMtWUDch1DLleHLv9Jjf1GYe01sPvrRfzKC5pXnHSXiddOgyzDHnU+MK6vqbETGcrB89ENcFZUveJGON1KfwM9x3JCiP5IVz3Pxam72XKy0eRMUda2ZGgT7EP/KpJA+ESlkT58qf103KDRy71R0IlSi64o2ruoUP271rPoZsc/MUbvssbBvJyolVz6O54uQUs2sJMZMOFIecMeSs/NwxMi2aeNRAHZ3Xik55nULmgWMMLPO04ZBmEl8evssvUfMTqdDaFbJgBj2OEfqHt2ygWKhWmCNzqIgu3upuBidKAnbPfn9ChPWVjiAukNt6ftz4eA3ze0CyeSLTiezELX6I/eyiNx3iRhyc9e7cz1WtLWr6rv7anztQ7oej7WjBBwP0f2XJmngKtG6bZTx/JghDx2qTx4ZKSHkQPkaTFzU5/57bXPTjHA6wEnyzIPHvr7S379TZjl4xnuNyJcr0sLG3nFr66i1CerDvQ== nico@desktop"
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDB6jsD23KsTSZn9sa1tjgUKDvIIH3BDEQVuPUdxvf++liDvIVm9AQfcVv3smYftvdLLwkEHrzt+Qm5En31oQSdbljGBTuIGXQcVMUYn+83rVIke5xwC7F3279pSqsvcS1atqLVRuYwOWb07TIlaHojG4oXyzPTjnszU80nKcTJ9EvlNx0VI5UI/C33A0DaCvJbBzM9Hi7Jpqn76Ln0ZQ+CHOhGBBRZwmXLrEN+VdSItPBGBqsILHQAr0LTQbvfR7hs+cmxRsA19mS/h9UJimkoX1HmIljT6ztJsHy8LqAk93yL1VBd/Jm50uvsasVHtlz/tXR6MsCn5w+0SsZhW8zst+z4Euzb0cjEN0UylUJGNw8nlF9ZjnMbAdidT8yfpqmV01CUBxtO7iqIiERUFS/ayqq+tggGGBMWlGimulX75HowhvmAHi/rCtCq02CN5rzzhgAVcsN3ZnbQiPq38kKBFGFwHnp6RfHcNv6bDwABvbiRgbCtglrzfX5LJY1lZcpUxbAJMa1iyR6zm0EUMK0QfNHdVre5kASCzeLVfmDj0NhIqO93YRScM2GtbOND5YSqECVf+XeL5POOL56wNxdVaWQtUUYbosu+74MDZk9KoWyUAG64DRHjMOMVQ66EiwXHHCB5dpwDgkdxXwxDFSfL8wBPs9ZTxZXW9N2Lu20fdw== nico@desktop"
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC4UI+xzCxmgUgxZVz9JS1VgYHCUpWEroiAcy8sNpiMdHlS3W74wqpcGtdwQOWbFTTjksB/5OWvhfjblgYMvL45H+SSHS/mwu95UD3tcSP7FAUVUyls2enC6+H8ufLM5onY0nF4pv+t4IosB+ulCjcuNity++ClkGCkGu/D0WSG212I93DY+KgqVhaE4pHmO6Lfo6l8H1DvKEHodh2Nd9VNVd4V3WeczELGFvMnQmcZY86L5xnjQSqbJPX6Cil8oawpbHOSjrNy9Cmn6eC4CJ2kTc5aWA05p09WcJzWSov9lyalYkEbog9Cz1T6ceDesHiyCxh3eHhUrDuS/Gan615To3YUREUsPklwNkifyxHiVEeR7kae10n31X1I8S/q+Wh1XRYjtjDUW1oY0CtX+oThfwikTKMyRxaJJN29lOiaWYZHNVL++w66qGiq2E3jirCg2glu9R1IAEsu7Zqwb8zG5AgrhXwcNVlH0Sp1+KeqF1C+iDrYMj6l7x8qpvamWJlzE0lQwEkLZKdwHSzHPtAyl03i357kZIdeOFSSesJ9SMdBV1K1cUDqCVCma2+s83wuUOA1dFohKnxGnWPa7qKAJ9dSwVYRVYJDZFfrYO8gFJXNKBNcOk9o5SM9qaI7b2SpxYkPn7h/grHty0gVd43Punrv0bx2EjV9xGz871xGIQ== nico@work"
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDCFTv0zmG+noCzsfKPg0NMTELnweYw4c1gRJ1mGNLwo9R03fHbYJw7zsZ381XWcAWTEa9gysA4LcVhSj9zON0EcD81sbpSAGBSwt61g1nx2X+v3jScRThPAcgrGxdozgcF7tlYDZqy2z5Tm94j/6AswMN/YL2iUxJPiHZcIaZlzVD4Nv8fVTo8SE1poLJBA9xMovYBvVLruyr6yGm2LPu5b3zN3wrQUxrIIxxmzCEtfCsXL3A6gz5OBIoJ5y5/4SE9WveNGdVEcWIcbz4blcTEL4HrZNxrGvBlo+rHxHgd6CbWL/FK92h/rvJKxBU3qMMswr/P3i02Ycl6lS+gwnS8selL0ZAzO47Xz90EAH/5JqSyv8PY/1N6s2LoNCFDOHyX+Sx0SxN7kyoqlH3bbgR2CPpLxixFPnwG8zXxBH0ZywBh4h5EykzuDyb9I5iUYQMPSBRWoKInCjXxPL4fYulckwtB+Rj/neDZEWeUFLG1N3Y+IdInE4GHJYL1dyEz+z9cImQgbcehdIe8WkNppHF3ixksJouWI3qBwYFWVxKAk/s3lP2N2ld8YY2zq70qINfMmMKw4pVIvcCvesGd1m1mEz6kL5TGgPZMjzJ/trAoi/jBbNUoz+eiSstYhL5UHTCwrL272cpBPybAtSSyqyw2lJptePfZCtvXhRfdYoRozQ== nico@server"
   ];
