@@ -37,7 +37,6 @@
     sops.secrets."cloudflare/api_token" = { };
 
     sops.secrets."restic/password" = { };
-    sops.secrets."restic/environment" = { };
     sops.secrets."restic/repository" = { };
   };
 }

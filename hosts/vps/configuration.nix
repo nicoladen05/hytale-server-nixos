@@ -52,76 +52,24 @@ in
     baseDomain = "nicoladen.dev";
 
     services = {
-      botify = {
-        enable = false;
-        tokenFile = config.sops.secrets."services/botify/token".path;
-      };
-
       ddns = {
         enable = true;
         tokenFile = config.sops.secrets."cloudflare/api_token".path;
+        domains = [
+          "vps.nicoladen.dev"
+          "n8n.nicoladen.dev"
+        ];
       };
-
-      immich = {
-        enable = true;
-        hardwareAcceleration = true;
-        mediaLocation = "/data/immich";
-      };
-
-      vaultwarden.enable = true;
-
-      ocis.enable = true;
-      ocis.configDir = "/data/ocis_config";
 
       n8n.enable = true;
-
-      wireguard = {
-        enable = false;
-        externalInterface = "eth0";
-        ips = [
-          "192.168.255.2/32"
-          "fd3a:6c4f:1b2e::2/128"
-          "2003:e0:17ff:3b42::2/128"
-        ];
-        privateKeyFile = config.sops.secrets."wireguard/privkey".path;
-        peers = {
-          phone = {
-            publicKey = "HUJGJf2uFa8p8EpwQNS5ZKz06qIQOd1uquA8zGkB1Ag=";
-            allowedIPs = [
-              "0.0.0.0/0"
-              "::/128"
-            ];
-            endpoint = "ddns.nicoladen.dev:51820";
-          };
-          server = {
-            publicKey = config.sops.secrets."wireguard/pubkey".value;
-            allowedIPs = [
-              "0.0.0.0/0"
-              "::/128"
-            ];
-            endpoint = "ddns.nicoladen.dev:51820";
-          };
-        };
-      };
     };
   };
-
-  services.caddy.virtualHosts."obsidiansync.nicoladen.dev".extraConfig = ''
-    reverse_proxy 127.0.0.1:5984
-  '';
 
   environment.systemPackages = with pkgs; [
     docker-compose
   ];
 
   users.users.nico.extraGroups = [ "docker" ];
-
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      "5 3 * * * podman restart minecraft"
-    ];
-  };
 
   home-manager = {
     extraSpecialArgs = {

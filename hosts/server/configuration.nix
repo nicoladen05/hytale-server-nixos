@@ -44,19 +44,23 @@ in
 
     services = {
       backup = {
-        enable = false;
+        enable = true;
         repositoryFile = config.sops.secrets."restic/repository".path;
         passwordFile = config.sops.secrets."restic/password".path;
-        environmentFile = config.sops.secrets."restic/environment".path;
       };
 
       ddns = {
-        enable = false;
+        enable = true;
         tokenFile = config.sops.secrets."cloudflare/api_token".path;
+        domains = [
+          "*.nicoladen.dev"
+          "ddns.nicoladen.dev"
+          "mc.nicoladen.dev"
+        ];
       };
 
       botify = {
-        enable = false;
+        enable = true;
         tokenFile = config.sops.secrets."services/botify/token".path;
       };
 
@@ -72,9 +76,18 @@ in
 
       vaultwarden.enable = true;
 
-      ocis.enable = false;
+      ocis.enable = true;
 
-      n8n.enable = false;
+      minecraft-server = {
+        enable = true;
+        servers = {
+          chill_modded = {
+            type = "fabric";
+            version = "1.21.1";
+            ram = "6G";
+          };
+        };
+      };
 
       wireguard = {
         enable = true;

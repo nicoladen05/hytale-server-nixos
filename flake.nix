@@ -59,6 +59,8 @@
       url = "github:vicinaehq/vicinae";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
   outputs =
@@ -92,6 +94,7 @@
           home-manager.nixosModules.home-manager
           stylix.nixosModules.stylix
           nvf.nixosModules.default
+          nix-minecraft.nixosModules.minecraft-servers
         ];
       };
 
@@ -104,6 +107,7 @@
           sops-nix.nixosModules.sops
           stylix.nixosModules.stylix
           nvf.nixosModules.default
+          nix-minecraft.nixosModules.minecraft-servers
         ];
       };
 

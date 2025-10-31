@@ -12,6 +12,7 @@
     ./homeassistant
     ./immich
     ./media
+    ./minecraft
     ./n8n
     ./ocis
     ./pihole
