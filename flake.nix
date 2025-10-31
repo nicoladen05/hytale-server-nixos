@@ -164,6 +164,7 @@
       deploy.nodes.server = {
         hostname = network.clients.server.ip;
         interactiveSudo = true;
+        magicRollback = false;
         profiles.system = {
           user = "root";
           sshUser = "nico";
