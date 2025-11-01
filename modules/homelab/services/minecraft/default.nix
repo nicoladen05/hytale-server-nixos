@@ -14,6 +14,7 @@
   options = {
     homelab.services.minecraft-server = {
       enable = lib.mkEnableOption "enable the minecraft server";
+
       servers = lib.mkOption {
         type = lib.types.attrsOf (
           lib.types.submodule {
@@ -37,6 +38,7 @@
                   - `paper`: A high-performance fork of Spigot.
                 '';
               };
+
               version = lib.mkOption {
                 type = lib.types.str;
                 default = "";
@@ -59,6 +61,7 @@
                       # Transform version string (e.g. "1.21.7") into format -X_XX_X (e.g. "-1_21_7")
                       "-" + builtins.concatStringsSep "_" parts;
               };
+
               ram = lib.mkOption {
                 type = lib.types.str;
                 default = "4G";
@@ -67,6 +70,30 @@
                   The amount of RAM to allocate to the Minecraft server.
                   This should be a string with a number followed by a unit (e.g. "2G" for 2 gigabytes).
                 '';
+              };
+
+              packwiz = lib.mkOption {
+                type = lib.types.submodule {
+                  options = {
+                    enable = lib.mkOption {
+                      type = lib.types.bool;
+                      default = false;
+                      description = "Enable packwiz support for this server.";
+                    };
+                    url = lib.mkOption {
+                      type = lib.types.str;
+                      default = "";
+                      description = "The URL to the packwiz modpack.";
+                    };
+                    packHash = lib.mkOption {
+                      type = lib.types.str;
+                      default = "";
+                      description = "The expected hash of the modpack for verification.";
+                    };
+                  };
+                };
+                default = { };
+                description = "Options for packwiz modpack support.";
               };
             };
           }
@@ -83,12 +110,31 @@
       eula = true;
       openFirewall = true;
 
-      servers = lib.mapAttrs (serverName: serverConfig: {
-        enable = true;
-        jvmOpts = "-Xmx${serverConfig.ram} -Xms${serverConfig.ram}";
-        package = pkgs.minecraftServers."${serverConfig.type}${serverConfig.version}";
-      }) config.homelab.services.minecraft-server.servers;
+      servers = lib.mapAttrs (
+        serverName: serverConfig:
+        let
+          # compute attribute name for package lookup, e.g. "fabric-1_21_7"
+          attrName = "${serverConfig.type}${serverConfig.version}";
+          package = builtins.getAttr attrName pkgs.minecraftServers;
+          modpack =
+            if (serverConfig.packwiz != null) && serverConfig.packwiz.enable then
+              pkgs.fetchPackwizModpack {
+                inherit (serverConfig.packwiz) url packHash;
+              }
+            else
+              null;
+        in
+        {
+          enable = true;
+          jvmOpts = "-Xmx${serverConfig.ram} -Xms${serverConfig.ram}";
+          package = package;
 
+          # only add symlinks when packwiz is enabled
+          symlinks = lib.optionalAttrs ((serverConfig.packwiz != null) && serverConfig.packwiz.enable) {
+            mods = "${modpack}/mods";
+          };
+        }
+      ) config.homelab.services.minecraft-server.servers;
     };
   };
 }
