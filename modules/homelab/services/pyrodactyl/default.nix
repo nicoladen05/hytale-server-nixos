@@ -83,7 +83,7 @@ in
         APP_URL = "https://${cfg.url}";
         APP_TIMEZONE = config.system.timeZone;
         APP_SERVICE_AUTHOR = "noreply@${cfg.url}"; 
-        APP_ENV: "production";
+        APP_ENV = "production";
         APP_ENVIRONMENT_ONLY = "false";
         CACHE_DRIVER = "redis";
         SESSION_DRIVER = "redis";
