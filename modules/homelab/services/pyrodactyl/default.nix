@@ -78,7 +78,7 @@ in
     virtualisation.oci-containers.containers."pyrodactyl-panel" = {
       image = "ghcr.io/pyrohost/pyrodactyl:latest";
       autoStart = true;
-      ports = [ "${httpPort}:80" "${httpsPort}:443" ];
+      ports = [ "${cfg.httpPort}:80" "${cfg.httpsPort}:443" ];
       environment = {
         APP_URL = "https://${cfg.url}";
         APP_TIMEZONE = config.system.timeZone;
