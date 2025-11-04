@@ -109,9 +109,5 @@ in
       ];
       user = "pyrodactyl:users";
     };
-
-    virtualisation.oci-containers.containers."pyrodactyl" = {
-      
-    };
   };
 }
