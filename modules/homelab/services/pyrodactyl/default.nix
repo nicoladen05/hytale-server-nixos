@@ -95,7 +95,7 @@ in
         DB_DATABASE = "panel";
         DB_USERNAME = "pterodactyl";
         DB_PASSWORD = "changeme";
-        HASHIDS_LENGTH = 8;
+        HASHIDS_LENGTH = "8";
       };
       volumes = [
         "${cfg.path}/var:/app/var/"
