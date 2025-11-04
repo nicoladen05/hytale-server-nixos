@@ -58,10 +58,13 @@ in
         domains = [
           "vps.nicoladen.dev"
           "n8n.nicoladen.dev"
+          "panel.nicoladen.dev"
         ];
       };
 
       n8n.enable = true;
+
+      pyrodactyl.enable = true;
     };
   };
 

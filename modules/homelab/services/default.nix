@@ -16,6 +16,7 @@
     ./n8n
     ./ocis
     ./pihole
+    ./pyrodactyl
     ./vaultwarden
     ./windows
     ./wireguard
