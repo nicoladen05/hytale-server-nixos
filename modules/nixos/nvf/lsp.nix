@@ -44,7 +44,7 @@
           enable = true;
           lsp = {
             enable = true;
-            server = "nixd";
+            servers = ["nixd"];
           };
           treesitter.enable = true;
           format.enable = false;
@@ -54,7 +54,7 @@
         python = {
           enable = true;
           lsp.enable = true;
-          lsp.server = "pyright";
+          lsp.servers = ["pyright"];
           format.enable = true;
           format.type = "black-and-isort";
         };
@@ -64,7 +64,7 @@
           format.enable = true;
           format.type = "prettierd";
           lsp.enable = true;
-          lsp.server = "ts_ls";
+          lsp.servers = ["ts_ls"];
           treesitter.enable = true;
         };
         html = {

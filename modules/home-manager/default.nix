@@ -41,8 +41,10 @@
 
     programs.git = {
       enable = true;
-      userName = "${config.git.userName}";
-      userEmail = "${config.git.userEmail}";
+      settings.user = {
+        name = "${config.git.userName}";
+        email = "${config.git.userEmail}";
+      };
     };
 
     home.username = "${userName}";
