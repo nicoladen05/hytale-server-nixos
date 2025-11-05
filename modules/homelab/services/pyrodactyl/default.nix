@@ -8,7 +8,7 @@ in
     enable = lib.mkEnableOption "Pyrodactyl service";
     path = lib.mkOption {
       type = lib.types.path;
-      default = "${config.homelab.configDir}/pyrodactyl-db";
+      default = "${config.homelab.configDir}/pyrodactyl";
     };
     httpPort = lib.mkOption {
       type = lib.types.int;
