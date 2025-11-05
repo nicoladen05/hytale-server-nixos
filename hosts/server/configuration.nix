@@ -89,7 +89,7 @@ in
             packwiz = {
               enable = true;
               url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/refs/heads/addon/immersive/pack.toml";
-              packHash = "sha256-0snr5y8WwlDn7qRU5jw1yM5YOVIY93YYIihlvtC2Jx0=";
+              packHash = "sha256-2HogG+bCESJyazvpkwo2W2tOrnmUfoebBpip6IjBclU=";
             };
           };
         };
@@ -139,7 +139,7 @@ in
   users.users.root.hashedPasswordFile = lib.mkForce null;
 
   users.users.nico.openssh.authorizedKeys.keys = [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDB6jsD23KsTSZn9sa1tjgUKDvIIH3BDEQVuPUdxvf++liDvIVm9AQfcVv3smYftvdLLwkEHrzt+Qm5En31oQSdbljGBTuIGXQcVMUYn+83rVIke5xwC7F3279pSqsvcS1atqLVRuYwOWb07TIlaHojG4oXyzPTjnszU80nKcTJ9EvlNx0VI5UI/C33A0DaCvJbBzM9Hi7Jpqn76Ln0ZQ+CHOhGBBRZwmXLrEN+VdSItPBGBqsILHQAr0LTQbvfR7hs+cmxRsA19mS/h9UJimkoX1HmIljT6ztJsHy8LqAk93yL1VBd/Jm50uvsasVHtlz/tXR6MsCn5w+0SsZhW8zst+z4Euzb0cjEN0UylUJGNw8nlF9ZjnMbAdidT8yfpqmV01CUBxtO7iqIiERUFS/ayqq+tggGGBMWlGimulX75HowhvmAHi/rCtCq02CN5rzzhgAVcsN3ZnbQiPq38kKBFGFwHnp6RfHcNv6bDwABvbiRgbCtglrzfX5LJY1lZcpUxbAJMa1iyR6zm0EUMK0QfNHdVre5kASCzeLVfmDj0NhIqO93YRScM2GtbOND5YSqECVf+XeL5POOL56wNxdVaWQtUUYbosu+74MDZk9KoWyUAG64DRHjMOMVQ66EiwXHHCB5dpwDgkdxXwxDFSfL8wBPs9ZTxZXW9N2Lu20fdw== nico@DESKTOP-EMEHM3S "
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDaKGBxwribB760V3K59EtWizS0B/1AD5Rx7xeuZD+W5GtlZX955Y8/reQodOoY0uzbXBI3wZYGUi5meHLQWdOn5+WuSCELODbduC86sE6Hmrhfq2Rcr0SU3lmGAOzbsH0DZVd9Qyg9M0oc1DnkYzQgTxkX6mbwQ2iU3e5jBGJwAENqUK8Oq01MlISvNOsIbwUyuh3qkJubYusuWESv4VPDymEWcbDxFPwe5hKT0M5nD31cCAxPSdDmcRGn3Fv+sl9b0aI7yFzQ/FnnS3RG+WXfkVzSENjQ2fycBwHbfmD5Pl8apUnWIM4dfWrxdvVmcqMhEyvhLZpIY31Xyq6hOyx9UbEDiwi79Fyzzhmw+rm8HnxIgLMDVLocDX5R99HirXMEQ2Ybd2N1YbpJzJ13Rhnn47dol5aWprjiRIi/Odap2BwY3SXICt297OwmKegwcWk1zocEARJgPq19GNIuynUEk9opPQaPHvgWMf9RLsiyMnAjGdh+hi7MP4KAP+MWZa80bFe1jz7E+PMpkSoKnB+IrfvqwiApySP9LbIRWVyAXGAr+qPN1H0ztPs6+GbRA+bTXPzudqrdxnw99s7mTMBxKs+Sa4ef5UTpa97FTOWt/MDFhjiFVTuEF3fvm7GEOFEiC3EMBc+/prZfERbRDL0cifEPaGsA8jIW/Eeq9qsbww== nico@DESKTOP-EMEHM3S "
   ];
   nix.settings.trusted-users = [ userName ];
 
