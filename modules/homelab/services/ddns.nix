@@ -20,6 +20,10 @@ in
       ];
     };
 
+    ipv6 = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -29,7 +33,7 @@ in
       inherit (cfg) domains;
 
       ipv4 = true;
-      ipv6 = true;
+      ipv6 = cfg.ipv6;
     };
   };
 }

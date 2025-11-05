@@ -51,6 +51,7 @@ in
 
       ddns = {
         enable = true;
+        ipv6 = false;
         tokenFile = config.sops.secrets."cloudflare/api_token".path;
         domains = [
           "*.nicoladen.dev"
