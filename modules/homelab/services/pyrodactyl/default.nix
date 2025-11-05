@@ -34,7 +34,7 @@ in
     };
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.path} 0775 pyrodactyl users -"
+      "d ${cfg.path} 0775 nico users -"
       "d ${cfg.path}/database 0775 pyrodactyl users -"
       "d ${cfg.path}/var 0775 pyrodactyl users -"
       "d ${cfg.path}/nginx 0775 pyrodactyl users -"

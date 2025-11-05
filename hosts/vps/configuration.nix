@@ -48,7 +48,7 @@ in
     enable = true;
     external = true;
 
-    configDir = "/home/nico/services";
+    configDir = "/opt/services";
     baseDomain = "nicoladen.dev";
 
     services = {
