@@ -18,6 +18,11 @@ in
         default = "home.${config.homelab.baseDomain}";
       };
 
+      expose = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+
       configDir = lib.mkOption {
         type = lib.types.path;
         default = "${config.homelab.configDir}/hass";
@@ -82,5 +87,12 @@ in
       8123
       6052
     ];
+
+
+    services.caddy.virtualHosts."${cfg.url}" = lib.mkIf cfg.expose {
+      extraConfig = ''
+        reverse_proxy 127.0.0.1:8123
+      '';
+    };
   };
 }

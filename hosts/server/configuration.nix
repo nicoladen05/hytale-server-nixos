@@ -73,7 +73,10 @@ in
 
       pihole.enable = true;
 
-      homeassistant.enable = true;
+      homeassistant = {
+        enable = true;
+        expose = true;
+      };
 
       vaultwarden.enable = true;
 
