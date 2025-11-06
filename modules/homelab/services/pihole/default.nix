@@ -35,6 +35,7 @@ in
     virtualisation.oci-containers.containers."pihole" = {
       image = "docker.io/pihole/pihole:latest";
       autoStart = true;
+      pull = "newer";
       ports = [
         "${network.clients.server.ip}:53:53/udp"
         "${network.clients.server.ip}:53:53/tcp"

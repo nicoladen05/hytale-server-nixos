@@ -54,6 +54,7 @@ in
     virtualisation.oci-containers.containers."homeassistant" = {
       image = "ghcr.io/home-assistant/home-assistant:stable";
       autoStart = true;
+      pull = "newer";
       volumes = [
         "${builtins.toString cfg.configDir}:/config"
       ];
@@ -69,6 +70,7 @@ in
     virtualisation.oci-containers.containers."esphome" = {
       image = "ghcr.io/esphome/esphome:latest";
       autoStart = true;
+      pull = "newer";
       privileged = true;
       volumes = [
         "${builtins.toString cfg.esphomeConfigDir}:/config"
