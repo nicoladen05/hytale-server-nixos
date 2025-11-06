@@ -26,15 +26,14 @@ in
 
   config = lib.mkIf cfg.enable {
     users.users.pyrodactyl = {
-      isSystemUser = true;
-      home = "/var/lib/pterodactyl";
-      createHome = false;
+      name = "pyrodactyl";
+      uid = 2001;
       group = "users";
-      shell = lib.mkDefault "/usr/sbin/nologin";
+      isSystemUser = true;
     };
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.path} 0775 nico users -"
+      "d ${cfg.path} 0775 pyrodactyl users -"
       "d ${cfg.path}/database 0775 pyrodactyl users -"
       "d ${cfg.path}/var 0775 pyrodactyl users -"
       "d ${cfg.path}/nginx 0775 pyrodactyl users -"
@@ -65,14 +64,14 @@ in
         MYSQL_DATABASE = "panel";
         MYSQL_USER = "pterodactyl";
       };
-      user = "pyrodactyl:users";
+      user = "2001:100";
     };
 
     # Cache
     virtualisation.oci-containers.containers."pyrodactyl-redis" = {
       image = "docker.io/library/redis:latest";
       autoStart = true;
-      user = "pyrodactyl:users";
+      user = "2001:100";
     };
 
     # Panel
@@ -89,9 +88,9 @@ in
         CACHE_DRIVER = "redis";
         SESSION_DRIVER = "redis";
         QUEUE_DRIVER = "redis";
-        REDIS_HOST = "pyrodactyl-redis";
+        REDIS_HOST = "10.0.0.68";
         DB_CONNECTION = "mysql";
-        DB_HOST = "pyrodactyl-db";
+        DB_HOST = "10.0.0.68";
         DB_PORT = "3306";
         DB_DATABASE = "panel";
         DB_USERNAME = "pterodactyl";
@@ -108,7 +107,13 @@ in
         "pyrodactyl-db"
         "pyrodactyl-redis"
       ];
-      user = "pyrodactyl:users";
+      user = "2001:100";
+    };
+
+    services.caddy.virtualHosts."${cfg.url}" = {
+      extraConfig = ''
+        reverse_proxy 127.0.0.1:${builtins.toString cfg.httpPort}
+      '';
     };
   };
 }
