@@ -64,7 +64,7 @@ in
 
       n8n.enable = true;
 
-      pyrodactyl.enable = true;
+      # pyrodactyl.enable = true;
     };
   };
 

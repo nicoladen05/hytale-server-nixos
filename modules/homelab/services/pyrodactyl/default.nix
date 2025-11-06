@@ -25,20 +25,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    users.users.pyrodactyl = {
-      name = "pyrodactyl";
-      uid = 2001;
-      group = "users";
-      isSystemUser = true;
-    };
-
     systemd.tmpfiles.rules = [
-      "d ${cfg.path} 0775 pyrodactyl users -"
-      "d ${cfg.path}/database 0775 pyrodactyl users -"
-      "d ${cfg.path}/var 0775 pyrodactyl users -"
-      "d ${cfg.path}/nginx 0775 pyrodactyl users -"
-      "d ${cfg.path}/certs 0775 pyrodactyl users -"
-      "d ${cfg.path}/logs 0775 pyrodactyl users -"
+      "d ${cfg.path} 0775 root users -"
+      "d ${cfg.path}/database 0775 root users -"
+      "d ${cfg.path}/var 0775 root users -"
+      "d ${cfg.path}/nginx 0775 root users -"
+      "d ${cfg.path}/certs 0775 root users -"
+      "d ${cfg.path}/logs 0775 root users -"
     ];
 
     virtualisation.containers.enable = true;
@@ -64,14 +57,14 @@ in
         MYSQL_DATABASE = "panel";
         MYSQL_USER = "pterodactyl";
       };
-      user = "2001:100";
+      ports = [ "127.0.0.1:3306:3306" ];
     };
 
     # Cache
     virtualisation.oci-containers.containers."pyrodactyl-redis" = {
       image = "docker.io/library/redis:latest";
       autoStart = true;
-      user = "2001:100";
+      ports = [ "127.0.0.1:6379:6379" ];
     };
 
     # Panel
@@ -88,9 +81,9 @@ in
         CACHE_DRIVER = "redis";
         SESSION_DRIVER = "redis";
         QUEUE_DRIVER = "redis";
-        REDIS_HOST = "10.0.0.68";
+        REDIS_HOST = "127.0.0.1";
         DB_CONNECTION = "mysql";
-        DB_HOST = "10.0.0.68";
+        DB_HOST = "127.0.0.1";
         DB_PORT = "3306";
         DB_DATABASE = "panel";
         DB_USERNAME = "pterodactyl";
@@ -107,8 +100,9 @@ in
         "pyrodactyl-db"
         "pyrodactyl-redis"
       ];
-      user = "2001:100";
     };
+
+    networking.firewall.allowedTCPPorts = [ 8443 ];
 
     services.caddy.virtualHosts."${cfg.url}" = {
       extraConfig = ''
