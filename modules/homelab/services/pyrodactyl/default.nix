@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
 let 
   cfg = config.homelab.services.pyrodactyl;
@@ -24,15 +24,46 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = 
+  let
+    dbName = "panel";
+    dbUser = "pyrodactyl";
+  in lib.mkIf cfg.enable {
     systemd.tmpfiles.rules = [
-      "d ${cfg.path} 0775 root users -"
-      "d ${cfg.path}/database 0775 root users -"
-      "d ${cfg.path}/var 0775 root users -"
-      "d ${cfg.path}/nginx 0775 root users -"
-      "d ${cfg.path}/certs 0775 root users -"
-      "d ${cfg.path}/logs 0775 root users -"
+      "d ${cfg.path} 0775 pyrodactyl users -"
+      "d ${cfg.path}/database 0775 pyrodactyl users -"
+      "d ${cfg.path}/var 0775 pyrodactyl users -"
+      "d ${cfg.path}/nginx 0775 pyrodactyl users -"
+      "d ${cfg.path}/certs 0775 pyrodactyl users -"
+      "d ${cfg.path}/logs 0775 pyrodactyl users -"
     ];
+
+    users.users.pyrodactyl = {
+      isSystemUser = true;
+      name = "pyrodactyl";
+      group = "users";
+    };
+
+    # Database
+    services.mysql = {
+      enable = true;
+      package = pkgs.mariadb;
+      ensureDatabases = [ dbName ];
+      ensureUsers = [
+        {
+          name = dbUser;
+          ensurePermissions = {
+            "${dbName}.*" = "ALL PRIVILEGES";
+          };
+        }
+      ];
+      user = "pyrodactyl";
+    };
+
+    # Redis
+    services.redis = {
+      enable = true;
+    };
 
     virtualisation.containers.enable = true;
     virtualisation.oci-containers.backend = "podman";
@@ -44,37 +75,14 @@ in
       };
     };
 
-    # Database
-    virtualisation.oci-containers.containers."pyrodactyl-db" = {
-      image = "docker.io/library/mariadb:latest";
-      autoStart = true;
-      volumes = [
-        "${cfg.path}/database:/var/lib/mysql"
-      ];
-      environment = {
-        MYSQL_PASSWORD = "changeme";
-        MYSQL_ROOT_PASSWORD = "changeme";
-        MYSQL_DATABASE = "panel";
-        MYSQL_USER = "pterodactyl";
-      };
-      ports = [ "127.0.0.1:3306:3306" ];
-    };
-
-    # Cache
-    virtualisation.oci-containers.containers."pyrodactyl-redis" = {
-      image = "docker.io/library/redis:latest";
-      autoStart = true;
-      ports = [ "127.0.0.1:6379:6379" ];
-    };
-
     # Panel
     virtualisation.oci-containers.containers."pyrodactyl-panel" = {
       image = "ghcr.io/pyrohost/pyrodactyl:latest";
       autoStart = true;
+      pull = "newer";
       ports = [ "${builtins.toString cfg.httpPort}:80" "${builtins.toString cfg.httpsPort}:443" ];
       environment = {
         APP_URL = "https://${cfg.url}";
-        APP_TIMEZONE = config.system.timeZone;
         APP_SERVICE_AUTHOR = "noreply@${cfg.url}"; 
         APP_ENV = "production";
         APP_ENVIRONMENT_ONLY = "false";
@@ -86,7 +94,7 @@ in
         DB_HOST = "127.0.0.1";
         DB_PORT = "3306";
         DB_DATABASE = "panel";
-        DB_USERNAME = "pterodactyl";
+        DB_USERNAME = "pyrodactyl";
         DB_PASSWORD = "changeme";
         HASHIDS_LENGTH = "8";
       };
@@ -95,10 +103,6 @@ in
         "${cfg.path}/nginx:/etc/nginx/http.d/"
         "${cfg.path}/certs:/etc/letsencrypt/"
         "${cfg.path}/logs:/app/storage/logs/"
-      ];
-      dependsOn = [
-        "pyrodactyl-db"
-        "pyrodactyl-redis"
       ];
     };
 
