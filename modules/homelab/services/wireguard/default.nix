@@ -62,6 +62,7 @@ in
 
       firewall.allowedUDPPorts = [ cfg.port ];
 
+      networkmanager.enable = lib.mkForce false;
       useNetworkd = true;
     };
 
@@ -73,15 +74,24 @@ in
 
         address = cfg.ips;
 
-        networkConfig = {  
+        networkConfig = {
           IPv4Forwarding = true;
           IPv6Forwarding = true;
         };
 
         routes = [
-          { Destination = "192.168.255.0/24"; Gateway = "0.0.0.0"; }
-          { Destination = "fd3a:6c4f:1b2e::/64"; Gateway = "::"; }
-          { Destination = "2003:e0:17ff:3b42::/64"; Gateway = "::"; }
+          {
+            Destination = "192.168.255.0/24";
+            Gateway = "0.0.0.0";
+          }
+          {
+            Destination = "fd3a:6c4f:1b2e::/64";
+            Gateway = "::";
+          }
+          {
+            Destination = "2003:e0:17ff:3b42::/64";
+            Gateway = "::";
+          }
         ];
       };
 

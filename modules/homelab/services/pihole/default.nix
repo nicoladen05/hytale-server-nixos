@@ -39,8 +39,8 @@ in
       ports = [
         "${network.clients.server.ip}:53:53/udp"
         "${network.clients.server.ip}:53:53/tcp"
-        "${network.clients.server.ip}:8080:80/tcp"
-        "${network.clients.server.ip}:8081:443/tcp"
+        "${network.clients.server.ip}:8081:80/tcp"
+        "${network.clients.server.ip}:8082:443/tcp"
       ];
       volumes = [
         "${builtins.toString cfg.configDir}:/etc/pihole"
@@ -54,8 +54,8 @@ in
 
     networking.firewall.allowedTCPPorts = [
       53
-      8080
-      8443
+      8081
+      8082
     ];
 
   };

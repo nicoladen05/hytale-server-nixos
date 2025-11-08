@@ -32,11 +32,15 @@
     sops.secrets."services/botify/token" = { };
     sops.secrets."wireguard/privkey" = {
       mode = "0640";
+      owner = "systemd-network";
     };
 
     sops.secrets."cloudflare/api_token" = { };
 
     sops.secrets."restic/password" = { };
     sops.secrets."restic/repository" = { };
+
+    sops.secrets."glance_restic/password" = { };
+    sops.secrets."glance_restic/url" = { };
   };
 }

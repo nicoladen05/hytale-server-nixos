@@ -1,17 +1,249 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 let
   cfg = config.homelab.services.glance;
+  immichCard = {
+    type = "custom-api";
+    title = "Immich Stats";
+    cache = "1d";
+    url = "https://immich.nicoladen.dev/api/server/statistics";
+    headers = {
+      x-api-key = "gwj69JQrEWIksPbv87SVcvce1HUsrRqUU0ALbKUCLk";
+      Accept = "application/json";
+    };
+    template = ''
+      <div class="flex justify-between text-center">
+        <div>
+            <div class="color-highlight size-h3">{{ .JSON.Int "photos" | formatNumber }}</div>
+            <div class="size-h6">PHOTOS</div>
+        </div>
+        <div>
+            <div class="color-highlight size-h3">{{ .JSON.Int "videos" | formatNumber }}</div>
+            <div class="size-h6">VIDEOS</div>
+        </div>
+        <div>
+            <div class="color-highlight size-h3">{{ div (.JSON.Int "usage" | toFloat) 1073741824 | toInt | formatNumber }}GB</div>
+            <div class="size-h6">USAGE</div>
+        </div>
+      </div>
+    '';
+  };
+  minecraftCard = url: {
+    type = "custom-api";
+    title = "Minecraft Servers";
+    cache = "30s";
+    url = "https://api.mcstatus.io/v2/status/java/${url}";
+    template = ''
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div style="flex-grow:1; min-width:0;">
+          <a class="size-h4 block text-truncate color-highlight">
+            {{ .JSON.String "host" }}
+            {{ if .JSON.Bool "online" }}
+            <span
+              style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--color-positive); display: inline-block; vertical-align: middle;"
+              data-popover-type="text"
+              data-popover-text="Online"
+            ></span>
+            {{ else }}
+            <span
+              style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--color-negative); display: inline-block; vertical-align: middle;"
+              data-popover-type="text"
+              data-popover-text="Offline"
+            ></span>
+            {{ end }}
+          </a>
+
+          <ul class="list-horizontal-text">
+            <li>
+              {{ if .JSON.Bool "online" }}
+              <span>{{ .JSON.String "version.name_clean" }}</span>
+              {{ else }}
+              <span>Offline</span>
+              {{ end }}
+            </li>
+            {{ if .JSON.Bool "online" }}
+            <li data-popover-type="html">
+              <div data-popover-html>
+                {{ range .JSON.Array "players.list" }}{{ .String "name_clean" }}<br>{{ end }}
+              </div>
+              <p style="display:inline-flex;align-items:center;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6" style="height:1em;vertical-align:middle;margin-right:0.5em;">
+                  <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+                </svg>
+                {{ .JSON.Int "players.online" | formatNumber }}/{{ .JSON.Int "players.max" | formatNumber }} players
+              </p>
+            </li>
+            {{ else }}
+            <li>
+              <p style="display:inline-flex;align-items:center;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6" style="height:1em;vertical-align:middle;margin-right:0.5em;opacity:0.5;">
+                  <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+                </svg>
+                0 players
+              </p>
+            </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    '';
+  };
 in
 {
   options.homelab.services.glance = {
     enable = lib.mkEnableOption "Enable the Glance Dashboard";
   };
 
-  config = lib.mkIf cfg.enable = {
+  config = lib.mkIf cfg.enable {
     services.glance = {
       enable = true;
       openFirewall = true;
+      settings = {
+        server.host = "0.0.0.0";
+
+        pages = [
+          {
+            name = "Home";
+            hide-desktop-navigation = true;
+            columns = [
+              # Left
+              {
+                size = "small";
+                widgets = [
+                  {
+                    type = "dns-stats";
+                    service = "pihole-v6";
+                    url = "http://192.168.2.2:8081";
+                    password = "aCrPUAyIjWYndG8vaR1Yg2ZnM1EMVKPO1GMYolucmjk=";
+                  }
+                  immichCard
+                  (minecraftCard "mc.nicoladen.dev")
+                  {
+                    type = "extension";
+                    title = "Backups";
+                    url = "http://127.0.0.1:8675/backups";
+                    cache = "1h";
+                    allow-potentially-dangerous-html = true;
+                    parameters = {
+                      hide-file-count = true;
+                    };
+                  }
+                ];
+              }
+
+              # Center
+              {
+                size = "full";
+                widgets = [
+                  {
+                    type = "search";
+                    autofocus = true;
+                    search-engine = "google";
+                  }
+                  {
+                    type = "monitor";
+                    cache = "1m";
+                    title = "Services";
+                    sites = [
+                      {
+                        title = "Homeassistant";
+                        url = "https://home.nicoladen.dev";
+                        icon = "si:homeassistant";
+                      }
+                      {
+                        title = "Immich";
+                        url = "https://immich.nicoladen.dev";
+                        icon = "si:immich";
+                      }
+                      {
+                        title = "OwnCloud";
+                        url = "https://cloud.nicoladen.dev";
+                        icon = "si:owncloud";
+                      }
+                      {
+                        title = "Vaultwarden";
+                        url = "https://vaultwarden.nicoladen.dev";
+                        icon = "si:vaultwarden";
+                      }
+                      {
+                        title = "n8n";
+                        url = "https://n8n.nicoladen.dev";
+                        icon = "si:n8n";
+                      }
+                      {
+                        title = "Pihole";
+                        url = "http://192.168.2.2:8081/admin";
+                        icon = "si:pihole";
+                      }
+                    ];
+                  }
+                  {
+                    type = "split-column";
+                    widgets = [
+                      {
+                        type = "server-stats";
+                        servers = [
+                          {
+                            type = "local";
+                            name = "Server";
+                          }
+                          {
+                            type = "remote";
+                            name = "VPS";
+                            url = "server.nicoladen.dev";
+                          }
+                        ];
+                      }
+                    ];
+                  }
+                ];
+              }
+
+              # Right
+              {
+                size = "small";
+                widgets = [
+                  {
+                    type = "weather";
+                    units = "metric";
+                    hour-format = "24h";
+                    location = "Wolfsburg, Germany";
+                  }
+                  {
+                    type = "to-do";
+                  }
+                ];
+              }
+            ];
+          }
+        ];
+      };
     };
+
+    virtualisation.oci-containers.containers."glance-restic" = {
+      image = "ghcr.io/nicoladen05/restic-glance-extension:latest";
+      autoStart = true;
+      pull = "newer";
+      ports = [
+        "8675:8675"
+      ];
+      volumes = [
+        "/home/nico/.ssh:/root/.ssh"
+      ];
+      environment = {
+        RESTIC_REPOS = "backups";
+        RESTIC_CACHE_INTERVAL = "3600";
+      };
+      environmentFiles = [
+        config.sops.secrets."glance_restic/url".path
+        config.sops.secrets."glance_restic/password".path
+      ];
+    };
+
   };
 }
