@@ -9,6 +9,7 @@
     ./blocky
     ./botify
     ./code-server
+    ./glance
     ./homeassistant
     ./immich
     ./media

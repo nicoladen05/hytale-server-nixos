@@ -59,6 +59,8 @@ in
         ];
       };
 
+      glance.enable = true;
+
       botify = {
         enable = true;
         tokenFile = config.sops.secrets."services/botify/token".path;
