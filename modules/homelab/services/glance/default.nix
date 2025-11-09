@@ -151,6 +151,43 @@ let
       </div>
     '';
   };
+
+  klipperCard = title: url: {
+    inherit title;
+    type = "custom-api";
+    cache = "30s";
+    url = "http://${url}/printer/info";
+    template = ''
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div style="flex-grow:1; min-width:0;">
+          <a class="size-h4 block text-truncate color-highlight">
+            {{ if eq (.JSON.String "result.state") "ready" }}
+            Ready
+            <span
+              style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--color-positive); display: inline-block; vertical-align: middle;"
+              data-popover-type="text"
+              data-popover-text="Online"
+            ></span>
+            {{ else }}
+            Shut Down
+            <span
+              style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--color-negative); display: inline-block; vertical-align: middle;"
+              data-popover-type="text"
+              data-popover-text="Offline"
+            ></span>
+            {{ end }}
+          </a>
+        </div>
+      </div>
+    '';
+  };
+
+  # prusaCard = title: url: {
+  #   inherit title;
+  #   type = "custom-api";
+  #   cache = "30s";
+  #   url = "http://${url}";
+  # };
 in
 {
   options.homelab.services.glance = {
@@ -263,6 +300,7 @@ in
                           }
                         ];
                       }
+                      (klipperCard "Anycubic i3" "192.168.2.104")
                     ];
                   }
                 ];
