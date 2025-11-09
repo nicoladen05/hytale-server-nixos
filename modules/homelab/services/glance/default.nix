@@ -33,11 +33,16 @@ let
       </div>
     '';
   };
-  minecraftCard = url: {
+  minecraftCard = url: url2: {
     type = "custom-api";
     title = "Minecraft Servers";
     cache = "30s";
     url = "https://api.mcstatus.io/v2/status/java/${url}";
+    subrequests = {
+      mc2 = {
+        url = "https://api.mcstatus.io/v2/status/java/${url2}";
+      };
+    };
     template = ''
       <div style="display:flex; align-items:center; gap:12px;">
         <div style="flex-grow:1; min-width:0;">
@@ -91,6 +96,59 @@ let
           </ul>
         </div>
       </div>
+
+      <div style="display:flex; align-items:center; gap:12px; margin-top: 1em; border-top: 1px solid var(--color-separator); padding-top: 1em">
+        <div style="flex-grow:1; min-width:0;">
+          <a class="size-h4 block text-truncate color-highlight">
+            {{ (.Subrequest "mc2").JSON.String "host" }}
+            {{ if (.Subrequest "mc2").JSON.Bool "online" }}
+            <span
+              style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--color-positive); display: inline-block; vertical-align: middle;"
+              data-popover-type="text"
+              data-popover-text="Online"
+            ></span>
+            {{ else }}
+            <span
+              style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--color-negative); display: inline-block; vertical-align: middle;"
+              data-popover-type="text"
+              data-popover-text="Offline"
+            ></span>
+            {{ end }}
+          </a>
+
+          <ul class="list-horizontal-text">
+            <li>
+              {{ if (.Subrequest "mc2").JSON.Bool "online" }}
+              <span>{{ (.Subrequest "mc2").JSON.String "version.name_clean" }}</span>
+              {{ else }}
+              <span>Offline</span>
+              {{ end }}
+            </li>
+            {{ if (.Subrequest "mc2").JSON.Bool "online" }}
+            <li data-popover-type="html">
+              <div data-popover-html>
+                {{ range (.Subrequest "mc2").JSON.Array "players.list" }}{{ .String "name_clean" }}<br>{{ end }}
+              </div>
+              <p style="display:inline-flex;align-items:center;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6" style="height:1em;vertical-align:middle;margin-right:0.5em;">
+                  <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+                </svg>
+                {{ (.Subrequest "mc2").JSON.Int "players.online" | formatNumber }}/{{ (.Subrequest "mc2").JSON.Int "players.max" | formatNumber }} players
+              </p>
+            </li>
+            {{ else }}
+            <li>
+              <p style="display:inline-flex;align-items:center;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6" style="height:1em;vertical-align:middle;margin-right:0.5em;opacity:0.5;">
+                  <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+                </svg>
+                0 players
+              </p>
+            </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
     '';
   };
 in
@@ -122,7 +180,7 @@ in
                     password = "aCrPUAyIjWYndG8vaR1Yg2ZnM1EMVKPO1GMYolucmjk=";
                   }
                   immichCard
-                  (minecraftCard "mc.nicoladen.dev")
+                  (minecraftCard "mc.nicoladen.dev" "mc2.nicoladen.dev")
                   {
                     type = "extension";
                     title = "Backups";
@@ -197,6 +255,12 @@ in
                             name = "VPS";
                             url = "server.nicoladen.dev";
                           }
+                          {
+                            type = "remote";
+                            name = "3D Printer";
+                            url = "http://192.168.2.104:27973";
+                            token = "eaPTnKZWk0Xa7d1nE5ACe7381LRqa9by";
+                          }
                         ];
                       }
                     ];
@@ -225,6 +289,7 @@ in
       };
     };
 
+    # Restic
     virtualisation.oci-containers.containers."glance-restic" = {
       image = "ghcr.io/nicoladen05/restic-glance-extension:latest";
       autoStart = true;

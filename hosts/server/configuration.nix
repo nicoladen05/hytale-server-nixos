@@ -55,7 +55,6 @@ in
         domains = [
           "*.nicoladen.dev"
           "ddns.nicoladen.dev"
-          "mc.nicoladen.dev"
         ];
       };
 
@@ -82,22 +81,6 @@ in
       vaultwarden.enable = true;
 
       ocis.enable = true;
-
-      minecraft-server = {
-        enable = true;
-        servers = {
-          chill_modded = {
-            type = "fabric";
-            version = "1.21.1";
-            ram = "6G";
-            packwiz = {
-              enable = true;
-              url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/refs/heads/addon/immersive/pack.toml";
-              packHash = "sha256-2HogG+bCESJyazvpkwo2W2tOrnmUfoebBpip6IjBclU=";
-            };
-          };
-        };
-      };
 
       wireguard = {
         enable = true;

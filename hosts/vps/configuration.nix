@@ -56,10 +56,27 @@ in
         enable = true;
         tokenFile = config.sops.secrets."cloudflare/api_token".path;
         domains = [
+          "mc.nicoladen.dev"
           "vps.nicoladen.dev"
           "n8n.nicoladen.dev"
           "panel.nicoladen.dev"
         ];
+      };
+
+      minecraft-server = {
+        enable = true;
+        servers = {
+          chill_modded = {
+            type = "fabric";
+            version = "1.21.1";
+            ram = "6G";
+            packwiz = {
+              enable = true;
+              url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/refs/heads/addon/immersive/pack.toml";
+              packHash = "sha256-2HogG+bCESJyazvpkwo2W2tOrnmUfoebBpip6IjBclU=";
+            };
+          };
+        };
       };
 
       n8n.enable = true;
