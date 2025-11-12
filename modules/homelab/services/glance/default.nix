@@ -190,6 +190,10 @@ let
   # };
 in
 {
+  imports = [
+    ./agent.nix
+  ];
+
   options.homelab.services.glance = {
     enable = lib.mkEnableOption "Enable the Glance Dashboard";
   };
