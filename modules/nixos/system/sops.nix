@@ -40,6 +40,15 @@
     sops.secrets."restic/password" = { };
     sops.secrets."restic/repository" = { };
 
+    sops.secrets."glance/pihole_password" = { };
+    sops.secrets."glance/immich_api_key" = { };
+    sops.secrets."glance/3d_printer_remote" = { };
+    sops.secrets."glance/vps_remote" = { };
+
+    sops.templates."glance/vps_remote_env".content = ''
+      TOKEN=${config.sops.placeholder."glance/vps_remote"}
+    '';
+
     sops.secrets."glance_restic/password" = { };
     sops.secrets."glance_restic/url" = { };
   };

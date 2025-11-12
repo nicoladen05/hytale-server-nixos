@@ -13,7 +13,9 @@ let
     cache = "1d";
     url = "https://immich.nicoladen.dev/api/server/statistics";
     headers = {
-      x-api-key = "gwj69JQrEWIksPbv87SVcvce1HUsrRqUU0ALbKUCLk";
+      x-api-key = {
+        _secret = config.sops.secrets."glance/immich_api_key".path;
+      };
       Accept = "application/json";
     };
     template = ''
@@ -169,7 +171,7 @@ let
               data-popover-text="Online"
             ></span>
             {{ else }}
-            Shut Down
+            Off
             <span
               style="width: 8px; height: 8px; border-radius: 50%; background-color: var(--color-negative); display: inline-block; vertical-align: middle;"
               data-popover-type="text"
@@ -181,13 +183,6 @@ let
       </div>
     '';
   };
-
-  # prusaCard = title: url: {
-  #   inherit title;
-  #   type = "custom-api";
-  #   cache = "30s";
-  #   url = "http://${url}";
-  # };
 in
 {
   imports = [
@@ -218,7 +213,9 @@ in
                     type = "dns-stats";
                     service = "pihole-v6";
                     url = "http://192.168.2.2:8081";
-                    password = "aCrPUAyIjWYndG8vaR1Yg2ZnM1EMVKPO1GMYolucmjk=";
+                    password = {
+                      _secret = config.sops.secrets."glance/pihole_password".path;
+                    };
                   }
                   immichCard
                   (minecraftCard "mc.nicoladen.dev" "mc2.nicoladen.dev")
@@ -294,17 +291,27 @@ in
                           {
                             type = "remote";
                             name = "VPS";
-                            url = "server.nicoladen.dev";
+                            url = "http://130.61.231.173:27973/";
+                            token = {
+                              _secret = config.sops.secrets."glance/vps_remote".path;
+                            };
                           }
                           {
                             type = "remote";
                             name = "3D Printer";
                             url = "http://192.168.2.104:27973";
-                            token = "eaPTnKZWk0Xa7d1nE5ACe7381LRqa9by";
+                            token = {
+                              _secret = config.sops.secrets."glance/3d_printer_remote".path;
+                            };
                           }
                         ];
                       }
-                      (klipperCard "Anycubic i3" "192.168.2.104")
+                      {
+                        type = "group";
+                        widgets = [
+                          (klipperCard "Anycubic i3" "192.168.2.104")
+                        ];
+                      }
                     ];
                   }
                 ];

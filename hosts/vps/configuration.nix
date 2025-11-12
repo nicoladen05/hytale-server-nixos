@@ -81,7 +81,10 @@ in
 
       n8n.enable = true;
 
-      glance.agent.enable = true;
+      glance.agent = {
+        enable = true;
+        settings.tokenFile = config.sops.templates."glance/vps_remote_env".path;
+      };
 
       pyrodactyl.enable = false;
     };

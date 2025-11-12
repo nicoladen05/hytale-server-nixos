@@ -1,6 +1,11 @@
-{ buildGoPackage, ... }:
+{
+  buildGoModule,
+  fetchFromGitHub,
+  lib,
+  ...
+}:
 
-buildGoPackage rec {
+buildGoModule rec {
   pname = "glance-agent";
   version = "0.1.0";
 
