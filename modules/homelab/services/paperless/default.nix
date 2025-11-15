@@ -19,6 +19,7 @@ in
 
     services.paperless = {
       enable = true;
+      address = "0.0.0.0";
       mediaDir = cfg.dataDir;
       settings = {
         PAPERLESS_CONSUMER_IGNORE_PATTERN = [
@@ -28,5 +29,7 @@ in
         PAPERLESS_OCR_LANGUAGE = "deu+eng";
       };
     };
+
+    networking.firewall.allowedTCPPorts = [ 28981 ];
   };
 }
