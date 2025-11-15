@@ -73,6 +73,8 @@ in
 
       pihole.enable = true;
 
+      paperless.enable = true;
+
       homeassistant = {
         enable = true;
         expose = true;

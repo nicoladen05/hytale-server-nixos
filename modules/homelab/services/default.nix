@@ -16,6 +16,7 @@
     ./minecraft
     ./n8n
     ./ocis
+    ./paperless
     ./pihole
     ./pyrodactyl
     ./vaultwarden
