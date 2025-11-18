@@ -103,7 +103,7 @@ in
             endpoint = "ddns.nicoladen.dev:51820";
           };
           ipad = {
-            publicKey = "HUJGJf2uFa8p8EpwQNS5ZKz06qIQOd1uquA8zGkB1Ag=";
+            publicKey = "YRgKxkrWXRrW0Bxpw+w8PCLzPp+2+Luo2TtneZIz+Sc=";
             allowedIPs = [
               "0.0.0.0/0"
               "::/128"
