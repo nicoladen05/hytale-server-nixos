@@ -102,6 +102,14 @@ in
             ];
             endpoint = "ddns.nicoladen.dev:51820";
           };
+          ipad = {
+            publicKey = "HUJGJf2uFa8p8EpwQNS5ZKz06qIQOd1uquA8zGkB1Ag=";
+            allowedIPs = [
+              "0.0.0.0/0"
+              "::/128"
+            ];
+            endpoint = "ddns.nicoladen.dev:51820";
+          };
         };
       };
     };
