@@ -1,4 +1,10 @@
-{ pkgs, lib, config, inputs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
 
 {
   options = {
@@ -16,10 +22,6 @@
         font = {
           normal = "Maple Mono NF CN";
           size = 10;
-        };
-        theme = {
-          iconTheme = "Papirus-Dark";
-          name = "catppuccin-mocha";
         };
       };
     };
