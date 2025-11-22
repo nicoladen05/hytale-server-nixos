@@ -90,9 +90,15 @@ in
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    docker-compose
-  ];
+  virtualisation.containers.enable = true;
+  virtualisation.oci-containers.backend = "podman";
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = false;
+    };
+  };
 
   users.users.nico.extraGroups = [ "docker" ];
 
