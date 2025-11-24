@@ -8,12 +8,12 @@ in
   imports = with nixos-raspberrypi.nixosModules; [
     raspberry-pi-5.base
     raspberry-pi-5.bluetooth
-    raspberry-pi-5.bluetooth
+    usb-ethernet-gadget
     sd-image
-    
+
     ../../modules/nixos
   ];
-  
+
   system = {
     enable = true;
     sops.enable = true;

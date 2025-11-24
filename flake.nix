@@ -172,7 +172,7 @@
       };
 
       deploy.nodes.travelrouter = {
-        hostname = "travelrouter";
+        hostname = "192.168.2.103";
         remoteBuild = true;
         interactiveSudo = true;
         profiles.system = {
