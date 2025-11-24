@@ -221,6 +221,21 @@
       }
     },
     "flake-compat_3": {
+      "locked": {
+        "lastModified": 1761588595,
+        "narHash": "sha256-XKUZz9zewJNUj46b4AJdiRZJAvSZ0Dqj2BNfXvFlJC4=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "f387cd2afec9419c8ee37694406ca490c3f34ee5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-compat_4": {
       "flake": false,
       "locked": {
         "lastModified": 1751685974,
@@ -451,21 +466,22 @@
     "nixos-raspberrypi": {
       "inputs": {
         "argononed": "argononed",
+        "flake-compat": "flake-compat_3",
         "nixos-images": "nixos-images",
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1758967172,
-        "narHash": "sha256-zRASAVS7tX7gPdvCUbi2m7KGX0jNuMlaOFqbkUZhu9k=",
+        "lastModified": 1763810751,
+        "narHash": "sha256-OiLqjLOPmYHsKI2obQ10V7IoDTWRQbbIln0P99562ws=",
         "owner": "nvmd",
         "repo": "nixos-raspberrypi",
-        "rev": "09c214a30e5a27e0fa92a9975b91c82ba05d1f17",
+        "rev": "638fdc1695c068fbb80ff7252b3b576b13746dbc",
         "type": "github"
       },
       "original": {
         "owner": "nvmd",
-        "ref": "main",
         "repo": "nixos-raspberrypi",
+        "rev": "638fdc1695c068fbb80ff7252b3b576b13746dbc",
         "type": "github"
       }
     },
@@ -519,11 +535,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1758583444,
-        "narHash": "sha256-OnYthHIsVIMrZDWtCEp6Zde8ZtMcEBnpyCIdtTKU7bo=",
+        "lastModified": 1761934558,
+        "narHash": "sha256-0gB7tv25nPv+Vkr9YNi6gOEpX5cuDTnaTZlRNHZfgqA=",
         "owner": "nvmd",
         "repo": "nixpkgs",
-        "rev": "d8551a2038e21091fce8157e070bdb25dca0a94f",
+        "rev": "791ec2ce5034ba9658e12ee4c33a001a38f5280a",
         "type": "github"
       },
       "original": {
@@ -629,7 +645,7 @@
     },
     "nvf": {
       "inputs": {
-        "flake-compat": "flake-compat_3",
+        "flake-compat": "flake-compat_4",
         "flake-parts": "flake-parts_2",
         "mnw": "mnw",
         "nixpkgs": [
