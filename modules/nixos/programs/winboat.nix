@@ -1,4 +1,9 @@
-{ lib, pkgs, config, inputs, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 let
   cfg = config.programs.winboat;
@@ -10,8 +15,8 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
-      inputs.winboat.packages.x86_64-linux.winboat
       pkgs.freerdp
+      pkgs.winboat
     ];
 
     virtualisation.docker.enable = true;

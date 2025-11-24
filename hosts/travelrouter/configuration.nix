@@ -1,4 +1,9 @@
-{ nixos-raspberrypi, config, ... }:
+{
+  nixos-raspberrypi,
+  config,
+  lib,
+  ...
+}:
 
 let
   userName = "nico";
