@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.homelab.services.botify;
@@ -9,23 +14,27 @@ let
 
   pycordPkg = pkgs.python313Packages.pycord.override { voiceSupport = true; };
 
-  pythonEnvironment = pkgs.python313.withPackages(p: with p; [
-    pycordPkg
-    python-dotenv
-    pexpect
-    aiohttp
-    mcstatus
-    requests
-    # We need to replace discord.py with pycord in the wavelink
-    # build inputs, otherwise we'll have two derivations providing
-    # the discord namespace
-    (wavelink.overridePythonAttrs (old: {
-      dependencies =
-        (builtins.filter (pkg: pkg.pname != "discord.py")
-          (old.propagatedBuildInputs or []))
-        ++ [ pycordPkg ];
-    }))
-  ]);
+  pythonEnvironment = pkgs.python313.withPackages (
+    p: with p; [
+      pycordPkg
+      python-dotenv
+      pexpect
+      (aiohttp.overridePythonAttrs (old: {
+        dependencies = builtins.filter (x: x.pname != "aiodns") old.dependencies;
+        doCheck = false;
+      }))
+      mcstatus
+      requests
+      # We need to replace discord.py with pycord in the wavelink
+      # build inputs, otherwise we'll have two derivations providing
+      # the discord namespace
+      (wavelink.overridePythonAttrs (old: {
+        dependencies =
+          (builtins.filter (pkg: pkg.pname != "discord.py") (old.propagatedBuildInputs or [ ]))
+          ++ [ pycordPkg ];
+      }))
+    ]
+  );
 
   botify = pkgs.fetchFromGitHub {
     owner = "nicoladen05";
@@ -54,8 +63,8 @@ in
         EnvironmentFile = cfg.tokenFile;
         # Required for minecraft server commands
         Environment = "PATH=${pkgs.openssh}/bin:/run/current-system/sw/bin:/bin:/usr/bin";
-        User="${config.system.userName}";
-        Group="users";
+        User = "${config.system.userName}";
+        Group = "users";
       };
     };
   };

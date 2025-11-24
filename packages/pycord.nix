@@ -1,7 +1,7 @@
-{ 
+{
   python313Packages,
   fetchFromGitHub,
-  voiceSupport ? false
+  voiceSupport ? false,
 }:
 
 python313Packages.buildPythonPackage {
@@ -16,15 +16,21 @@ python313Packages.buildPythonPackage {
     sha256 = "sha256-CB7qAMjLazGRIH1idgvY3pRWCwbOeibgNtK4k3SgWVc=";
   };
 
-  build-system = with python313Packages; [ 
+  build-system = with python313Packages; [
     setuptools
     setuptools-scm
   ];
 
-  dependencies = with python313Packages; [
-    aiohttp
-    typing-extensions
-  ] ++ lib.optionals voiceSupport [pynacl];
+  dependencies =
+    with python313Packages;
+    [
+      (aiohttp.overridePythonAttrs (old: {
+        dependencies = builtins.filter (x: x.pname != "aiodns") old.dependencies;
+        doCheck = false;
+      }))
+      typing-extensions
+    ]
+    ++ lib.optionals voiceSupport [ pynacl ];
 
   postPatch = ''
     substituteInPlace pyproject.toml \
