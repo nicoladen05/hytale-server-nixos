@@ -48,7 +48,6 @@
           };
           treesitter.enable = true;
           format.enable = false;
-          format.package = pkgs.alejandra;
           format.type = "alejandra";
         };
         python = {
