@@ -8,7 +8,7 @@ in
   imports = with nixos-raspberrypi.nixosModules; [
     raspberry-pi-5.base
     raspberry-pi-5.bluetooth
-    usb-ethernet-gadget
+    usb-gadget-ethernet
     sd-image
 
     ../../modules/nixos
