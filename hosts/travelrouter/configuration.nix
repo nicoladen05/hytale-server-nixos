@@ -1,7 +1,6 @@
 {
   nixos-raspberrypi,
   config,
-  lib,
   ...
 }:
 
