@@ -44,26 +44,29 @@
           enable = true;
           lsp = {
             enable = true;
-            servers = ["nixd"];
+            servers = [ "nixd" ];
           };
           treesitter.enable = true;
           format.enable = false;
-          format.type = "alejandra";
+          format.type = [ "alejandra" ];
         };
         python = {
           enable = true;
           lsp.enable = true;
-          lsp.servers = ["pyright"];
+          lsp.servers = [ "pyright" ];
           format.enable = true;
-          format.type = "black-and-isort";
+          format.type = [
+            "black"
+            "isort"
+          ];
         };
         ts = {
           enable = true;
           extraDiagnostics.enable = true;
           format.enable = true;
-          format.type = "prettierd";
+          format.type = [ "prettierd" ];
           lsp.enable = true;
-          lsp.servers = ["ts_ls"];
+          lsp.servers = [ "ts_ls" ];
           treesitter.enable = true;
         };
         html = {
