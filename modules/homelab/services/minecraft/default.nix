@@ -19,6 +19,15 @@
         type = lib.types.attrsOf (
           lib.types.submodule {
             options = {
+              port = lib.mkOption {
+                type = lib.types.int;
+                default = 25565;
+                example = 25565;
+                description = ''
+                  The port on which the Minecraft server will listen.
+                '';
+              };
+
               type = lib.mkOption {
                 type = lib.types.enum [
                   "vanilla"
@@ -30,7 +39,7 @@
                 default = "vanilla";
                 example = "fabric";
                 description = ''
-                  The type of Minecraft server to run. 
+                  The type of Minecraft server to run.
                   - `vanilla`: The official Minecraft server.
                   - `fabric`: A lightweight modding toolchain.
                   - `forge`: A popular modding platform.
@@ -127,7 +136,8 @@
         {
           enable = true;
           jvmOpts = "-Xmx${serverConfig.ram} -Xms${serverConfig.ram}";
-          package = package;
+          inherit package;
+          inherit (serverConfig) port;
 
           # only add symlinks when packwiz is enabled
           symlinks = lib.optionalAttrs ((serverConfig.packwiz != null) && serverConfig.packwiz.enable) {
