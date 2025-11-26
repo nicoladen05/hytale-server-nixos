@@ -1,0 +1,19 @@
+// Project tasks configuration. See https://zed.dev/docs/tasks for documentation.
+//
+// Example:
+[
+  {
+    "label": "Deploy server",
+    "command": "nix develop -c deploy .#server",
+    "reveal": "no_focus",
+    "reveal_target": "dock",
+    "hide": "on_success"
+  },
+  {
+    "label": "Deploy vps",
+    "command": "nix develop -c deploy .#vps",
+    "reveal": "no_focus",
+    "reveal_target": "dock",
+    "hide": "on_success"
+  }
+]
