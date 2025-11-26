@@ -306,19 +306,19 @@ in
                           }
                         ];
                       }
-                      {
-                        type = "group";
-                        widgets = [
-                          {
-                            type = "extension";
-                            title = "Core ONE";
-                            url = "http://192.168.2.39:5000";
-                            cache = "1s";
-                            allow-potentially-dangerous-html = true;
-                          }
-                          (klipperCard "Anycubic i3" "192.168.2.104")
-                        ];
-                      }
+                      # {
+                      #   type = "group";
+                      #   widgets = [
+                      #     {
+                      #       type = "extension";
+                      #       title = "Core ONE";
+                      #       url = "http://192.168.2.39:5000";
+                      #       cache = "1s";
+                      #       allow-potentially-dangerous-html = true;
+                      #     }
+                      #     (klipperCard "Anycubic i3" "192.168.2.104")
+                      #   ];
+                      # }
                     ];
                   }
                 ];
