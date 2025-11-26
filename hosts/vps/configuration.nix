@@ -1,7 +1,8 @@
 {
-  modulesPath,
   config,
   inputs,
+  lib,
+  modulesPath,
   pkgs,
   ...
 }:
@@ -63,21 +64,21 @@ in
         ];
       };
 
-      minecraft-server = {
-        enable = true;
-        servers = {
-          chill_modded = {
-            type = "fabric";
-            version = "1.21.1";
-            ram = "6G";
-            packwiz = {
-              enable = true;
-              url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/refs/heads/addon/immersive/pack.toml";
-              packHash = "sha256-2HogG+bCESJyazvpkwo2W2tOrnmUfoebBpip6IjBclU=";
-            };
-          };
+      minecraft-server =
+        let
+          servers = import ../../configs/minecraft/servers.nix;
+          filteredServers = lib.filterAttrs (_: server: server.host == "vps") servers;
+        in
+        {
+          enable = true;
+          servers = lib.mapAttrs (
+            name: config:
+            builtins.removeAttrs config [
+              "host"
+              "domain"
+            ]
+          ) filteredServers;
         };
-      };
 
       n8n.enable = true;
 

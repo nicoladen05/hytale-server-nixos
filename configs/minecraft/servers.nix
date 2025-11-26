@@ -1,15 +1,14 @@
 {
-  immersive = {
-    name = "Immersive Surival";
-    version = "1.21.1";
-    type = "fabric";
-    host = "server";
-    ram = "6G";
+  chill_modded = {
+    host = "vps";
     domain = "mc.nicoladen.dev";
-    mods = {
+    type = "fabric";
+    version = "1.21.1";
+    ram = "6G";
+    packwiz = {
       enable = true;
-      packwizUrl = "";
-      packwizHash = "";
+      url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/refs/heads/addon/immersive/pack.toml";
+      packHash = "sha256-2HogG+bCESJyazvpkwo2W2tOrnmUfoebBpip6IjBclU=";
     };
   };
 }
