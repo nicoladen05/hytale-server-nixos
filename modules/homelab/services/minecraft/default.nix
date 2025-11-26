@@ -137,7 +137,10 @@
           enable = true;
           jvmOpts = "-Xmx${serverConfig.ram} -Xms${serverConfig.ram}";
           inherit package;
-          inherit (serverConfig) port;
+
+          serverProperties = {
+            server-port = serverConfig.port;
+          };
 
           # only add symlinks when packwiz is enabled
           symlinks = lib.optionalAttrs ((serverConfig.packwiz != null) && serverConfig.packwiz.enable) {
