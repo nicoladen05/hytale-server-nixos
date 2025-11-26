@@ -12,6 +12,7 @@
       packHash = "sha256-2HogG+bCESJyazvpkwo2W2tOrnmUfoebBpip6IjBclU=";
     };
   };
+
   survival_latest = {
     host = "vps";
     domain = "mc.nicoladen.dev";
@@ -20,6 +21,8 @@
     ram = "4G";
     packwiz = {
       enable = false;
+      url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/9893e9f3ca9a41f0f5b580d249fb6d0d93db0a26/pack.toml";
+      packHash = "";
     };
   };
 }
