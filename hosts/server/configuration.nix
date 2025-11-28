@@ -81,6 +81,8 @@ in
 
       vaultwarden.enable = true;
 
+      spoolman.enable = true;
+
       ocis.enable = true;
 
       wireguard = {

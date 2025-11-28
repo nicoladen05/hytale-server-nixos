@@ -19,6 +19,7 @@
     ./paperless
     ./pihole
     ./pyrodactyl
+    ./spoolman
     ./vaultwarden
     ./windows
     ./wireguard
