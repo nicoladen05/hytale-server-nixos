@@ -50,7 +50,7 @@ in
       serviceConfig = {
         Type = "simple";
         Restart = "always";
-        ExecStart = "${filabridgePkg} --port ${builtins.toString cfg.port} --host ${cfg.host}";
+        ExecStart = "${filabridgePkg}/bin/filabridge --port ${builtins.toString cfg.port} --host ${cfg.host}";
         WorkingDirectory = cfg.dataDir;
 
         User = cfg.user;
