@@ -35,6 +35,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    systemd.tmpfiles.rules = [ "d ${cfg.dataDir} 0755 ${cfg.user} ${cfg.group} -" ];
+
     users.users.${cfg.user} = {
       isSystemUser = true;
       inherit (cfg) group;
