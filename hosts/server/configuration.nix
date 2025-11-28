@@ -82,6 +82,7 @@ in
       vaultwarden.enable = true;
 
       spoolman.enable = true;
+      spoolman.filabridge.enable = true;
 
       ocis.enable = true;
 

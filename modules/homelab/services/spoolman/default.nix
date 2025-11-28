@@ -4,6 +4,10 @@ let
   cfg = config.homelab.services.spoolman;
 in
 {
+  imports = [
+    ./filabridge.nix
+  ];
+
   options.homelab.services.spoolman = {
     enable = lib.mkEnableOption "spoolman";
     port = lib.mkOption {
