@@ -56,6 +56,11 @@
     };
 
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+
+    prusa-octoapp-proxy = {
+        url = "github:nicoladen05/prusa-octoapp-proxy";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -90,6 +95,7 @@
           stylix.nixosModules.stylix
           nvf.nixosModules.default
           nix-minecraft.nixosModules.minecraft-servers
+          prusa-octoapp-proxy.nixosModules.default
         ];
       };
 
@@ -103,6 +109,7 @@
           stylix.nixosModules.stylix
           nvf.nixosModules.default
           nix-minecraft.nixosModules.minecraft-servers
+          prusa-octoapp-proxy.nixosModules.default
         ];
       };
 

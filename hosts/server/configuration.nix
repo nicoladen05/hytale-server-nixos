@@ -84,6 +84,8 @@ in
       spoolman.enable = true;
       spoolman.filabridge.enable = true;
 
+      prusa-octoapp-proxy.enable = true;
+
       ocis.enable = true;
 
       wireguard = {

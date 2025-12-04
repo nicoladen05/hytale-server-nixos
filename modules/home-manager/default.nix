@@ -1,6 +1,5 @@
 {
   userName,
-  inputs,
   lib,
   config,
   ...
@@ -30,14 +29,6 @@
 
   config = lib.mkIf config.home-manager.enable {
     programs.home-manager.enable = true;
-
-    xdg.userDirs = {
-      enable = true;
-      documents = "$HOME/docs";
-      download = "$HOME/dl";
-      videos = "$HOME/vids";
-      pictures = "$HOME/pics";
-    };
 
     programs.git = {
       enable = true;

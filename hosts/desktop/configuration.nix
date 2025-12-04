@@ -22,7 +22,7 @@ in
     extraSpecialArgs = {
       inherit inputs userName;
     };
-    users = { 
+    users = {
       "${userName}" = import ./home.nix;
     };
   };
@@ -83,7 +83,7 @@ in
   # Graphical configuration
   desktop = {
     audio.enable = true;
-    hyprland.enable = true;
+    kde.enable = true;
 
     # Colors
     stylix = {

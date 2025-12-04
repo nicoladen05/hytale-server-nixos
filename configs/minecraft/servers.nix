@@ -20,9 +20,9 @@
     version = "1.21.10";
     ram = "4G";
     packwiz = {
-      enable = false;
-      url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/9893e9f3ca9a41f0f5b580d249fb6d0d93db0a26/pack.toml";
-      packHash = "";
+      enable = true;
+      url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/refs/heads/master/pack.toml";
+      packHash = "sha256-+0igIFjh4N3JFZ3++zVMPyoNAK4uW3w4NnelrFIkCeU=";
     };
   };
 }

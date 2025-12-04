@@ -18,6 +18,7 @@
     ./ocis
     ./paperless
     ./pihole
+    ./prusa-octoapp-proxy
     ./pyrodactyl
     ./spoolman
     ./vaultwarden
