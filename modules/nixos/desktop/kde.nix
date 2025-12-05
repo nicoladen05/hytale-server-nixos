@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options = {
     desktop.kde.enable = lib.mkEnableOption "KDE Plasma desktop environment";
   };
@@ -12,7 +13,7 @@
       desktopManager.plasma6.enable = true;
       displayManager.sddm.enable = true;
       displayManager.sddm.wayland.enable = true;
-      services.displayManager.sddm.settings.General.DisplayServer = "wayland";
+      displayManager.sddm.settings.General.DisplayServer = "wayland";
     };
   };
 }

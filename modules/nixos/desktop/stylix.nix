@@ -28,6 +28,7 @@
   config = lib.mkIf config.desktop.stylix.enable {
     stylix.enable = true;
     stylix.targets.console.enable = false;
+    stylix.autoEnable = false;
 
     stylix.targets.nvf = {
       enable = true;
@@ -57,10 +58,10 @@
     #   base0F = "B66467";
     # };
 
-    stylix.image = pkgs.fetchurl {
-      url = "${config.desktop.stylix.wallpaper}";
-      sha256 = "${config.desktop.stylix.wallpaperHash}}";
-    };
+    # stylix.image = pkgs.fetchurl {
+    #   url = "${config.desktop.stylix.wallpaper}";
+    #   sha256 = "${config.desktop.stylix.wallpaperHash}}";
+    # };
 
     # stylix.cursor.package = pkgs.banana-cursor;
     # stylix.cursor.name = "Banana";
