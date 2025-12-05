@@ -4,6 +4,5 @@
   imports = [
     ./hyprland
     ./gnome
-    ./kde
   ];
 }

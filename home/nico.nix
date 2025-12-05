@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -15,6 +15,7 @@
     enable = true;
     zsh.enable = true;
     tmux.enable = true;
+    direnv.enable = true;
   };
 
   # NVF
