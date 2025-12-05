@@ -63,6 +63,7 @@ in
       };
       extraOptions = [
         "--network=host"
+        "--pull=newer"
         "--dns=${network.clients.router.ip}"
       ];
     };
@@ -81,6 +82,7 @@ in
       };
       extraOptions = [
         "--network=host"
+        "--pull=newer"
         "--dns=${network.clients.router.ip}"
       ];
     };

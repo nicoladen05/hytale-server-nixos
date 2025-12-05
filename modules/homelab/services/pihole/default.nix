@@ -50,6 +50,7 @@ in
         FTLCONF_webserver_api_password = "correct horse battery staple";
         FTLCONF_dns_listeningMode = "all";
       };
+      extraOptions = [ "--pull=newer" ];
     };
 
     networking.firewall.allowedTCPPorts = [
