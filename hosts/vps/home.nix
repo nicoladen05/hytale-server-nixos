@@ -13,6 +13,7 @@
   home-manager = {
     enable = true;
 
+    direnv.enable = true;
     zsh.enable = true;
     tmux.enable = true;
     yazi.enable = true;
