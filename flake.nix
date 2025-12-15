@@ -61,6 +61,11 @@
         url = "github:nicoladen05/prusa-octoapp-proxy";
         inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    flux = {
+      url = "github:IogaMaster/flux";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

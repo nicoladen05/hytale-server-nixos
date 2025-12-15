@@ -42,6 +42,8 @@ in
     baseDomain = "nicoladen.dev";
 
     services = {
+      assetto-corsa-server.enable = false;
+
       backup = {
         enable = true;
         repositoryFile = config.sops.secrets."restic/repository".path;

@@ -5,6 +5,7 @@
     ./caddy.nix
     ./ddns.nix
 
+    ./assetto-corsa-server
     ./backup
     ./blocky
     ./botify
