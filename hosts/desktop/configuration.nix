@@ -90,8 +90,8 @@ in
     stylix = {
       enable = true;
       colorScheme = "catppuccin-mocha";
-      wallpaper = "https://raw.githubusercontent.com/orangci/walls-catppuccin-mocha/master/keyboard.png";
-      wallpaperHash = "sha256-IUkujJbnij/Xa79oCo+92dKcpEOpsF2pBPIvLB1+OWQ=";
+      wallpaper = "https://images.unsplash.com/photo-1762112800032-b8d8119557b8?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=the-walters-art-museum-gjIIkr9-8qc-unsplash.jpg";
+      wallpaperHash = "sha256-b9c71bedda09df5a57f623cf88c595eeea8341bd144f81587a7760841bf395e7";
     };
   };
 
