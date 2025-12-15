@@ -35,15 +35,9 @@ in
     passwordlessRebuild = true;
 
     shell = pkgs.zsh;
-
-    tcpPorts = [
-      16662
-      25565
-      25566
-      25567
-      3000
-    ];
   };
+
+  programs.nix-ld.enable = true;
 
   homelab = {
     enable = true;
