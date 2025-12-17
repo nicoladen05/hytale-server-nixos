@@ -35,6 +35,8 @@ in
     passwordlessRebuild = true;
 
     shell = pkgs.zsh;
+
+    udpPorts = [ 24454 ];
   };
 
   programs.nix-ld.enable = true;
@@ -74,7 +76,7 @@ in
           ) filteredServers;
         };
 
-      n8n.enable = true;
+      # n8n.enable = true;
 
       glance.agent = {
         enable = true;

@@ -33,7 +33,7 @@
 
     stylix.url = "github:danth/stylix";
 
-    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/638fdc1695c068fbb80ff7252b3b576b13746dbce";
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi";
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";

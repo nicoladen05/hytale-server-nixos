@@ -1,15 +1,15 @@
 {
-  chill_modded = {
+  arthem_survival = {
     host = "vps";
     domain = "mc2.nicoladen.dev";
     port = 25566;
     type = "fabric";
-    version = "1.21.1";
-    ram = "6G";
+    version = "1.21.11";
+    ram = "4G";
     packwiz = {
       enable = true;
-      url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/refs/heads/addon/immersive/pack.toml";
-      packHash = "sha256-2HogG+bCESJyazvpkwo2W2tOrnmUfoebBpip6IjBclU=";
+      url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/refs/heads/master/pack.toml";
+      packHash = "sha256-0BPB0zxFQyM1SqAPD6O/uBKyAceBBzFdH0+p/1fVsvQ=";
     };
   };
 
@@ -17,12 +17,12 @@
     host = "vps";
     domain = "mc.nicoladen.dev";
     type = "fabric";
-    version = "1.21.10";
+    version = "1.21.11";
     ram = "4G";
     packwiz = {
       enable = true;
       url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/refs/heads/master/pack.toml";
-      packHash = "sha256-+0igIFjh4N3JFZ3++zVMPyoNAK4uW3w4NnelrFIkCeU=";
+      packHash = "sha256-0BPB0zxFQyM1SqAPD6O/uBKyAceBBzFdH0+p/1fVsvQ=";
     };
   };
 }
