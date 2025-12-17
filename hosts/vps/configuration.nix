@@ -54,9 +54,10 @@ in
         tokenFile = config.sops.secrets."cloudflare/api_token".path;
         domains = [
           "mc.nicoladen.dev"
+          "mc2.nicoladen.dev"
           "vps.nicoladen.dev"
           "n8n.nicoladen.dev"
-          "panel.nicoladen.dev"
+          "minio.nicoladen.dev"
         ];
       };
 
@@ -82,6 +83,8 @@ in
         enable = true;
         settings.tokenFile = config.sops.templates."glance/vps_remote_env".path;
       };
+
+      minio.enable = false;
 
       pyrodactyl.enable = false;
     };

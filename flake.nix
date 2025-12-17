@@ -152,6 +152,16 @@
       devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShell {
         packages = [
           inputs.deploy-rs.packages.x86_64-linux.deploy-rs
+          pkgs.nil
+          pkgs.nixd
+        ];
+      };
+
+      devShells.aarch64-linux.default = nixpkgs.legacyPackages.aarch64-linux.mkShell {
+        packages = [
+          inputs.deploy-rs.packages.aarch64-linux.deploy-rs
+          pkgs.nil
+          pkgs.nixd
         ];
       };
 

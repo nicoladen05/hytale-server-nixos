@@ -14,6 +14,7 @@
     ./immich
     ./media
     ./minecraft
+    ./minio
     ./n8n
     ./ocis
     ./paperless
