@@ -40,6 +40,7 @@ in
   };
 
   programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = [ pkgs.flite ];
 
   homelab = {
     enable = true;
