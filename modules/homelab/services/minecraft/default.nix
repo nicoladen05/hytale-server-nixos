@@ -81,6 +81,15 @@
                 '';
               };
 
+              properties = lib.mkOption {
+                type = lib.types.attrs;
+                default = {};
+                description = ''
+                  Additional properties to pass to the Minecraft server.
+                  These should be key-value pairs.
+                '';
+              };
+
               packwiz = lib.mkOption {
                 type = lib.types.submodule {
                   options = {
@@ -138,7 +147,7 @@
           jvmOpts = "-Xmx${serverConfig.ram} -Xms${serverConfig.ram}";
           inherit package;
 
-          serverProperties = {
+          serverProperties = serverConfig.properties // {
             server-port = serverConfig.port;
           };
 

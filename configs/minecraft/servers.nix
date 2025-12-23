@@ -6,6 +6,9 @@
     type = "fabric";
     version = "1.21.11";
     ram = "4G";
+    properties = {
+      difficulty = "hard";
+    };
     packwiz = {
       enable = true;
       url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/refs/heads/master/pack.toml";
