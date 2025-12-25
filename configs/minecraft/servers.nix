@@ -1,3 +1,6 @@
+let
+  whitelist = import ./whitelist.nix;
+in
 {
   arthem_survival = {
     host = "vps";
@@ -6,6 +9,7 @@
     type = "fabric";
     version = "1.21.11";
     ram = "4G";
+    whitelist = whitelist.luca;
     properties = {
       difficulty = "hard";
     };
@@ -22,6 +26,7 @@
     type = "fabric";
     version = "1.21.11";
     ram = "4G";
+    whitelist = whitelist.default;
     packwiz = {
       enable = true;
       url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/refs/heads/master/pack.toml";

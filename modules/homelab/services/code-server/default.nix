@@ -27,7 +27,7 @@ in
       port = 8443;
     };
 
-    users.users.code-server.packages = [ pkgs.python314 ];
+    users.users.code-server.packages = [ pkgs.python314 pkgs.python314Packages.pip ];
 
     networking.firewall.allowedTCPPorts = [ 8443 ];
   };

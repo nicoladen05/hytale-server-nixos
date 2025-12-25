@@ -90,6 +90,15 @@
                 '';
               };
 
+              whitelist = lib.mkOption {
+                type = lib.types.attrsOf lib.types.str;
+                default = {};
+                description = ''
+                  A whitelist of players allowed to join the server.
+                  The keys are player names, and the values are their UUIDs.
+                '';
+              };
+
               packwiz = lib.mkOption {
                 type = lib.types.submodule {
                   options = {
@@ -146,9 +155,11 @@
           enable = true;
           jvmOpts = "-Xmx${serverConfig.ram} -Xms${serverConfig.ram}";
           inherit package;
+          inherit (serverConfig) whitelist;
 
           serverProperties = serverConfig.properties // {
             server-port = serverConfig.port;
+            white-list = if serverConfig.whitelist == {} then false else true;
           };
 
           # only add symlinks when packwiz is enabled
