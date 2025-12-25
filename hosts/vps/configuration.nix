@@ -78,7 +78,7 @@ in
           ) filteredServers;
         };
 
-      # n8n.enable = true;
+      n8n.enable = true;
 
       glance.agent = {
         enable = true;
