@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  network,
+  pkgs,
   ...
 }:
 
@@ -25,8 +25,9 @@ in
       enable = true;
       host = "0.0.0.0";
       port = 8443;
-      userDataDir = "/var/lib/code-server";
     };
+
+    users.users.code-server.packages = [ pkgs.python314 ];
 
     networking.firewall.allowedTCPPorts = [ 8443 ];
   };
