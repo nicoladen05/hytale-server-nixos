@@ -116,6 +116,13 @@ in
             ];
             endpoint = "ddns.nicoladen.dev:51820";
           };
+          ipad-luca = {
+            publicKey = "83uqVPr2ojPfNDFa0FWy1o6A6qgGJZmeRAR/5rPBVjs=";
+            allowedIPs = [
+              "192.168.255.3/32"
+            ];
+            endpoint = "ddns.nicoladen.dev:51820";
+          };
         };
       };
     };
