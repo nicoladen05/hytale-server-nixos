@@ -83,7 +83,7 @@
 
               properties = lib.mkOption {
                 type = lib.types.attrs;
-                default = {};
+                default = { };
                 description = ''
                   Additional properties to pass to the Minecraft server.
                   These should be key-value pairs.
@@ -92,11 +92,28 @@
 
               whitelist = lib.mkOption {
                 type = lib.types.attrsOf lib.types.str;
-                default = {};
+                default = { };
                 description = ''
                   A whitelist of players allowed to join the server.
                   The keys are player names, and the values are their UUIDs.
                 '';
+              };
+
+              mods = lib.mkOption {
+                type = lib.types.submodule {
+                  options = {
+                    enable = lib.mkOption {
+                      type = lib.types.bool;
+                      default = false;
+                      description = "Enable custom mods for this server.";
+                    };
+                    mods = lib.mkOption {
+                      type = lib.types.attrsOf lib.types.package;
+                      default = { };
+                    };
+                  };
+                };
+                default = { };
               };
 
               packwiz = lib.mkOption {
@@ -159,13 +176,20 @@
 
           serverProperties = serverConfig.properties // {
             server-port = serverConfig.port;
-            white-list = if serverConfig.whitelist == {} then false else true;
+            white-list = if serverConfig.whitelist == { } then false else true;
           };
 
           # only add symlinks when packwiz is enabled
-          symlinks = lib.optionalAttrs ((serverConfig.packwiz != null) && serverConfig.packwiz.enable) {
-            mods = "${modpack}/mods";
-          };
+          symlinks =
+            lib.optionalAttrs ((serverConfig.packwiz != null) && serverConfig.packwiz.enable) {
+              mods = "${modpack}/mods";
+            }
+            // lib.optionalAttrs (serverConfig.mods.enable) (
+              lib.mapAttrs' (name: mod: {
+                name = "mods/${name}.jar";
+                value = mod;
+              }) serverConfig.mods.mods
+            );
         }
       ) config.homelab.services.minecraft-server.servers;
     };

@@ -1,5 +1,8 @@
+{ pkgs, ... }:
+
 let
   whitelist = import ./whitelist.nix;
+  mods = import ./mods.nix { inherit pkgs; };
 in
 {
   arthem_survival = {
@@ -13,10 +16,9 @@ in
     properties = {
       difficulty = "hard";
     };
-    packwiz = {
+    mods = {
       enable = true;
-      url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/refs/heads/master/pack.toml";
-      packHash = "sha256-0BPB0zxFQyM1SqAPD6O/uBKyAceBBzFdH0+p/1fVsvQ=";
+      mods = mods.default // mods.cheaty;
     };
   };
 
@@ -27,10 +29,9 @@ in
     version = "1.21.11";
     ram = "4G";
     whitelist = whitelist.default;
-    packwiz = {
+    mods = {
       enable = true;
-      url = "https://raw.githubusercontent.com/nicoladen05/minecraft-mods/refs/heads/master/pack.toml";
-      packHash = "sha256-0BPB0zxFQyM1SqAPD6O/uBKyAceBBzFdH0+p/1fVsvQ=";
+      mods = mods.default // mods.building;
     };
   };
 }

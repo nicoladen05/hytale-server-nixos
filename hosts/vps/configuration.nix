@@ -64,7 +64,7 @@ in
 
       minecraft-server =
         let
-          servers = import ../../configs/minecraft/servers.nix;
+          servers = import ../../configs/minecraft/servers.nix { inherit pkgs; };
           filteredServers = lib.filterAttrs (_: server: server.host == "vps") servers;
         in
         {
@@ -114,11 +114,6 @@ in
   };
 
   nvf.enable = true;
-  programs.nvf.settings.vim.theme = {
-    enable = true;
-    name = "github";
-    style = "dark_dimmed";
-  };
 
   stylix = {
     enable = true;

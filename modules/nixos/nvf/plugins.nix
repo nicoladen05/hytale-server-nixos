@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 {
   config = lib.mkIf config.nvf.enable {
     programs.nvf.settings.vim = {
@@ -103,6 +103,19 @@
           file3 = "<C-i>";
           file4 = "<C-o>";
           listMarks = "<C-l>";
+        };
+      };
+
+      extraPlugins = {
+        neovim-ayu = {
+          package = pkgs.vimPlugins.neovim-ayu;
+          setup = ''
+            require('ayu').setup({
+              mirage = false, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
+              terminal = true, -- Set to `false` to let terminal manage its own colors.
+              overrides = {}, -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
+            })
+          '';
         };
       };
     };
