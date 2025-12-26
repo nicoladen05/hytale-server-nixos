@@ -123,6 +123,13 @@ in
             ];
             endpoint = "ddns.nicoladen.dev:51820";
           };
+          micha = {
+            publicKey = "0yiBvElispoc7aktPpL4N7YBmMa3YIPqFq+moR2FUlc=";
+            allowedIPs = [
+              "192.168.255.5/32"
+            ];
+            endpoint = "ddns.nicoladen.dev:51820";
+          };
         };
       };
     };
