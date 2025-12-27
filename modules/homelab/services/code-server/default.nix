@@ -29,7 +29,7 @@ in
 
     users.users.code-server.packages = [ 
       pkgs.python313 
-      pkgs.python313.tkinter
+      pkgs.python313Packages.tkinter
       pkgs.xvfb-run
       pkgs.uv 
     ];
