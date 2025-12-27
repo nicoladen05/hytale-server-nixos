@@ -16,8 +16,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - uses: DeterminateSystems/determinate-nix-action@v3
-      - uses: DeterminateSystems/update-flake-lock@main
+      - name: Install nix
+        uses: DeterminateSystems/determinate-nix-action@v3
+
+      - name: Update flake
+        run: |
+          nix flake update
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
