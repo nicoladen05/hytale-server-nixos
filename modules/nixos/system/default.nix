@@ -198,5 +198,13 @@
       automatic = true;
       dates = [ "03:45" ];
     };
+
+    system.autoUpgrade = {
+      enable = true;
+      flake = "github:nicoladen05/nix#${config.system.hostName}";
+      dates = "4:00";
+      flags = [ "-L "];
+      allowReboot = true;
+    };
   };
 }
