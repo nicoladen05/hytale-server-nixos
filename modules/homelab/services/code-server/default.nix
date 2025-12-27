@@ -28,8 +28,9 @@ in
     };
 
     users.users.code-server.packages = [ 
-      pkgs.python313 
-      pkgs.python313Packages.tkinter
+      pkgs.python313.withPackages [
+        pkgs.python313Packages.tkinter
+      ]
       pkgs.xvfb-run
       pkgs.uv 
     ];
