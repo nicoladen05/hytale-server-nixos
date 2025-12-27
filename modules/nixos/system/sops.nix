@@ -51,5 +51,7 @@
 
     sops.secrets."glance_restic/password" = { };
     sops.secrets."glance_restic/url" = { };
+
+    sops.secrets."crowdsec/enrollment_key" = { };
   };
 }

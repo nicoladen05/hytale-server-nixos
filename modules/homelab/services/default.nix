@@ -3,6 +3,7 @@
 {
   imports = [
     ./caddy.nix
+    ./crowdsec.nix
     ./ddns.nix
 
     ./assetto-corsa-server
