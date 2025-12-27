@@ -2,19 +2,25 @@ name: update-dependencies
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 0 * * *'
 
 jobs:
-  update-dependencies:
+  nix-flake-update:
+    permissions:
+      contents: write
+      id-token: write
+      issues: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@v12
-      - id: update
-        uses: DeterminateSystems/update-flake-lock@v23
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - uses: DeterminateSystems/update-flake-lock@main
       - name: Merge
         run:
           gh pr merge --auto "${{ steps.update.outputs.pull-request-number }}" --rebase
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         if: ${{ steps.update.outputs.pull-request-number != '' }}
+
+        name: "chore: update flake"
