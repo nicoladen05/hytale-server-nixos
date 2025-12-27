@@ -31,7 +31,16 @@ in
           lapi.credentialsFile = "/var/lib/crowdsec/lapi.yaml";
           capi.credentialsFile = "/var/lib/crowdsec/capi.yaml";
 
-          console.tokenFile = config.sops.secrets."crowdsec/enrollment_key".path;
+          console = {
+            tokenFile = config.sops.secrets."crowdsec/enrollment_key".path;
+            configuration = {
+              share_context = true;
+              share_custom = true;
+              share_manual_decisions = true;
+              share_tainted = true;
+              console_management = true;
+            };
+          };
         };
 
         localConfig = {
