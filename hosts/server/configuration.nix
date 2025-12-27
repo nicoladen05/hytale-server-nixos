@@ -138,6 +138,7 @@ in
   # Static ip
   services.resolved.enable = false;
   networking = {
+    nameservers = [ "8.8.8.8" ];
     interfaces.enp1s0.ipv4.addresses = [
       {
         address = "192.168.2.2";
