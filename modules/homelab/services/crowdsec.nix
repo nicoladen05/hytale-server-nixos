@@ -62,6 +62,11 @@ in
 
         hub = {
           collections = [ "crowdsecurity/linux" "crowdsecurity/caddy" ];
+          scenarios = [
+            "gauth-fr/immich-bf"
+            "crowdsecurity/home-assistant-bf"
+            "Dominic-Wagner/vaultwarden-bf"
+          ];
         };
       };
 
