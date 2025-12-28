@@ -136,13 +136,10 @@ in
   };
 
   # Static ip
-  services.resolved = {
-    enable = true;
-    extraConfig = ''
-      DNSStubListener=no
-    '';
-  };
+  services.resolved.enable = false;
   networking = {
+    networkmanager.dns = "none";
+    nameservers = [ "1.1.1.1" ];
     interfaces.enp1s0.ipv4.addresses = [
       {
         address = "192.168.2.2";
