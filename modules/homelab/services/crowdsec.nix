@@ -81,7 +81,7 @@ in
     };
 
     systemd.services.crowdsec-firewall-bouncer = {
-      path = [ pkgs.ipset pkgs.iptables ]; 
+      path = [ pkgs.ipset pkgs.iptables ];
       serviceConfig = {
         CapabilityBoundingSet = [ "CAP_NET_ADMIN" "CAP_NET_RAW" ];
         AmbientCapabilities = [ "CAP_NET_ADMIN" "CAP_NET_RAW" ];
