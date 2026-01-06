@@ -56,7 +56,7 @@ in
       autoStart = true;
       pull = "newer";
       volumes = [
-        "${builtins.toString cfg.configDir}:/config"
+        "${toString cfg.configDir}:/config"
       ];
       environment = {
         TZ = config.system.timeZone;
@@ -74,7 +74,7 @@ in
       pull = "newer";
       privileged = true;
       volumes = [
-        "${builtins.toString cfg.esphomeConfigDir}:/config"
+        "${toString cfg.esphomeConfigDir}:/config"
       ];
       environment = {
         TZ = config.system.timeZone;
@@ -91,7 +91,6 @@ in
       8123
       6052
     ];
-
 
     services.caddy.virtualHosts."${cfg.url}" = lib.mkIf cfg.expose {
       extraConfig = ''
