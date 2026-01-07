@@ -249,12 +249,12 @@ in
                       {
                         title = "Homeassistant";
                         url = "https://home.nicoladen.dev";
-                        icon = "si:homeassistant";
+                        icon = "sh:home-assistant";
                       }
                       {
                         title = "Immich";
                         url = "https://immich.nicoladen.dev";
-                        icon = "si:immich";
+                        icon = "sh:immich";
                       }
                       {
                         title = "OwnCloud";
@@ -269,12 +269,22 @@ in
                       {
                         title = "n8n";
                         url = "https://n8n.nicoladen.dev";
-                        icon = "si:n8n";
+                        icon = "sh:n8n";
                       }
                       {
                         title = "Pihole";
                         url = "http://192.168.2.2:8081/admin";
-                        icon = "si:pihole";
+                        icon = "sh:pi-hole";
+                      }
+                      {
+                        title = "Spoolman";
+                        url = "http://192.168.2.2:7912";
+                        icon = "sh:spoolman";
+                      }
+                      {
+                        title = "ESPHome";
+                        url = "http://192.168.2.2:6052";
+                        icon = "sh:esphome";
                       }
                     ];
                   }
