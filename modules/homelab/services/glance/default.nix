@@ -262,6 +262,11 @@ in
                         icon = "si:owncloud";
                       }
                       {
+                        title = "Paperless-NGX";
+                        url = "https://192.168.2.2:28981";
+                        icon = "sh:paperless-ngx";
+                      }
+                      {
                         title = "Vaultwarden";
                         url = "https://vaultwarden.nicoladen.dev";
                         icon = "si:vaultwarden";
