@@ -74,6 +74,8 @@ in
         mediaLocation = "/data/immich";
       };
 
+      media.jellyfin.enable = true;
+
       pihole.enable = true;
 
       paperless.enable = true;
