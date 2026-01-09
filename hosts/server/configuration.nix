@@ -104,6 +104,7 @@ in
         ];
         privateKeyFile = config.sops.secrets."wireguard/privkey".path;
         peers = {
+          # Family
           phone = {
             publicKey = "HUJGJf2uFa8p8EpwQNS5ZKz06qIQOd1uquA8zGkB1Ag=";
             allowedIPs = [
@@ -129,6 +130,22 @@ in
             publicKey = "0yiBvElispoc7aktPpL4N7YBmMa3YIPqFq+moR2FUlc=";
             allowedIPs = [
               "192.168.255.5/32"
+            ];
+            endpoint = "ddns.nicoladen.dev:51820";
+          };
+
+          # Friends
+          jakob = {
+            publicKey = "+i9swa1iKylRcFyp8miERswwqRgMsNy1aW7nnxmg9Hc=";
+            allowedIPs = [
+              "192.168.255.101/32"
+            ];
+            endpoint = "ddns.nicoladen.dev:51820";
+          };
+          olli = {
+            publicKey = "HDmDmvKzWQtryIjjVWphF8O/xZRoj5FyGncbE5htIU0=";
+            allowedIPs = [
+              "192.168.255.102/32"
             ];
             endpoint = "ddns.nicoladen.dev:51820";
           };
