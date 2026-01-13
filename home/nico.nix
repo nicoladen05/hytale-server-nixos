@@ -16,6 +16,7 @@
     zsh.enable = true;
     tmux.enable = true;
     direnv.enable = true;
+    zathura.enable = true;
   };
 
   # NVF
