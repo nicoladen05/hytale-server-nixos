@@ -14,7 +14,9 @@
       pkgs = import nixpkgs { inherit system; };
     in
     {
+      default = hytale-server
       hytale-server = pkgs.callPackage ./pkgs/hytale-server { };
     });
   };
+  nixosModules.default = import ./modules/hytale-server;
 }
