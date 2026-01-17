@@ -101,8 +101,8 @@ Check the logs for errors:
 sudo journalctl -u hytale-server -n 50
 ```
 
-Common issues:
-Hash mismatch: The server JAR hash doesn't match - submit an issue or a PR. You can use an override to update the hash of the server package to the correct version.
+#### Common issues:
+- Hash mismatch: The server JAR hash doesn't match - submit an issue or a PR. You can use an override to update the hash of the server package to the correct version.
 
 ### File Locations
 - Server data: /var/lib/hytale-server/
