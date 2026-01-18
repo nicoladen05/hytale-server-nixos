@@ -155,6 +155,9 @@ in
         ExecStart = "${cfg.javaPackage}/bin/java ${jvmFlags} -jar ${cfg.package}/share/java/hytale-server/hytale-server.jar ${serverFlags}";
         Restart = "on-failure";
         RestartSec = "10s";
+        StandardInput = "socket";
+        StandardOutput = "journal";
+        StandardError = "journal";
       };
 
       preStart = ''
