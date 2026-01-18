@@ -58,12 +58,17 @@
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     prusa-octoapp-proxy = {
-        url = "github:nicoladen05/prusa-octoapp-proxy";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nicoladen05/prusa-octoapp-proxy";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     flux = {
       url = "github:IogaMaster/flux";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hytale-server-nix = {
+      url = "github:nicoladen05/hytale-server-nixos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

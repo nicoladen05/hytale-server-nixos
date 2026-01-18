@@ -444,6 +444,26 @@
         "type": "github"
       }
     },
+    "hytale-server-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1768736353,
+        "narHash": "sha256-fXlyRjT2Xxd8FpbuPxYMlB8j4edJv6Xd7QWWUoIFY0A=",
+        "owner": "nicoladen05",
+        "repo": "hytale-server-nixos",
+        "rev": "bcd0aefa04cd93b10ad1f23c4c4eeb860e6ad93f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nicoladen05",
+        "repo": "hytale-server-nixos",
+        "type": "github"
+      }
+    },
     "impermanence": {
       "inputs": {
         "home-manager": "home-manager_2",
@@ -853,6 +873,7 @@
         "firefox-addons": "firefox-addons",
         "flux": "flux",
         "home-manager": "home-manager",
+        "hytale-server-nix": "hytale-server-nix",
         "impermanence": "impermanence",
         "nix-minecraft": "nix-minecraft",
         "nixos-raspberrypi": "nixos-raspberrypi",

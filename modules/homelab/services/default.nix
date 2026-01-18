@@ -13,6 +13,7 @@
     ./code-server
     ./glance
     ./homeassistant
+    ./hytale
     ./immich
     ./media
     ./minecraft

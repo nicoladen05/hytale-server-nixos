@@ -62,6 +62,8 @@ in
         ];
       };
 
+      hytale-server.enable = true;
+
       minecraft-server =
         let
           servers = import ../../configs/minecraft/servers.nix { inherit pkgs; };
