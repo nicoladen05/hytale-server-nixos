@@ -451,11 +451,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1768736353,
-        "narHash": "sha256-fXlyRjT2Xxd8FpbuPxYMlB8j4edJv6Xd7QWWUoIFY0A=",
+        "lastModified": 1768767536,
+        "narHash": "sha256-5yj61cmsdeTwg46X3lVtdN+0cAVcxN1UIClQoYpiT8U=",
         "owner": "nicoladen05",
         "repo": "hytale-server-nixos",
-        "rev": "bcd0aefa04cd93b10ad1f23c4c4eeb860e6ad93f",
+        "rev": "a99c4fe17ffb3a0f29a25bcae9ccb4938eb27760",
         "type": "github"
       },
       "original": {
