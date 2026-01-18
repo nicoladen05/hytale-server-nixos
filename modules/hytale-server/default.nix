@@ -167,7 +167,7 @@ in
       '';
     };
 
-    sockets.hytale-server = {
+    systemd.sockets.hytale-server = {
       requires = [ "hytale-server.service" ];
       partOf = [ "hytale-server.service" ];
       socketConfig = {
