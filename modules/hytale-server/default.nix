@@ -1,19 +1,26 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.services.hytale-server;
 
   # Build command line flags from options
-  serverFlags = lib.concatStringsSep " " (lib.filter (x: x != "") [
-    "--auth-mode ${cfg.authMode}"
-    "--universe ${cfg.universe}"
-    "--assets ${cfg.assets}"
-    "--bind 0.0.0.0:${toString cfg.serverPort}"
-    (lib.optionalString cfg.acceptEarlyPlugins "--accept-early-plugins")
-    (lib.optionalString cfg.backup.enable "--backup-path ${cfg.backup.path}")
-    (lib.optionalString cfg.backup.enable "--backup-frequency ${toString cfg.backup.frequency}")
-    (lib.optionalString cfg.backup.enable "--backup-max-count ${toString cfg.backup.maxCount}")
-  ]);
+  serverFlags = lib.concatStringsSep " " (
+    lib.filter (x: x != "") [
+      "--auth-mode ${cfg.authMode}"
+      "--universe ${cfg.universe}"
+      "--assets ${cfg.assets}"
+      "--bind 0.0.0.0:${toString cfg.serverPort}"
+      (lib.optionalString cfg.acceptEarlyPlugins "--accept-early-plugins")
+      (lib.optionalString cfg.backup.enable "--backup-path ${cfg.backup.path}")
+      (lib.optionalString cfg.backup.enable "--backup-frequency ${toString cfg.backup.frequency}")
+      (lib.optionalString cfg.backup.enable "--backup-max-count ${toString cfg.backup.maxCount}")
+    ]
+  );
 
   jvmFlags = lib.concatStringsSep " " cfg.jvmOptions;
 in
@@ -27,7 +34,7 @@ in
       defaultText = lib.literalExpression "pkgs.hytale-server";
       description = "The Hytale server package to use";
     };
-#
+    #
     javaPackage = lib.mkOption {
       type = lib.types.package;
       default = pkgs.jdk25;
@@ -48,7 +55,11 @@ in
     };
 
     authMode = lib.mkOption {
-      type = lib.types.enum [ "authenticated" "offline" "insecure" ];
+      type = lib.types.enum [
+        "authenticated"
+        "offline"
+        "insecure"
+      ];
       default = "authenticated";
       description = "Authentication mode for the Hytale server. One of the following: authenticated, offline, insecure";
     };
@@ -86,7 +97,7 @@ in
           };
         };
       };
-      default = {};
+      default = { };
     };
 
     universe = lib.mkOption {
@@ -120,7 +131,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.allowedUdpPorts = lib.mkIf cfg.openFirewall [ cfg.serverPort ];
+    networking.firewall.allowedUDPPorts = lib.mkIf cfg.openFirewall [ cfg.serverPort ];
 
     users.users.${cfg.user} = {
       isSystemUser = true;
@@ -128,7 +139,7 @@ in
       description = "Hytale server user";
     };
 
-    users.groups.${cfg.group} = {};
+    users.groups.${cfg.group} = { };
 
     systemd.services.hytale-server = {
       description = "Hytale Game Server";
