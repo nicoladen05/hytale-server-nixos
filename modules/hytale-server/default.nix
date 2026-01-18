@@ -48,6 +48,12 @@ in
       description = "Extra JVM options to pass to the Hytale server";
     };
 
+    plugins = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      default = [ ];
+      description = "List of plugin jars to include in the mods directory.";
+    };
+
     acceptEarlyPlugins = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -172,6 +178,14 @@ in
         # Ensure proper permissions on data directory
         chown ${cfg.user}:${cfg.group} ${cfg.dataDir}
         chmod 750 ${cfg.dataDir}
+
+        # Install plugins
+        mkdir -p ${cfg.dataDir}/mods
+        find ${cfg.dataDir}/mods -type l -delete
+        for plugin in ${toString cfg.plugins}; do
+          ln -sf $plugin ${cfg.dataDir}/mods/$(basename $plugin)
+        done
+        chown -R ${cfg.user}:${cfg.group} ${cfg.dataDir}/mods
       '';
     };
 
