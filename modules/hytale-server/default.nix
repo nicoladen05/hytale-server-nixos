@@ -144,7 +144,12 @@ in
     systemd.services.hytale-server = {
       description = "Hytale Game Server";
       wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
+      after = [
+        "network.target"
+        "hytale-server.socket"
+      ];
+      partOf = [ "hytale-server.socket" ];
+      requires = [ "hytale-server.socket" ];
 
       serviceConfig = {
         Type = "simple";
