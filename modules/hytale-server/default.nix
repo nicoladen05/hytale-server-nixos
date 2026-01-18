@@ -30,7 +30,7 @@ in
 
     package = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.hytale-server;
+      default = pkgs.callPackage ../../packages/hytale-server { };
       defaultText = lib.literalExpression "pkgs.hytale-server";
       description = "The Hytale server package to use";
     };
