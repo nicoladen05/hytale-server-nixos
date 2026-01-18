@@ -1,6 +1,6 @@
 {
   stdenvNoCC,
-  requireFile
+  requireFile,
 }:
 
 stdenvNoCC.mkDerivation rec {
@@ -30,7 +30,7 @@ stdenvNoCC.mkDerivation rec {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/share/java
+    mkdir -p $out/share/java/hytale-server
 
     cp $src $out/share/java/hytale-server/hytale-server.jar
 
