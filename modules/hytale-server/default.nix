@@ -152,8 +152,7 @@ in
         Group = cfg.group;
         WorkingDirectory = cfg.dataDir;
         StateDirectory = "hytale-server";
-        ExecStart = "${pkgs.tmux}/bin/tmux -S ${cfg.dataDir}/hytale.sock new-session -s hytale -d '${cfg.javaPackage}/bin/java ${jvmFlags} -jar ${cfg.package}/share/java/hytale-server/hytale-server.jar ${serverFlags}'";
-        ExecStop = "${pkgs.tmux}/bin/tmux -S ${cfg.dataDir}/hytale.sock send-keys -t hytale 'stop' Enter";
+        ExecStart = "${cfg.javaPackage}/bin/java ${jvmFlags} -jar ${cfg.package}/share/java/hytale-server/hytale-server.jar ${serverFlags}";
         Restart = "on-failure";
         RestartSec = "10s";
       };
@@ -166,6 +165,19 @@ in
         chown ${cfg.user}:${cfg.group} ${cfg.dataDir}
         chmod 750 ${cfg.dataDir}
       '';
+    };
+
+    sockets.hytale-server = {
+      requires = [ "hytale-server.service" ];
+      partOf = [ "hytale-server.service" ];
+      socketConfig = {
+        ListenFIFO = "/run/hytale-server.stdin";
+        SocketMode = "0660";
+        SocketUser = cfg.user;
+        SocketGroup = cfg.group;
+        RemoveOnStop = true;
+        FlushPending = true;
+      };
     };
 
     environment.systemPackages = [
