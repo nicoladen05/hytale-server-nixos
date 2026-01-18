@@ -31,5 +31,14 @@ in
     };
 
     networking.firewall.allowedTCPPorts = [ 28981 ];
+
+    services.caddy.virtualHosts = {
+      "paperless.${config.homelab.internalDomain}" = {
+        extraConfig = ''
+          import cloudflare_dns
+          reverse_proxy 127.0.0.1:28981
+        '';
+      };
+    };
   };
 }

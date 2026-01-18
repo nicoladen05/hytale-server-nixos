@@ -38,10 +38,19 @@ in
 
     networking.firewall.allowedTCPPorts = [ 8222 ];
 
-    services.caddy.virtualHosts."${cfg.url}" = {
-      extraConfig = ''
-        reverse_proxy 127.0.0.1:${builtins.toString cfg.port}
-      '';
+    services.caddy.virtualHosts = {
+      "${cfg.url}:444" = {
+        extraConfig = ''
+          reverse_proxy 127.0.0.1:${builtins.toString cfg.port}
+        '';
+      };
+
+      "vaultwarden.${config.homelab.internalDomain}" = {
+        extraConfig = ''
+          import cloudflare_dns
+          reverse_proxy 127.0.0.1:${builtins.toString cfg.port}
+        '';
+      };
     };
   };
 }

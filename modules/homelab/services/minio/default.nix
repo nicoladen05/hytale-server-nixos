@@ -27,10 +27,12 @@ in
 
     networking.firewall.allowedTCPPorts = [ 9000 ];
 
-    services.caddy.virtualHosts."${cfg.url}" = {
-      extraConfig = ''
-        reverse_proxy 127.0.0.1:9001
-      '';
+    services.caddy.virtualHosts = {
+      "${cfg.url}" = {
+        extraConfig = ''
+          reverse_proxy 127.0.0.1:9001
+        '';
+      };
     };
   };
 }

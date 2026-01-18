@@ -30,8 +30,8 @@ in
 
   config = lib.mkIf cfg.enable {
     # Create mediaLocation if it does not exist and set permission
-    systemd.tmpfiles.rules = [ 
-      "d ${cfg.mediaLocation} 0755 immich immich -" 
+    systemd.tmpfiles.rules = [
+      "d ${cfg.mediaLocation} 0755 immich immich -"
     ];
 
     # Immich config
@@ -47,10 +47,19 @@ in
 
     #networking.firewall.allowedTCPPorts = [ 2283 ];
 
-    services.caddy.virtualHosts."${cfg.url}" = {
-      extraConfig = ''
-        reverse_proxy 127.0.0.1:${builtins.toString cfg.port}
-      '';
+    services.caddy.virtualHosts = {
+      "${cfg.url}:444" = {
+        extraConfig = ''
+          reverse_proxy 127.0.0.1:${builtins.toString cfg.port}
+        '';
+      };
+
+      "immich.${config.homelab.internalDomain}" = {
+        extraConfig = ''
+          import cloudflare_dns
+          reverse_proxy 127.0.0.1:${builtins.toString cfg.port}
+        '';
+      };
     };
   };
 }

@@ -92,10 +92,19 @@ in
       6052
     ];
 
-    services.caddy.virtualHosts."${cfg.url}" = lib.mkIf cfg.expose {
-      extraConfig = ''
-        reverse_proxy 127.0.0.1:8123
-      '';
+    services.caddy.virtualHosts = {
+      "${cfg.url}:444" = lib.mkIf cfg.expose {
+        extraConfig = ''
+          reverse_proxy 127.0.0.1:8123
+        '';
+      };
+
+      "home.${config.homelab.internalDomain}" = {
+        extraConfig = ''
+          import cloudflare_dns
+          reverse_proxy 127.0.0.1:8123
+        '';
+      };
     };
   };
 }

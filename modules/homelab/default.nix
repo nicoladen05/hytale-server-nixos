@@ -21,5 +21,11 @@
       example = "example.com";
       description = "Base domain for homelab services. Should not include https:// or http://.";
     };
+
+    internalDomain = lib.mkOption {
+      type = lib.types.str;
+      example = "lan.example.com";
+      description = "Internal domain for homelab services. Should not include https:// or http://.";
+    };
   };
 }

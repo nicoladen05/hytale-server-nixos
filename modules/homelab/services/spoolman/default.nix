@@ -24,5 +24,13 @@ in
       inherit (cfg) port;
       openFirewall = true;
     };
+    services.caddy.virtualHosts = {
+      "spoolman.${config.homelab.internalDomain}" = {
+        extraConfig = ''
+          import cloudflare_dns
+          reverse_proxy 127.0.0.1:${builtins.toString cfg.port}
+        '';
+      };
+    };
   };
 }

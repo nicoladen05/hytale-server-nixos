@@ -128,18 +128,14 @@ in
         6380
       ];
 
-      services.caddy.virtualHosts."${cfg.url}" = {
-        extraConfig = ''
-          
-                    
-                              
-                                        
-                                                  
-                                                            
-                                                                      
-                                                                                
-                                                                                          reverse_proxy 127.0.0.1:${builtins.toString cfg.httpPort}
-        '';
+      services.caddy.virtualHosts = {
+        "${cfg.url}" = {
+          extraConfig = ''
+            
+                        
+                                    reverse_proxy 127.0.0.1:${builtins.toString cfg.httpPort}
+          '';
+        };
       };
     };
 }

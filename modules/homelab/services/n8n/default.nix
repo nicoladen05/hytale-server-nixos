@@ -19,10 +19,12 @@ in
       environment.WEBHOOK_URL = "https://${cfg.url}";
     };
 
-    services.caddy.virtualHosts."${cfg.url}" = {
-      extraConfig = ''
-        reverse_proxy 127.0.0.1:5678
-      '';
+    services.caddy.virtualHosts = {
+      "${cfg.url}" = {
+        extraConfig = ''
+          reverse_proxy 127.0.0.1:5678
+        '';
+      };
     };
   };
 }

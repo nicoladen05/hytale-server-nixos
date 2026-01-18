@@ -36,5 +36,14 @@ in
     ];
 
     networking.firewall.allowedTCPPorts = [ 8443 ];
+
+    services.caddy.virtualHosts = {
+      "code.${config.homelab.internalDomain}" = {
+        extraConfig = ''
+          import cloudflare_dns
+          reverse_proxy 127.0.0.1:8443
+        '';
+      };
+    };
   };
 }

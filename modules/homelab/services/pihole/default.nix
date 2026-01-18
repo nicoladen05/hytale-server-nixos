@@ -57,7 +57,18 @@ in
       53
       8081
       8082
+      8081
+      8082
     ];
+
+    services.caddy.virtualHosts = {
+      "pihole.${config.homelab.internalDomain}" = {
+        extraConfig = ''
+          import cloudflare_dns
+          reverse_proxy ${network.clients.server.ip}:8081
+        '';
+      };
+    };
 
   };
 }

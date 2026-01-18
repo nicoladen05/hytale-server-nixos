@@ -24,8 +24,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.tmpfiles.rules = [ 
-      "d ${cfg.configDir} 0770 ocis users -" 
+    systemd.tmpfiles.rules = [
+      "d ${cfg.configDir} 0770 ocis users -"
     ];
 
     services.ocis = {
@@ -53,10 +53,19 @@ in
 
     networking.firewall.allowedTCPPorts = [ 9200 ];
 
-    services.caddy.virtualHosts."${cfg.url}" = {
-      extraConfig = ''
-        reverse_proxy 127.0.0.1:${builtins.toString cfg.port}
-      '';
+    services.caddy.virtualHosts = {
+      "${cfg.url}:444" = {
+        extraConfig = ''
+          reverse_proxy 127.0.0.1:${builtins.toString cfg.port}
+        '';
+      };
+
+      "ocis.${config.homelab.internalDomain}" = {
+        extraConfig = ''
+          import cloudflare_dns
+          reverse_proxy 127.0.0.1:${builtins.toString cfg.port}
+        '';
+      };
     };
   };
 }

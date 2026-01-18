@@ -19,5 +19,14 @@ in
       openFirewall = true;
       group = "users";
     };
+
+    services.caddy.virtualHosts = {
+      "jellyfin.${config.homelab.internalDomain}" = {
+        extraConfig = ''
+          import cloudflare_dns
+          reverse_proxy 127.0.0.1:8096
+        '';
+      };
+    };
   };
 }

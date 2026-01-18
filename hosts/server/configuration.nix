@@ -40,6 +40,7 @@ in
     external = true;
 
     baseDomain = "nicoladen.dev";
+    internalDomain = "taube.party";
 
     services = {
       assetto-corsa-server.enable = false;
