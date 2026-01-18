@@ -31,11 +31,8 @@ let
   botify = pkgs.fetchFromGitHub {
     owner = "nicoladen05";
     repo = "botify";
-    rev = "5577ca64981ca76184ef0d50e9237993fa5e0954";
-    hash = "sha256-d/xl+QbNYwPfgW8AQH5hExycglmjtCDwqNr71qLwWW0=";
-    postFetch = ''
-      rm -rf $out/.direnv
-    '';
+    rev = "d103c321cd51aa491edf0b4dc59542a631887839";
+    hash = "sha256-a7DhkyqkmDVscsmuf2Av5n/dToB92y6aXJjDauC4w9A=";
   };
 in
 {
