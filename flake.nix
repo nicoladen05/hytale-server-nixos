@@ -23,6 +23,7 @@
           hytale-server = pkgs.callPackage ./pkgs/hytale-server { };
         }
       );
+
+      nixosModules.default = import ./modules/hytale-server;
     };
-  nixosModules.default = import ./modules/hytale-server;
 }
