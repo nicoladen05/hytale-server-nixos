@@ -120,11 +120,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1768851068,
-        "narHash": "sha256-AIn+7WXVSQZNqof6SygVZ5D0ZicOOclBx+2dZxDPehc=",
+        "lastModified": 1768852772,
+        "narHash": "sha256-hwzgk1RdE+xUuV2InxeYp45QXxPob9l8eQjdFw58zG0=",
         "owner": "nicoladen05",
         "repo": "botify",
-        "rev": "d58c500f3498ce5433c3be825a4a972c806320c3",
+        "rev": "c42de548fa98e02c3532bbf895e84d1db58807d4",
         "type": "github"
       },
       "original": {
