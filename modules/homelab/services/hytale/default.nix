@@ -35,6 +35,6 @@ in
     };
 
     # This is the port used by the query plugin
-    networking.firewall.allowedTCPPorts = [ 5521 ];
+    networking.firewall.allowedUDPPorts = [ 5521 ];
   };
 }
