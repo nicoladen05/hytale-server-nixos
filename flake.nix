@@ -71,6 +71,11 @@
       url = "github:nicoladen05/hytale-server-nixos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    botify = {
+      url = "github:nicoladen05/botify";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
