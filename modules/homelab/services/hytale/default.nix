@@ -28,18 +28,13 @@ in
 
       plugins = [
         (pkgs.fetchurl {
-          url = "https://github.com/nitrado/hytale-plugin-webserver/releases/download/v1.0.0/nitrado-webserver-1.0.0.jar";
-          hash = "sha256-nO/oCsE5c22SBzPZO90kydR1VCvCioK4+QG9BCsE1eM=";
-        })
-
-        (pkgs.fetchurl {
-          url = "https://github.com/nitrado/hytale-plugin-query/releases/download/v1.0.1/nitrado-query-1.0.1.jar";
-          hash = "sha256-hDt8wDLNnupA8i3e7VoQFsnkH7cgmkvbOyL+x0uLxCQ=";
+          url = "https://github.com/G-PORTAL/hytale-plugin-query/releases/download/1.1.1/gportal-query-1.1.1.jar";
+          hash = "sha256-U2rfAWB5x0Oatus+X8Epa4AkUrYts2v2lUm/lufUJIs=";
         })
       ];
     };
 
-    # This is the port used by the nitrado query plugin
-    networking.firewall.allowedTCPPorts = [ 5523 ];
+    # This is the port used by the query plugin
+    networking.firewall.allowedTCPPorts = [ 5521 ];
   };
 }
