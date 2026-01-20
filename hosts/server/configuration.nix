@@ -67,6 +67,7 @@ in
       botify = {
         enable = true;
         tokenFile = config.sops.secrets."services/botify/token".path;
+        openaiTokenFile = config.sops.secrets."services/botify/openai_api_key".path;
       };
 
       immich = {

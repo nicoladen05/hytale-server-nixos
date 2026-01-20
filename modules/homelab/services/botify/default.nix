@@ -17,6 +17,10 @@ in
       type = lib.types.path;
       description = "A file containing the bots token, prefixed with BOT_TOKEN=";
     };
+    openaiTokenFile = lib.mkOption {
+      type = lib.types.path;
+      description = "A file containing the OpenAI API key, prefixed with OPENAI_API_KEY=";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -27,7 +31,7 @@ in
     ];
 
     services.botify = {
-      inherit (cfg) enable tokenFile;
+      inherit (cfg) enable tokenFile openaiTokenFile;
     };
   };
 }
