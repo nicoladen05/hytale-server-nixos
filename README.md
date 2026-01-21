@@ -9,6 +9,8 @@ Personal NixOS configuration repository with system configurations for multiple 
   - `<hostname>/hardware-configuration.nix` - Hardware-specific settings
   - `<hostname>/home.nix` - Home Manager configuration
   - `<hostname>/disko.nix` - Disk configuration (if needed)
+- `home/` - Home Manager configurations
+- `configs/` - Global configuration files (intended to be modified)
 - `modules/` - Reusable NixOS modules
   - `nixos/` - System-level NixOS modules
   - `home-manager/` - Home Manager configurations
