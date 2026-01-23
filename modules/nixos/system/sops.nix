@@ -29,15 +29,6 @@
       neededForUsers = true;
     };
 
-    sops.secrets."services/botify/token" = {
-      owner = "botify";
-      group = "botify";
-    };
-    sops.secrets."services/botify/openai_api_key" = {
-      owner = "botify";
-      group = "botify";
-    };
-
     sops.secrets."wireguard/privkey" = {
       mode = "0640";
       owner = "systemd-network";

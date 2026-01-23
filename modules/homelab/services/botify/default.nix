@@ -30,6 +30,15 @@ in
       })
     ];
 
+    sops.secrets."services/botify/token" = {
+      owner = "botify";
+      group = "botify";
+    };
+    sops.secrets."services/botify/openai_api_key" = {
+      owner = "botify";
+      group = "botify";
+    };
+
     services.botify = {
       inherit (cfg) enable tokenFile openaiTokenFile;
     };
