@@ -15,6 +15,7 @@
     terminal.enable = true;
     yazi.enable = true;
     zathura.enable = true;
+    direnv.enable = true;
 
     hyprland = {
       enable = true;
