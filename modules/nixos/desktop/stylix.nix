@@ -28,7 +28,6 @@
   config = lib.mkIf config.desktop.stylix.enable {
     stylix.enable = true;
     stylix.targets.console.enable = false;
-    stylix.autoEnable = false;
 
     stylix.targets.nvf = {
       enable = true;

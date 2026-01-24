@@ -78,13 +78,12 @@ in
     desktop.enable = true;
     gaming.enable = true;
     productivity.enable = true;
-    kde.enable = true;
   };
 
   # Graphical configuration
   desktop = {
     audio.enable = true;
-    kde.enable = true;
+    hyprland.enable = true;
 
     # Colors
     stylix = {
