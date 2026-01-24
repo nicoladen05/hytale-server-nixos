@@ -11,7 +11,7 @@
   home-manager = {
     enable = true;
 
-    firefox.enable = true;
+    firefox.enable = false;
     terminal.enable = true;
     yazi.enable = true;
     zathura.enable = true;
