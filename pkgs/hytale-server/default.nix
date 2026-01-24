@@ -5,11 +5,11 @@
 
 stdenvNoCC.mkDerivation {
   pname = "hytale-server";
-  version = "2026.01.15";
+  version = "2026.01.22";
 
   src = requireFile {
     name = "HytaleServer.jar";
-    hash = "sha256-GVPs6sHn5hDqs0OHDCgL1egW0Gcyo1CXFKF40KaXXNo=";
+    hash = "sha256-OEftAQOkJIG+4xzs6M+A4QN6gKge4+vqxf2gKbgiwGE=";
     message = ''
       The Hytale server cannot be downloaded automatically.
       Please download it manually:
